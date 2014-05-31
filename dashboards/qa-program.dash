@@ -1,0 +1,19 @@
+[dashboard]
+title = QA Review Inbox
+description = Review Inbox
+foreach = (project:openstack/tempest OR project:openstack-dev/grenade OR project:openstack/qa-specs) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=0,self
+
+[section "QA Specs"]
+query = project:openstack/qa-specs
+
+[section "Needs Feedback (Changes with no code review in last 5 days)"]
+query = NOT label:Code-Review<=2 age:5d
+
+[section "Needs final +2"]
+query = label:Code-Review>=2 limit:50
+
+[section "Passed Jenkins, No Negative Feedback"]
+query = NOT label:Code-Review>=2 limit:50
+
+[section "Wayward Changes (Changes with no code review in the last 2days)"]
+query = NOT label:Code-Review<=2 age:2d
