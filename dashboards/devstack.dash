@@ -1,7 +1,9 @@
 [dashboard]
 title = Devstack Review Inbox
 description = Review Inbox
-foreach = (project:openstack-dev/devstack OR project:openstack-dev/devstack-vagrant OR project:openstack-dev/bash8) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=0,self
+# note, we're putting grenade in this review list as well because grenade while part of QA program
+# is closer to a review group with devstack.
+foreach = (project:openstack-dev/devstack OR project:openstack-dev/devstack-vagrant OR project:openstack-dev/bash8 OR project:openstack-dev/grenade) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=0,self
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
