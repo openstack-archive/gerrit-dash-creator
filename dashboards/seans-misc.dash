@@ -4,7 +4,7 @@ description = Review Inbox
 foreach = (project:openstack-infra/elastic-recheck OR project:openstack-infra/os-loganalyze OR project:openstack-dev/hacking OR project:openstack/requirements) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
 
 [section "ER Queries"]
-query = project:openstack/elastic-recheck file:^queries/.*yaml
+query = project:openstack-infra/elastic-recheck file:^queries/.*yaml
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
