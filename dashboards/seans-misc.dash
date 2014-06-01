@@ -1,7 +1,7 @@
 [dashboard]
 title = Sean's Misc Review Inbox
 description = Review Inbox
-foreach = (project:openstack-infra/elastic-recheck OR project:openstack-infra/os-loganalyze OR project:openstack-dev/hacking OR project:openstack/requirements) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=0,self
+foreach = (project:openstack-infra/elastic-recheck OR project:openstack-infra/os-loganalyze OR project:openstack-dev/hacking OR project:openstack/requirements) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
 
 [section "ER Queries"]
 query = project:openstack/elastic-recheck file:^queries/.*yaml
@@ -10,10 +10,10 @@ query = project:openstack/elastic-recheck file:^queries/.*yaml
 query = NOT label:Code-Review<=2 age:5d
 
 [section "Your are a reviewer, but haven't voted in the current revision"]
-query = NOT label:Code-Review<=2,self reviewer:self
+query = reviewer:self
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 NOT label:Code-Review<=-1,self limit:50
+query = label:Code-Review>=2 limit:50
 
 [section "Passed Jenkins, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50

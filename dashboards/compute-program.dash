@@ -1,13 +1,13 @@
 [dashboard]
 title = Nova Review Inbox (master branch only)
 description = Review Inbox
-foreach = (project:openstack/nova OR project:openstack/python-novaclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=0,self branch:master
+foreach = (project:openstack/nova OR project:openstack/python-novaclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self branch:master
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
 
 [section "Your are a reviewer, but haven't voted in the current revision"]
-query = NOT label:Code-Review<=2,self reviewer:self
+query = reviewer:self
 
 [section "Needs final +2"]
 query = label:Code-Review>=2 limit:50
