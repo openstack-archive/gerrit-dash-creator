@@ -1,0 +1,16 @@
+[dashboard]
+title = My Past Votes (things I've reviewed that aren't in yet)
+description = Review Inbox
+foreach = status:open NOT owner:self reviewer:self
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=2 age:5d
+
+[section "Things I've -2ed"]
+query = label:Code-Review<=-2,self
+
+[section "Things I've +2ed that haven't landed yet"]
+query = label:Code-Review>=2,self
+
+[section "Approved things that are stuck"]
+query = label:Workflow>=1
