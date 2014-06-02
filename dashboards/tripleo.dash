@@ -1,0 +1,23 @@
+[dashboard]
+title = TripleO Inbox
+description = TripleO Review Inbox
+foreach = (project:openstack/tripleo-incubator OR project:openstack/tripleo-image-elements OR project:openstack/tripleo-heat-templates OR project:openstack/tripleo-specs OR project:openstack/os-apply-config OR project:openstack/os-collect-config OR project:openstack/os-refresh-config OR project:openstack/diskimage-builder) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2 NOT label:Workflow>=1
+
+[section "My Patches Requiring Attention"]
+query = owner:self (label:Verified-1%2cjenkins OR label:Code-Review-1)
+
+[section "TripleO Specs"]
+query = NOT owner:self project:openstack/tripleo-specs
+
+[section "Needs Approval"]
+query = label:Verified>=1%2cjenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+
+[section "5 Days Without Feedback"]
+query = label:Verified>=1%2cjenkins NOT owner:self NOT project:openstack/tripleo-specs NOT label:Code-Review<=2 age:5d
+
+[section "No Negative Feedback"]
+query = label:Verified>=1%2cjenkins NOT owner:self NOT project:openstack/tripleo-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
+
+[section "Other"]
+query = label:Verified>=1%2cjenkins NOT owner:self NOT project:openstack/tripleo-specs label:Code-Review-1 limit:20
+
