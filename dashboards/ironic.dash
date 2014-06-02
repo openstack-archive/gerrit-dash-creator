@@ -1,0 +1,23 @@
+[dashboard]
+title = Ironic Inbox
+description = Ironic Review Inbox
+foreach = (project:openstack/ironic OR project:openstack/python-ironicclient OR project:openstack/ironic-python-agent OR project:openstack/ironic-specs) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2 NOT label:Workflow>=1
+
+[section "My Patches Requiring Attention"]
+query = owner:self (label:Verified-1%2cjenkins OR label:Code-Review-1)
+
+[section "Ironic Specs"]
+query = NOT owner:self project:openstack/ironic-specs
+
+[section "Needs Approval"]
+query = label:Verified>=1%2cjenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+
+[section "5 Days Without Feedback"]
+query = label:Verified>=1%2cjenkins NOT owner:self NOT project:openstack/ironic-specs NOT label:Code-Review<=2 age:5d
+
+[section "No Negative Feedback"]
+query = label:Verified>=1%2cjenkins NOT owner:self NOT project:openstack/ironic-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
+
+[section "Other"]
+query = label:Verified>=1%2cjenkins NOT owner:self NOT project:openstack/ironic-specs label:Code-Review-1 limit:20
+
