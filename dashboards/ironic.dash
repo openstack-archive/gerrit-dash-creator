@@ -1,23 +1,28 @@
 [dashboard]
 title = Ironic Inbox
 description = Ironic Review Inbox
-foreach = (project:openstack/ironic OR project:openstack/python-ironicclient OR project:openstack/ironic-python-agent OR project:openstack/ironic-specs) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2 NOT label:Workflow>=1
+foreach = (project:openstack/ironic OR project:openstack/python-ironicclient OR project:openstack/ironic-python-agent OR project:openstack/ironic-specs) status:open NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
-query = owner:self (label:Verified-1%2cjenkins OR label:Code-Review-1)
+query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1 OR label:Workflow<=-1)
 
 [section "Ironic Specs"]
-query = NOT owner:self project:openstack/ironic-specs
+query = NOT label:Workflow>=1 NOT owner:self project:openstack/ironic-specs
 
 [section "Needs Approval"]
-query = label:Verified>=1%2cjenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+
+[section "Needs Reverify"]
+query = label:Workflow>=1 NOT label:Workflow<=-1 label:Verified<=-1,jenkins
 
 [section "5 Days Without Feedback"]
-query = label:Verified>=1%2cjenkins NOT owner:self NOT project:openstack/ironic-specs NOT label:Code-Review<=2 age:5d
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT project:openstack/ironic-specs NOT label:Code-Review<=2 age:5d
 
 [section "No Negative Feedback"]
-query = label:Verified>=1%2cjenkins NOT owner:self NOT project:openstack/ironic-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT project:openstack/ironic-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
 
-[section "Other"]
-query = label:Verified>=1%2cjenkins NOT owner:self NOT project:openstack/ironic-specs label:Code-Review-1 limit:20
+[section "With Negative Feedback"]
+query = NOT label:Workflow<=-1 NOT label:Verified<=-1,jenkins NOT owner:self NOT project:openstack/ironic-specs label:Code-Review-1 limit:20
 
+[section "Work In Progress Or Unverified"]
+query = NOT label:Workflow>=1 NOT owner:self (label:Workflow<=-1 OR label:Verified<=-1,jenkins) limit:20
