@@ -50,9 +50,14 @@ Contributions Welcomed
 ======================
 
 If you have a dashboard definition that your OpenStack team finds
-useful, please just send a PR. Very happy to include many many
-interesting examples in this repository for instances that people can
-find and use.
+useful, please submit a change request via git-review. The list of
+current outstanding changes can be seen at:
+
+https://review.openstack.org/#/q/status:open+project:stackforge/gerrit-dash-creator,n,z
+
+I'm very happy to include additional interesting examples that teams
+fine useful, and make it possible for teams to explore other
+approaches to reviewing code.
 
 If you have questions please find me on #openstack-dev,
 #openstack-infra, or #openstack-qa on FreeNode to discuss.
