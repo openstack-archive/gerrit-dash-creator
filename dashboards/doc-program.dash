@@ -1,0 +1,28 @@
+[dashboard]
+title = Ops/User Docs Review Inbox
+description = Review Inbox for OpenStack Documentation
+foreach = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/object-api OR project:openstack/image-api OR project:openstack/identity-api OR project:openstack/compute-api OR project:openstack/volume-api OR project:openstack/netconn-api OR project:openstack/operations-guide OR project:openstack/security-guide OR project:openstack/training-guides) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self
+
+[section "Needs feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=2 age:5d
+
+[section "API Docs"]
+query = (project:openstack/api-site OR project:openstack/object-api OR project:openstack/image-api OR project:openstack/identity-api OR project:openstack/compute-api OR project:openstack/volume-api OR project:openstack/netconn-api) status:open
+
+[section "Ops/Admin Docs"]
+query = (project:openstack/openstack-manuals OR project:openstack/operations-guide OR project:openstack/security-guide) status:open
+
+[section "Training"]
+query = project:openstack/training-guides
+
+[section "Your are a reviewer, but haven't voted in the current revision"]
+query = reviewer:self
+
+[section "Needs final +2"]
+query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/object-api OR project:openstack/image-api OR project:openstack/identity-api OR project:openstack/compute-api OR project:openstack/volume-api OR project:openstack/netconn-api OR project:openstack/operations-guide OR project:openstack/security-guide OR project:openstack/training-guides) label:Code-Review>=2 limit:50
+
+[section "Passed Jenkins, no negative feedback"]
+query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+
+[section "Wayward Changes (Changes with no code review in the last two days)"]
+query = NOT label:Code-Review<=2 age:2d
