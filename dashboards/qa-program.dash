@@ -13,7 +13,7 @@ query = NOT label:Code-Review<=2 age:5d
 query = reviewer:self
 
 [section "Needs final +2"]
-query = (project:openstack/tempest OR project:openstack-dev/grenade) label:Code-Review>=2 limit:50
+query = (project:openstack/tempest OR project:openstack-dev/grenade) label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1
 
 [section "Passed Jenkins, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
