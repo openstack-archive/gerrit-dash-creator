@@ -17,6 +17,8 @@ import fileinput
 import re
 import sys
 import urllib
+import os
+from bottle import run, route, template
 
 
 def escape_comma(buff):
@@ -70,17 +72,48 @@ def get_options():
         description='Create a gerrit dashboard URL from a dashboard definition')
     parser.add_argument('dash',
                         metavar='dashboard_file',
-                        help="Dashboard file to create url from")
+                        help="Dashboard file to create url from",
+                        nargs='?')
+    parser.add_argument('--webserver',
+                        help="Should we run a webserver?",
+                        action='store_true'
+                        )
     return parser.parse_args()
 
+def get_all_urls():
+    urls = []
+    for subdir, dirs, files in os.walk("dashboards"):
+        for file in files:
+            filename = subdir+"/"+file
+            title, foreach = get_title(filename)
+            sections = get_sections(filename)
+            urls.append({"title":title,"url": gen_url(title, foreach, sections)})
+    return urls
+
+# setup the route for the webserver
+@route("/")
+def index():
+    urls = get_all_urls()
+    return template("index.tpl",urls=urls)
+
+@route("/json/")
+def index():
+    urls = get_all_urls()
+    from bottle import response
+    from json import dumps
+    response.content_type = 'application/json'
+    return dumps(urls)
 
 def main():
     opts = get_options()
-    title, foreach = get_title(opts.dash)
-    sections = get_sections(opts.dash)
-    url = gen_url(title, foreach, sections)
-    print("URL for %s" % title)
-    print(url)
+    if opts.webserver == True:
+        run(host='localhost', port=8080, debug=True)
+    else:
+        title, foreach = get_title(opts.dash)
+        sections = get_sections(opts.dash)
+        url = gen_url(title, foreach, sections)
+        print("URL for %s" % title)
+        print(url)
 
 
 if __name__ == '__main__':

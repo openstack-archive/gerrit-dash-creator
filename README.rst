@@ -46,6 +46,17 @@ the dash file you want the url for::
 
 Then put the url in your browser and off you go.
 
+If you want to run a small webserver that maintains a list of all
+urls from all the dashboards, you can execute the script with the
+"--webserver" flag as follows::
+
+  > ./gerrit-dash-creator --webserver
+
+This will read all of the .dash files in the "dashboards" directory
+and create a list of all the URLs.  The webserver is accessible at
+http://localhost:8080/ with a JSON endpoint at
+http://localhost:8080/json/
+
 Contributions Welcomed
 ======================
 
