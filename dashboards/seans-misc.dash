@@ -6,6 +6,9 @@ foreach = (project:openstack-infra/elastic-recheck OR project:openstack-infra/os
 [section "ER Queries"]
 query = project:openstack-infra/elastic-recheck file:^queries/.*yaml
 
+[section "Gerrit Dash Creator"]
+query = project:stackforge/gerrit-dash-creator
+
 [section "Governance"]
 query = project:openstack/governance
 
