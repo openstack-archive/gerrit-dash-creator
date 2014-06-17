@@ -12,7 +12,7 @@ query = NOT label:Code-Review<=2 age:5d
 query = NOT label:Code-Review<=2,self reviewer:self
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 limit:50
+query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self
 
 [section "Passed Jenkins, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
