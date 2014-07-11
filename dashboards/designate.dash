@@ -1,0 +1,31 @@
+[dashboard]
+title = Designate Review Inbox (master branch only)
+description = Review Inbox
+foreach = (project:openstack/designate OR project:openstack/python-designateclient OR project:openstack/designate-specs) status:open NOT owner:self NOT label:Code-Review>=-2,self branch:master
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = (project:openstack/designate OR project:openstack/python-designateclient) NOT label:Code-Review<=2  age:5d NOT label:Workflow<=-1 label:Verified>=1,jenkins
+
+[section "Your are a reviewer, but haven't voted in the current revision"]
+query = (project:openstack/designate OR project:openstack/python-designateclient) reviewer:self label:Verified>=1,jenkins
+
+[section "Needs final +2"]
+query = (project:openstack/designate OR project:openstack/python-designateclient) label:Code-Review>=2 label:Verified>=1,jenkins limit:50 NOT label:Workflow<=-1
+
+[section "Passed Jenkins, No Negative Feedback"]
+query = (project:openstack/designate OR project:openstack/python-designateclient) label:Verified>=1,jenkins NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50 NOT label:Workflow<=-1
+
+[section "Failed Jenkins, No Negative Feedback"]
+query = (project:openstack/designate OR project:openstack/python-designateclient) label:Verified=-1,jenkins NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+
+[section "Failed Jenkins, Negative Feedback"]
+query = (project:openstack/designate OR project:openstack/python-designateclient) label:Verified=-1 NOT label:Code-Review>=0 limit:50
+
+[section "Negative Feedback"]
+query = (project:openstack/designate OR project:openstack/python-designateclient) label:Code-Review<=-1 limit:50
+
+[section "Wayward Changes (Changes with no code review in the last 2days)"]
+query = NOT label:Code-Review<=2 age:2d
+
+[section "Specs in need of review"]
+query = project:openstack/designate-specs
