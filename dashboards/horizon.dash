@@ -1,0 +1,30 @@
+[dashboard]
+title = Horizon Review Dashboard
+description = Horizon patches to look at
+foreach = (project:openstack/horizon OR project:openstack/django_openstack_auth) status:open NOT label:Code-Review<=-2
+
+[section "My Patches"]
+query = owner:self status:open
+
+[section "Needs Approval"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 branch:master
+
+#Optional section to exclude items you have already reviewed, must replace
+#"username" with your gerrit username
+#[section "Not Reviewed by Me"]
+#query = NOT label:Code-Review<=-2,username NOT label:Code-Review<=-1,username NOT label:Code-Review<=1,username NOT label:Code-Review<=2,username limit:50 branch:master
+
+[section "Needs Reverify"]
+query = label:Verified<=-1,jenkins branch:master NOT label:Code-Review<=-1 NOT label:Workflow<=-1
+
+[section "5 Days Without Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=2 age:5d branch:master
+
+[section "No Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master
+
+[section "With Negative Feedback"]
+query = NOT label:Workflow<=-1 NOT label:Verified<=-1,jenkins NOT owner:self label:Code-Review-1 limit:20 branch:master
+
+[section "Work In Progress"]
+query = NOT label:Workflow>=1 NOT owner:self label:Workflow<=-1 branch:master
