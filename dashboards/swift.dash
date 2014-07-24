@@ -29,3 +29,6 @@ query = NOT label:Workflow>=1 NOT owner:self label:Workflow<=-1 limit:20 NOT pro
 
 [section "Erasure Code work"]
 query = NOT project:openstack/swift-specs branch:feature/ec status:open
+
+[section "Possible abandoned changes"]
+query = status:open age:4week (label:Verified<=-1,jenkins OR label:Code-Review<=-1) NOT label:Workflow<=-1
