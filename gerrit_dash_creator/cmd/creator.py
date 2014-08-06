@@ -67,7 +67,8 @@ def gen_url(title, foreach, sections):
 
 def get_options():
     parser = argparse.ArgumentParser(
-        description='Create a gerrit dashboard URL from a dashboard definition')
+        description='Create a gerrit dashboard URL from a dashboard '
+                    'definition')
     parser.add_argument('dash',
                         metavar='dashboard_file',
                         help="Dashboard file to create url from")
