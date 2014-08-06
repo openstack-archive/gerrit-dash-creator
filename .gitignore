@@ -1,0 +1,24 @@
+.DS_Store
+.venv
+
+# Packages
+*.py[cod]
+*.egg
+*.egg-info
+dist
+build
+eggs
+sdist
+
+# Unit test / coverage reports
+.coverage
+.tox
+
+# pbr generates these
+AUTHORS
+ChangeLog
+
+# Editors
+*~
+.*.swp
+.bak
