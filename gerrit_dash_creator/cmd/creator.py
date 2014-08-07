@@ -13,10 +13,12 @@
 # under the License.
 
 import argparse
-import fileinput
-import re
+import os
+import os.path
 import sys
 import urllib
+
+from six.moves import configparser
 
 
 def escape_comma(buff):
@@ -24,64 +26,79 @@ def escape_comma(buff):
     return buff.replace(',', '%2c')
 
 
-def get_title(fname):
-    title = ""
-    foreach = ""
-    for line in fileinput.input(fname):
-        m = re.match("title = (.+)", line)
-        if m:
-            title = m.group(1)
+def generate_dashboard_url(dashboard):
+    try:
+        title = dashboard.get('dashboard', 'title')
+    except configparser.NoOptionError:
+        raise ValueError("option 'title' in section 'dashboard' not set")
 
-        m = re.match("foreach = (.+)", line)
-        if m:
-            foreach = escape_comma(m.group(1))
-    fileinput.close()
-    return title, foreach
+    try:
+        foreach = escape_comma(dashboard.get('dashboard', 'foreach'))
+    except configparser.NoOptionError:
+        raise ValueError("option 'foreach' in section 'dashboard' not set")
 
+    try:
+        baseurl = dashboard.get('dashboard', 'baseurl')
+    except configparser.NoOptionError:
+        baseurl = 'https://review.openstack.org/#/dashboard/?'
 
-def get_sections(fname):
-    sections = []
-    sname = None
-    for line in fileinput.input(fname):
-        m = re.match('\[section "([^"]+)', line)
-        if m:
-            sname = m.group(1)
-        elif sname:
-            m = re.match("query = (.+)", line)
-            if m:
-                query = escape_comma(m.group(1))
-
-                sections.append({'title': sname, 'query': query})
-    fileinput.close()
-    return sections
-
-
-def gen_url(title, foreach, sections):
-    base = 'https://review.openstack.org/#/dashboard/?'
+    base = baseurl
     base += urllib.urlencode({'title': title, 'foreach': foreach})
     base += '&'
-    encoded = [urllib.urlencode({x['title']: x['query']}) for x in sections]
-    base += '&'.join(encoded)
+    for section in dashboard.sections():
+        if not section.startswith('section'):
+            continue
+
+        try:
+            query = dashboard.get(section, 'query')
+        except configparser.NoOptionError:
+            raise ValueError("option 'query' in '%s' not set" % section)
+
+        title = section[9:-1]
+        encoded = urllib.urlencode({title: query})
+        base += "&%s" % encoded
     return base
 
 
 def get_options():
     parser = argparse.ArgumentParser(
-        description='Create a gerrit dashboard URL from a dashboard '
+        description='Create a Gerrit dashboard URL from a dashboard '
                     'definition')
-    parser.add_argument('dash',
+    parser.add_argument('dashboard_file',
                         metavar='dashboard_file',
-                        help="Dashboard file to create url from")
+                        help="Dashboard file to create URL from")
     return parser.parse_args()
+
+
+def read_dashboard_file(fname):
+    dashboard = configparser.ConfigParser()
+    dashboard.readfp(open(fname))
+    return dashboard
 
 
 def main():
     opts = get_options()
-    title, foreach = get_title(opts.dash)
-    sections = get_sections(opts.dash)
-    url = gen_url(title, foreach, sections)
-    print("URL for %s" % title)
+
+    if (not os.path.isfile(opts.dashboard_file) or
+            not os.access(opts.dashboard_file, os.R_OK)):
+        print("error: dashboard file '%s' is missing or is not readable" %
+              opts.dashboard_file)
+        return 1
+
+    dashboard = read_dashboard_file(opts.dashboard_file)
+
+    try:
+        url = generate_dashboard_url(dashboard)
+    except ValueError as e:
+        print("error:\tgenerating dashboard '%s' failed\n\t%s" %
+              (opts.dashboard_file, e))
+        return 1
+
+    print("Generated URL for the Gerrit dashboard '%s':" % opts.dashboard_file)
+    print("")
     print(url)
+
+    return 0
 
 
 if __name__ == '__main__':
