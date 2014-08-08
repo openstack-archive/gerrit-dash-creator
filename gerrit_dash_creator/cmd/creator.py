@@ -18,7 +18,10 @@ import os.path
 import sys
 import urllib
 
+import jinja2
+from pkg_resources import resource_filename
 from six.moves import configparser
+import six
 
 
 def escape_comma(buff):
@@ -43,9 +46,9 @@ def generate_dashboard_url(dashboard):
     except configparser.NoOptionError:
         baseurl = 'https://review.openstack.org/#/dashboard/?'
 
-    base = baseurl
-    base += urllib.urlencode({'title': title, 'foreach': foreach})
-    base += '&'
+    url = baseurl
+    url += urllib.urlencode({'title': title, 'foreach': foreach})
+    url += '&'
     for section in dashboard.sections():
         if not section.startswith('section'):
             continue
@@ -57,8 +60,8 @@ def generate_dashboard_url(dashboard):
 
         title = section[9:-1]
         encoded = urllib.urlencode({title: query})
-        base += "&%s" % encoded
-    return base
+        url += "&%s" % encoded
+    return url
 
 
 def get_options():
@@ -69,6 +72,13 @@ def get_options():
     parser.add_argument('dashboard_files', nargs='+',
                         metavar='dashboard_file',
                         help='Dashboard definition file to create URL from')
+    parser.add_argument('--template', default='single.txt',
+                        help='Name of template')
+    parser.add_argument('--template-path',
+                        default=resource_filename(__name__, "../../templates"),
+                        help='Path to scan for template files')
+    parser.add_argument('--template-file', default=None,
+                        help='Location of a specific template file')
     return parser.parse_args()
 
 
@@ -79,10 +89,51 @@ def read_dashboard_file(fname):
     return dashboard
 
 
+def load_template(template, template_path):
+    try:
+        loader = jinja2.FileSystemLoader(template_path)
+        environment = jinja2.Environment(loader=loader)
+        template = environment.get_template(template)
+    except (jinja2.exceptions.TemplateError, IOError) as e:
+        print("error: opening template '%s' failed: %s" %
+              (template, e.__class__.__name__))
+        return
+    return template
+
+
+def get_template(template_file=None, template_path=None, template_name=None):
+    if template_file:
+        template = load_template(
+            os.path.basename(template_file),
+            os.path.dirname(os.path.abspath(template_file))
+        )
+    else:
+        template = load_template(template, template_path)
+
+    return template
+
+
+def get_configuration(dashboard):
+    configuration = six.StringIO()
+    dashboard.write(configuration)
+    result = configuration.getvalue()
+    configuration.close()
+    return result
+
+
 def main():
     """Entrypoint."""
     result = 0
     opts = get_options()
+
+    template = get_template(
+        template_file=opts.template_file,
+        template_path=opts.template_path,
+        template_name=opts.template
+    )
+
+    if not template:
+        return 1
 
     for dashboard_file in opts.dashboard_files:
         if (not os.path.isfile(dashboard_file) or
@@ -108,8 +159,14 @@ def main():
             result = 1
             continue
 
-        print("\nGenerated URL for the Gerrit dashboard '%s':\n" % dashboard_file)
-        print(url)
+        variables = {
+            'title': dashboard.get('dashboard', 'title') or None,
+            'description': dashboard.get('dashboard', 'description') or None,
+            'url': url,
+            'filename': dashboard_file,
+            'configuration': get_configuration(dashboard)
+        }
+        print(template.render(variables))
 
     return result
 
