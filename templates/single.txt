@@ -1,0 +1,4 @@
+Generated URL for the Gerrit dashboard '{{ title }}':
+
+{{ url }}
+
