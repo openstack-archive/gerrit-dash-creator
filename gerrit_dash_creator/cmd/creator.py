@@ -66,7 +66,7 @@ def get_options():
     parser = argparse.ArgumentParser(
         description='Create a Gerrit dashboard URL from a dashboard '
                     'definition file')
-    parser.add_argument('dashboard_file',
+    parser.add_argument('dashboard_files', nargs='+',
                         metavar='dashboard_file',
                         help='Dashboard definition file to create URL from')
     return parser.parse_args()
@@ -81,33 +81,37 @@ def read_dashboard_file(fname):
 
 def main():
     """Entrypoint."""
+    result = 0
     opts = get_options()
 
-    if (not os.path.isfile(opts.dashboard_file) or
-            not os.access(opts.dashboard_file, os.R_OK)):
-        print("error: dashboard file '%s' is missing or is not readable" %
-              opts.dashboard_file)
-        return 1
+    for dashboard_file in opts.dashboard_files:
+        if (not os.path.isfile(dashboard_file) or
+                not os.access(dashboard_file, os.R_OK)):
+            print("\nerror: dashboard file '%s' is missing or is not readable" %
+                  dashboard_file)
+            result = 1
+            continue
 
-    try:
-        dashboard = read_dashboard_file(opts.dashboard_file)
-    except configparser.Error as e:
-        print("error: dashboard file '%s' cannot be parsed\n\n%s" %
-              (opts.dashboard_file, e))
-        return 1
+        try:
+            dashboard = read_dashboard_file(dashboard_file)
+        except configparser.Error as e:
+            print("\nerror: dashboard file '%s' cannot be parsed\n\n%s" %
+                  (dashboard_file, e))
+            return 1
+            continue
 
-    try:
-        url = generate_dashboard_url(dashboard)
-    except ValueError as e:
-        print("error:\tgenerating dashboard '%s' failed\n\t%s" %
-              (opts.dashboard_file, e))
-        return 1
+        try:
+            url = generate_dashboard_url(dashboard)
+        except ValueError as e:
+            print("\nerror:\tgenerating dashboard '%s' failed\n\t%s" %
+                  (dashboard_file, e))
+            result = 1
+            continue
 
-    print("Generated URL for the Gerrit dashboard '%s':" % opts.dashboard_file)
-    print("")
-    print(url)
+        print("\nGenerated URL for the Gerrit dashboard '%s':\n" % dashboard_file)
+        print(url)
 
-    return 0
+    return result
 
 
 if __name__ == '__main__':
