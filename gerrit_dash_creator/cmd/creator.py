@@ -89,7 +89,12 @@ def main():
               opts.dashboard_file)
         return 1
 
-    dashboard = read_dashboard_file(opts.dashboard_file)
+    try:
+        dashboard = read_dashboard_file(opts.dashboard_file)
+    except configparser.Error as e:
+        print("error: dashboard file '%s' cannot be parsed\n\n%s" %
+              (opts.dashboard_file, e))
+        return 1
 
     try:
         url = generate_dashboard_url(dashboard)
