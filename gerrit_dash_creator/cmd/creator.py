@@ -19,9 +19,9 @@ import sys
 import urllib
 
 import jinja2
-from pkg_resources import resource_filename
-from six.moves import configparser
+import pkg_resources
 import six
+from six.moves import configparser
 
 
 def escape_comma(buff):
@@ -69,23 +69,34 @@ def get_options():
     parser = argparse.ArgumentParser(
         description='Create a Gerrit dashboard URL from specified dashboard '
                     'definition files')
-    parser.add_argument('dashboard_files', nargs='+',
-                        metavar='dashboard_file',
-                        help='Dashboard definition file to create URL from')
+    parser.add_argument('dashboard_paths', nargs='+',
+                        metavar='dashboard_path',
+                        help='Path to a dashboard definition file or a '
+                             'directory containing a set of dashboard '
+                             'definition files with the file suffix .dash.')
+    parser.add_argument('--check-only', default=False, action="store_true",
+                        help='Only check the syntax of the specified '
+                             'dasbhoard files')
     parser.add_argument('--template', default='single.txt',
                         help='Name of template')
     parser.add_argument('--template-directory',
-                        default=resource_filename(__name__, "../../templates"),
+                        default=pkg_resources.resource_filename(
+                            __name__, "../../templates"
+                        ),
                         help='Directory to scan for template files')
     parser.add_argument('--template-file', default=None,
                         help='Location of a specific template file')
     return parser.parse_args()
 
 
-def read_dashboard_file(fname):
+def read_dashboard_file(dashboard_file):
     """Read and parse a dashboard definition from a specified file."""
+    if (not os.path.isfile(dashboard_file) or
+            not os.access(dashboard_file, os.R_OK)):
+        raise ValueError("dashboard file '%s' is missing or "
+                         "is not readable" % dashboard_file)
     dashboard = configparser.ConfigParser()
-    dashboard.readfp(open(fname))
+    dashboard.readfp(open(dashboard_file))
     return dashboard
 
 
@@ -117,9 +128,58 @@ def get_configuration(dashboard):
     return result
 
 
+def generate_dashboard_urls(dashboards, template):
+    """Prints the dashboard URLs of a set of dashboards."""
+    result = 0
+
+    for dashboard_file in dashboards:
+        dashboard = dashboards[dashboard_file]
+        try:
+            url = generate_dashboard_url(dashboard)
+        except ValueError as e:
+            raise ValueError("generating dashboard '%s' failed: %s" %
+                             (dashboard_file, e))
+            result = 1
+            continue
+
+        variables = {
+            'url': url,
+            'title': dashboard.get('dashboard', 'title') or None,
+            'description': dashboard.get('dashboard', 'description') or None,
+            'configuration': get_configuration(dashboard)
+        }
+        print(template.render(variables))
+
+    return result
+
+
+def load_dashboards(paths):
+    """Load specified dashboards from files or directories."""
+    dashboards = {}
+    for dashboard_path in paths:
+        dashboard_files = []
+        if os.path.isdir(dashboard_path):
+            for root, dirs, files in os.walk(dashboard_path):
+                for file in files:
+                    if file.endswith('.dash'):
+                        dashboard_files.append(os.path.join(root, file))
+        else:
+            dashboard_files.append(dashboard_path)
+
+        for dashboard_file in dashboard_files:
+            try:
+                dashboards[dashboard_file] = read_dashboard_file(
+                    dashboard_file
+                )
+            except configparser.Error as e:
+                raise ValueError("dashboard file '%s' cannot be "
+                                 "parsed: %s" % (dashboard_file, e))
+
+    return dashboards
+
+
 def main():
     """Entrypoint."""
-    result = 0
     opts = get_options()
 
     template = load_template(
@@ -128,43 +188,17 @@ def main():
         template_name=opts.template
     )
 
-    if not template:
+    try:
+        dashboards = load_dashboards(opts.dashboard_paths)
+        if not opts.check_only and template:
+            generate_dashboard_urls(dashboards, template)
+        elif not opts.check_only and not template:
+            return 1
+    except ValueError as e:
+        print("error: %s" % e)
         return 1
 
-    for dashboard_file in opts.dashboard_files:
-        if (not os.path.isfile(dashboard_file) or
-                not os.access(dashboard_file, os.R_OK)):
-            print("\nerror: dashboard file '%s' is missing or is not "
-                  "readable" % dashboard_file)
-            result = 1
-            continue
-
-        try:
-            dashboard = read_dashboard_file(dashboard_file)
-        except configparser.Error as e:
-            print("\nerror: dashboard file '%s' cannot be parsed\n\n%s" %
-                  (dashboard_file, e))
-            return 1
-            continue
-
-        try:
-            url = generate_dashboard_url(dashboard)
-        except ValueError as e:
-            print("\nerror:\tgenerating dashboard '%s' failed\n\t%s" %
-                  (dashboard_file, e))
-            result = 1
-            continue
-
-        variables = {
-            'title': dashboard.get('dashboard', 'title') or None,
-            'description': dashboard.get('dashboard', 'description') or None,
-            'url': url,
-            'filename': dashboard_file,
-            'configuration': get_configuration(dashboard)
-        }
-        print(template.render(variables))
-
-    return result
+    return 0
 
 
 if __name__ == '__main__':
