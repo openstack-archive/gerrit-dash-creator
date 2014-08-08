@@ -3,7 +3,7 @@ title = Reviews from New Contributors
 description = Reviews from New Contributors
 foreach = reviewer:"Welcome, new contributor!" status:open NOT owner:self NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self NOT project:openstack-dev/sandbox
 
-[section "Failed Jenkins, may need help debugging"
+[section "Failed Jenkins, may need help debugging"]
 query = label:Verified<1,jenkins
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
