@@ -6,6 +6,15 @@ foreach = (project:^openstack/.*oslo.* OR project:^openstack-dev/.*oslo.* OR pro
 [section "Oslo Specs"]
 query = project:openstack/oslo-specs
 
+[section "Bug Fixes"]
+query = topic:^bug/.*
+
+[section "Graduation Changes in Incubator"]
+query = project:openstack/oslo-incubator topic:^.*graduate.*
+
+[section "Graduating Libraries"]
+query = (project:openstack/oslo.db OR project:openstack/oslo.i18n OR project:openstack/oslo.serialization OR project:openstack/oslo.utils)
+
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
 
