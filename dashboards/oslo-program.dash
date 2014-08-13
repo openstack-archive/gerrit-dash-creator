@@ -6,6 +6,9 @@ foreach = (project:^openstack/.*oslo.* OR project:^openstack-dev/.*oslo.* OR pro
 [section "Oslo Specs"]
 query = project:openstack/oslo-specs
 
+[section "Bug Fixes"]
+query = topic:^bug/.*
+
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
 
