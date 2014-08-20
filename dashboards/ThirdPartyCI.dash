@@ -1,0 +1,19 @@
+#Note replace all hp-cinder-ci with your gerrit account name
+#Also update the Title & description to match your 3rd party ci account
+
+[dashboard]
+title = HP Storage CI Status
+description = Comparison of the HP Storage CI reviews with Jenkins for past 2 weeks
+foreach = (project:openstack/cinder) status:open NOT age:2week reviewer:hp-cinder-ci
+
+[section "Jenkins succeeds and 3rd Party CI failed"]
+query = label:Verified<=-1,hp-cinder-ci label:Verified>=1,jenkins
+
+[section "Jenkins succeeds and 3rd Party CI may have passed or failed (vote=0)"]
+query =  label:Verified=0,hp-cinder-ci label:Verified>=1,jenkins
+
+[section "Jenkins and 3rd Party CI both failed"]
+query =  label:Verified<=-1,hp-cinder-ci label:Verified<=-1,jenkins
+
+[section "Jenkins failed and 3rd Party CI may have passed or failed (vote=0)"]
+query = label:Verified=0,hp-cinder-ci label:Verified<=-1,jenkins
