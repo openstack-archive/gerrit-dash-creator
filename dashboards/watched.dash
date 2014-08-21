@@ -1,0 +1,19 @@
+[dashboard]
+title = Watched Projects
+description = Watched Projects
+foreach = is:watched is:open
+
+[section "You are a reviewer, but haven't voted in the current revision"]
+query = reviewer:self
+
+[section "Passed Jenkins, No Negative Feedback"]
+query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+
+[section "Needs final +2"]
+query = label:Code-Review>=2 limit:50
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=2 age:5d
+
+[section "Wayward Changes (Changes with no code review in the last 2days)"]
+query = NOT label:Code-Review<=2 age:2d
