@@ -1,0 +1,12 @@
+[dashboard]
+title = Oslo Graduation Changes in openstack-infra or openstack-dev
+description = Infra/Dev changes for Oslo
+# NOTE(dhellmann): The space in the message query results in
+# much more accurate query results.
+foreach = is:open message:" oslo"
+
+[section "openstack-infra/*"]
+query = project:^openstack-infra/.*
+
+[section "openstack-dev/*"]
+query = project:^openstack-dev/.*
