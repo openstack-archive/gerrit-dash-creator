@@ -13,7 +13,7 @@ query = topic:^bug/.*
 query = project:openstack/oslo-incubator topic:^.*graduate.*
 
 [section "Graduating Libraries"]
-query = (project:openstack/oslo.concurrency OR project:openstack/oslo.db OR project:openstack/oslo.i18n OR project:openstack/oslo.serialization OR project:openstack/oslo.utils)
+query = (project:openstack/oslo.concurrency OR project:openstack/oslo.db OR project:openstack/oslo.i18n OR project:openstack/oslo.log OR project:openstack/oslo.serialization OR project:openstack/oslo.utils)
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
