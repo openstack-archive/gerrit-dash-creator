@@ -3,6 +3,9 @@ title = Heat Review Inbox
 description = Review Inbox
 foreach = (project:openstack-dev/heat-cfnclient OR project:openstack/heat OR project:openstack/heat-cfntools OR project:openstack/heat-specs OR project:openstack/heat-templates OR project:openstack/python-heatclient OR project:openstack/tripleo-heat-templates OR project:stackforge/heat-translator OR project:stackforge/puppet-heat) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=0,self
 
+[section "Proposal Bot Proposals"]
+query = owner:"OpenStack Proposal Bot <openstack-infra@lists.openstack.org>"
+
 [section "Needs final +2"]
 query = label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
 
