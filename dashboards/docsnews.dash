@@ -1,0 +1,12 @@
+[dashboard]
+title = Ops/User Docs Newsworthy
+description = Review Inbox for OpenStack Documentation
+foreach = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/docs-specs OR project:openstack/object-api OR project:openstack/image-api OR project:openstack/identity-api OR project:openstack/compute-api OR project:openstack/volume-api OR project:openstack/netconn-api OR project:openstack/operations-guide OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:stackforge/clouddocs-maven-plugin OR project:openstack/ha-guide) 
+status:open NOT label:Code-Review<=-2
+
+[section "Work in progress"]
+query = NOT label:Workflow>=1 NOT owner:self label:Workflow<=-1
+
+[section "Merged in the last week"]
+query = status:merged age:1week
+
