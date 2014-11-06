@@ -10,10 +10,10 @@ query = NOT label:Code-Review<=2 age:5d
 query = reviewer:self
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+query = label:Code-Review>=2 NOT(reviewerin:nova-core label:Code-Review<=-1) limit:50
 
-[section "Passed Jenkins, No Negative Feedback"]
-query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+[section "Passed Jenkins, No Negative Core Feedback"]
+query = NOT label:Code-Review>=2 NOT(reviewerin:nova-core label:Code-Review<=-1) limit:50
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
 query = NOT label:Code-Review<=2 age:2d
