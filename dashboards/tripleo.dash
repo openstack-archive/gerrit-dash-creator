@@ -1,7 +1,7 @@
 [dashboard]
 title = TripleO Inbox
 description = TripleO Review Inbox
-foreach = (project:openstack/tripleo-incubator OR project:openstack/tripleo-image-elements OR project:openstack/tripleo-heat-templates OR project:openstack/tripleo-specs OR project:openstack/os-apply-config OR project:openstack/os-collect-config OR project:openstack/os-refresh-config OR project:openstack/os-cloud-config OR project:openstack/diskimage-builder OR project:openstack/dib-utils OR project:openstack-infra/tripleo-ci OR project:openstack/tuskar OR project:openstack/python-tuskarclient) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+foreach = (project:openstack/tripleo-incubator OR project:openstack/tripleo-image-elements OR project:openstack/tripleo-heat-templates OR project:openstack/tripleo-specs OR project:openstack/os-apply-config OR project:openstack/os-collect-config OR project:openstack/os-refresh-config OR project:openstack/os-cloud-config OR project:openstack/diskimage-builder OR project:openstack/dib-utils OR project:openstack-infra/tripleo-ci OR project:openstack/tuskar OR project:openstack/python-tuskarclient OR project:openstack/os-net-config) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1%2cjenkins OR label:Code-Review-1)
