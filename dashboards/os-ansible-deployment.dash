@@ -1,0 +1,19 @@
+[dashboard]
+title = os-ansible-deployment Review Inbox
+description = Review Inbox for the OpenStack Ansible Deployment project
+foreach = (project:stackforge/os-ansible-deployment OR project:stackforge/os-ansible-deployment-specs) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=0,self
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=2 age:5d
+
+[section "Your are a reviewer but haven't voted in the current revision"]
+query = NOT label:Code-Review<=2,self reviewer:self
+
+[section "Needs final +2"]
+query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self
+
+[section "Passed Jenkins, No Negative Feedback"]
+query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+
+[section "Wayward Changes (Changes with no code review in the last 2days)"]
+query = NOT label:Code-Review<=2 age:2d
