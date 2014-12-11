@@ -1,0 +1,19 @@
+[dashboard]
+title = Nova Specs
+description = Review Inbox
+foreach = project:^openstack/nova-specs status:open NOT label:Workflow<=-1 label:Verified>=1,jenkins
+
+[section "My Specs"]
+query = owner:self
+
+[section "Your are a reviewer, but haven't voted in the current revision"]
+query = NOT owner:self reviewer:self NOT label:Code-Review>=-2,self
+
+[section "Passed Jenkins, Not -2ed, You have never reviewed"]
+query = NOT owner:self NOT label:Code-Review>=-2,self NOT reviewer:self NOT label:Code-Review<=-2 limit:100
+
+[section "Wayward Changes (Changes with no code review in the last 7 days)"]
+query = NOT owner:self NOT label:Code-Review<=2 age:7d
+
+[section "Dead Specs"]
+query = label:Code-Review<=-2
