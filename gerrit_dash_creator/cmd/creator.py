@@ -24,9 +24,9 @@ import six
 from six.moves import configparser
 
 
-def escape_comma(buff):
+def escape(buff):
     """Because otherwise Firefox is a sad panda."""
-    return buff.replace(',', '%2c')
+    return buff.replace(',', '%2c').replace('-', '%2D')
 
 
 def generate_dashboard_url(dashboard):
@@ -37,7 +37,7 @@ def generate_dashboard_url(dashboard):
         raise ValueError("option 'title' in section 'dashboard' not set")
 
     try:
-        foreach = escape_comma(dashboard.get('dashboard', 'foreach'))
+        foreach = dashboard.get('dashboard', 'foreach')
     except configparser.NoOptionError:
         raise ValueError("option 'foreach' in section 'dashboard' not set")
 
@@ -47,8 +47,8 @@ def generate_dashboard_url(dashboard):
         baseurl = 'https://review.openstack.org/#/dashboard/?'
 
     url = baseurl
-    url += urllib.urlencode({'title': title, 'foreach': foreach})
-    url += '&'
+    url += urllib.urlencode({'title': escape(title),
+                             'foreach': escape(foreach)})
     for section in dashboard.sections():
         if not section.startswith('section'):
             continue
@@ -59,7 +59,7 @@ def generate_dashboard_url(dashboard):
             raise ValueError("option 'query' in '%s' not set" % section)
 
         title = section[9:-1]
-        encoded = urllib.urlencode({title: query})
+        encoded = urllib.urlencode({escape(title): escape(query)})
         url += "&%s" % encoded
     return url
 
