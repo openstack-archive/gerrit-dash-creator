@@ -1,7 +1,7 @@
 [dashboard]
-title = Fuel Inbox
+title = Fuel Review Inbox
 description = Fuel Review Inbox
-foreach = (project:^stackforge/fuel-.*) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+foreach = (project:^stackforge/fuel-.*) status:open NOT project:stackforge/fuel-docs NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1 OR label:Code-Review-1 OR label:Workflow<=-1)
