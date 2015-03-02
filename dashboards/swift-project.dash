@@ -1,0 +1,42 @@
+[dashboard]
+title = Swift Project Dashboard
+description = Overview of submitted patches and ongoing work
+foreach = (project:openstack/swift OR project:openstack/python-swiftclient OR project:openstack/swift-bench OR project:openstack/swift-specs) status:open
+
+[section "Swift Specs"]
+query = project:openstack/swift-specs NOT label:Code-Review<=-2
+
+[section "Starred Patches (by core)"]
+query = (
+starredby:notmyname OR
+starredby:torgomatic OR
+starredby:cschwede OR
+starredby:"alistair.coles@hp.com" OR
+starredby:"darrell@swiftstack.com" OR
+starredby:"david.goetz@rackspace.com" OR
+starredby:"greglange@gmail.com" OR
+starredby:"matt@oliver.net.au" OR
+starredby:"mike@weirdlooking.com" OR
+starredby:"zaitcev@kotori.zaitcev.us" OR
+starredby:"paul.e.luse@intel.com") AND status:open
+
+[section "Needs Approval"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins label:Code-Review>=2 NOT label:Code-Review-1 NOT project:openstack/swift-specs branch:master NOT label:Code-Review<=-2
+
+[section "In the gate queue"]
+query = label:Workflow>=1 label:Code-Review>=2 NOT label:Code-Review<=-2
+
+[section "Needs Reverify"]
+query = label:Verified<=-1,jenkins NOT project:openstack/swift-specs branch:master NOT label:Code-Review<=-1 NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+
+[section "Possible abandoned changes"]
+query = status:open age:4week (label:Verified<=-1,jenkins OR label:Code-Review<=-1) NOT label:Workflow<=-1
+
+[section "Erasure Code work"]
+query = NOT project:openstack/swift-specs branch:feature/ec status:open
+
+[section "On-Disk Encryption work"]
+query = NOT project:openstack/swift-specs branch:feature/crypto status:open
+
+[section "Recent patch proposals"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review<=2 -age:5d NOT project:openstack/swift-specs branch:master
