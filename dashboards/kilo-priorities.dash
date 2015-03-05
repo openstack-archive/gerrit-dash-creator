@@ -1,0 +1,31 @@
+[dashboard]
+title = Nova Kilo Priorities
+description = Priority reviews for the Kilo release of Nova
+foreach = status:open
+
+[section "Kilo objects"]
+query = owner:"Dan Smith" topic:bp/kilo-objects
+
+[section "Cells V2"]
+query = (topic:bp/cells-v2-mapping OR topic:bp/cells-instance-mapping)
+
+[section "RT objects"]
+query = (topic:bp/make-resource-tracker-use-objects OR topic:numa-objects-version OR topic:bp/detach-service-from-computenode)
+
+[section "Resource objects"]
+query = topic:resource-objects
+
+[section "Isolate scheduler DB"]
+query = topic:bp/isolate-scheduler-db
+
+[section "v2 on v3"]
+query = topic:bp/v2-on-v3-api
+
+[section "EC2 splitout"]
+query = (topic:bp/ec2-api)
+
+[section "Functional Testing"]
+query = topic:server-group-functional-tests
+
+[section "Online upgrade"]
+query = topic:bp/online-schema-changes
