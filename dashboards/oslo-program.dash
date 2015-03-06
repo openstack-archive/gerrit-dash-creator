@@ -9,11 +9,11 @@ query = project:openstack/oslo-specs
 [section "Bug Fixes"]
 query = topic:^bug/.*
 
+[section "Blueprints"]
+query = message:"Blueprint"
+
 [section "Graduation Changes in Incubator"]
 query = project:openstack/oslo-incubator topic:^.*graduate.*
-
-[section "Graduating Libraries"]
-query = (project:openstack/oslo.versionedobjects OR project:openstack/oslo.policy OR project:openstack/debtcollector OR project:openstack/tooz OR project:openstack/oslo.context OR project:openstack/oslo.log OR project:openstack/oslo.reports)
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
