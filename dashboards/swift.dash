@@ -1,34 +1,19 @@
 [dashboard]
 title = Swift Review Dashboard
-description = Swift patches to look at
-foreach = (project:openstack/swift OR project:openstack/python-swiftclient OR project:openstack/swift-python-agent OR project:openstack/swift-bench OR project:openstack/swift-specs) status:open NOT label:Code-Review<=-2
+description = Swift patches to review
+foreach = (project:openstack/swift OR project:openstack/python-swiftclient OR project:openstack/swift-python-agent OR project:openstack/swift-bench OR project:openstack/swift-specs) status:open
+
+[section "Starred (by PTL or myself)"]
+query = starredby:notmyname OR is:starred
 
 [section "Swift Specs"]
-query = project:openstack/swift-specs NOT owner:self
-
-[section "My Patches"]
-query = owner:self status:open
-
-[section "Needs Approval"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT project:openstack/swift-specs branch:master
-
-[section "Needs Reverify"]
-query = label:Verified<=-1,jenkins NOT project:openstack/swift-specs branch:master NOT label:Code-Review<=-1 NOT label:Workflow<=-1
-
-[section "5 Days Without Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=2 age:5d NOT project:openstack/swift-specs branch:master
+query = project:openstack/swift-specs NOT label:Code-Review<=-2
 
 [section "No Negative Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 NOT project:openstack/swift-specs limit:50 branch:master
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 NOT project:openstack/swift-specs branch:master -age:5d
 
-[section "With Negative Feedback"]
-query = NOT label:Workflow<=-1 NOT label:Verified<=-1,jenkins NOT owner:self label:Code-Review-1 NOT project:openstack/swift-specs limit:20 branch:master
+[section "Needs Final Approval"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT project:openstack/swift-specs branch:master
 
-[section "Work In Progress"]
-query = NOT label:Workflow>=1 NOT owner:self label:Workflow<=-1 limit:20 NOT project:openstack/swift-specs branch:master
-
-[section "Erasure Code work"]
-query = NOT project:openstack/swift-specs branch:feature/ec status:open
-
-[section "Possible abandoned changes"]
-query = status:open age:4week (label:Verified<=-1,jenkins OR label:Code-Review<=-1) NOT label:Workflow<=-1
+[section "Older open patches"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review<=2 age:5d -age:6week NOT project:openstack/swift-specs branch:master NOT label:Code-Review<=-2
