@@ -1,0 +1,22 @@
+[Dashboard]
+title = Rally Dashboard
+description = Rally patches to review
+foreach = (project:openstack/rally) status:open
+
+[section "Critical for next release"]
+query = (starredby:"mdubov@mirantis.com" AND starredby:"boris@pavlovic.me") AND status:open
+
+[section "Waiting for final approve"]
+query = label:Verified>=1,jenkins label:Verified>=1,rally-ci NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT (starredby:"amaretskiy@mirantis.com" OR starredby:"akurilin@mirantis.com" OR starredby:"boris@pavlovic.me" OR starredby:"yingjun.li@kylin-cloud.com" OR starredby:"mdubov@mirantis.com" OR starredby:"sskripnick@mirantis.com" OR starredby:"yfried@redhat.com")
+
+[section "Bug fixes"]
+query = topic:"^bug/.*" AND status:open
+
+[section "Important patches"]
+query = (starredby:"boris@pavlovic.me" OR starredby:"mdubov@mirantis.com") NOT (starredby:"mdubov@mirantis.com" AND starredby:"boris@pavlovic.me") AND status:open
+
+[section "Ready for review"]
+query = label:Verified>=1,jenkins label:Verified>=1,rally-ci NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Code-Review>=2 NOT (starredby:"amaretskiy@mirantis.com" OR starredby:"akurilin@mirantis.com" OR starredby:"boris@pavlovic.me" OR starredby:"yingjun.li@kylin-cloud.com" OR starredby:"mdubov@mirantis.com" OR starredby:"sskripnick@mirantis.com" OR starredby:"yfried@redhat.com")
+
+[section "Has -1 but passed tests"]
+query = label:Verified>=1,jenkins label:Verified>=1,rally-ci label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Code-Review>=2
