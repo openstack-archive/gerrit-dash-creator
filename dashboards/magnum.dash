@@ -1,0 +1,25 @@
+[dashboard]
+title = Magnum Review Inbox
+description = Review Inbox
+foreach = (project:openstack/magnum OR project:openstack/python-magnumclient ) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=0,self
+
+[section "Proposal Bot Proposals"]
+query = owner:"OpenStack Proposal Bot <openstack-infra@lists.openstack.org>"
+
+[section "Needs final +2"]
+query = label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=2 age:5d
+
+[section "You are a reviewer, but haven't voted in the current revision"]
+query = NOT label:Code-Review<=2,self reviewer:self
+
+[section "Passed Jenkins, No Negative Feedback"]
+query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+
+[section "Wayward Changes (Changes with no code review in the last 2days)"]
+query = NOT label:Code-Review<=2 age:2d
+
+[section "Negative Feedback"]
+query = label:Code-Review<=-1 limit:10
