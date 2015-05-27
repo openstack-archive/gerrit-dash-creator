@@ -1,7 +1,7 @@
 [dashboard]
 title = Swift Review Dashboard
 description = Swift patches to review
-foreach = (project:openstack/swift OR project:openstack/python-swiftclient OR project:openstack/swift-python-agent OR project:openstack/swift-bench OR project:openstack/swift-specs) status:open
+foreach = (project:openstack/swift OR project:openstack/python-swiftclient OR project:openstack/swift-python-agent OR project:openstack/swift-bench OR project:openstack/swift-specs) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "Starred (by PTL or myself)"]
 query = (starredby:notmyname OR is:starred) AND status:open
@@ -9,11 +9,14 @@ query = (starredby:notmyname OR is:starred) AND status:open
 [section "Swift Specs"]
 query = project:openstack/swift-specs NOT label:Code-Review<=-2
 
-[section "No Negative Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 NOT project:openstack/swift-specs branch:master -age:5d
-
-[section "Needs Final Approval"]
+[section "Needs Final Approval (to land on master)"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT project:openstack/swift-specs branch:master
 
+[section "On-Disk Encryption work (feature/crypto branch)"]
+query = NOT project:openstack/swift-specs branch:feature/crypto status:open
+
+[section "Recently Proposed to master"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=2 NOT project:openstack/swift-specs -age:5d
+
 [section "Older open patches"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review<=2 age:5d -age:6week NOT project:openstack/swift-specs branch:master NOT label:Code-Review<=-2
+query = NOT label:Workflow>=1 label:Verified>=1,jenkins NOT label:Code-Review<=2 age:5d -age:6week NOT project:openstack/swift-specs
