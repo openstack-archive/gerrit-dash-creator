@@ -5,4 +5,6 @@
 argparse
 jinja2
 pbr>=0.6,!=0.7,<1.0
+requests>=2.5.2
 six>=1.7.0
+PyYAML>=3.1.0
