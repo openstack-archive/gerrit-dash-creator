@@ -19,8 +19,18 @@ import sys
 import urllib
 
 import jinja2
+import pkg_resources
+import requests
 import six
 from six.moves import configparser
+import yaml
+
+
+PROJECTS_URL = ("https://git.openstack.org/cgit/openstack/governance/plain/"
+                "reference/projects.yaml")
+# Used to store the dictionary of the processed PROJECTS_URL.  Only retrieved
+# if needed.
+PROJECTS = None
 
 
 def escape(buff):
@@ -30,6 +40,13 @@ def escape(buff):
 
 def generate_dashboard_url(dashboard):
     """Generate a dashboard URL from a given definition."""
+    try:
+        project = dashboard.get('dashboard', 'project')
+        projects = get_project_repos(project)
+        projects = ' OR '.join(sorted(projects))
+    except configparser.NoOptionError:
+        project = None
+
     try:
         title = dashboard.get('dashboard', 'title')
     except configparser.NoOptionError:
@@ -44,6 +61,10 @@ def generate_dashboard_url(dashboard):
         baseurl = dashboard.get('dashboard', 'baseurl')
     except configparser.NoOptionError:
         baseurl = 'https://review.openstack.org/#/dashboard/?'
+
+    if project:
+        template = jinja2.Template(foreach)
+        foreach = template.render(projects=projects)
 
     url = baseurl
     url += escape(urllib.urlencode({'title': title,
@@ -173,6 +194,30 @@ def load_dashboards(paths):
                                  "parsed: %s" % (dashboard_file, e))
 
     return dashboards
+
+
+def get_projects():
+    """Get the list of official OpenStack projects."""
+
+    # FIXME(jlvilla): Remove when a better way is found
+    requests.packages.urllib3.disable_warnings()
+    result = requests.request('get', PROJECTS_URL)
+    result.raise_for_status()
+    projects = yaml.load(result.text)
+    return projects
+
+
+def get_project_repos(project):
+    """Get all the project repos for an OpenStack project."""
+
+    global PROJECTS
+    if PROJECTS is None:
+        PROJECTS = get_projects()
+    projects = PROJECTS[project]['projects']
+    project_repos = []
+    for project_data in projects:
+        project_repos.append('project:{}'.format(project_data['repo']))
+    return project_repos
 
 
 def main():

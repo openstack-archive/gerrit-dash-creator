@@ -44,8 +44,8 @@ the dashboard file you want the URL for::
 
 Then put the URL in your browser and off you go.
 
-A daily updated index of all available dashboars is available
-at http://ghostcloud.net/openstack_gerrit_dashboards/.
+A daily updated index of all available dashboards is available at:
+http://ghostcloud.net/openstack_gerrit_dashboards/.
 
 
 Contributions Welcomed
@@ -61,5 +61,5 @@ I'm very happy to include additional interesting examples that teams
 find useful, and make it possible for teams to explore other
 approaches to reviewing code.
 
-If you have questions please find me on #openstack-dev,
+If you have questions please find me (sdague) on #openstack-dev,
 #openstack-infra, or #openstack-qa on FreeNode to discuss.
