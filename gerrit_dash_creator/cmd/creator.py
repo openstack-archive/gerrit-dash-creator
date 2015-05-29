@@ -19,8 +19,14 @@ import sys
 import urllib
 
 import jinja2
+import requests
 import six
 from six.moves import configparser
+import yaml
+
+
+PROJECTS_URL = ("https://git.openstack.org/cgit/openstack/governance/plain/"
+                "reference/projects.yaml")
 
 
 def escape(buff):
@@ -30,6 +36,13 @@ def escape(buff):
 
 def generate_dashboard_url(dashboard):
     """Generate a dashboard URL from a given definition."""
+    try:
+        project = dashboard.get('dashboard', 'project')
+        projects = get_repositories_of_project(project)
+        projects = ' OR '.join(sorted(projects))
+    except configparser.NoOptionError:
+        project = None
+
     try:
         title = dashboard.get('dashboard', 'title')
     except configparser.NoOptionError:
@@ -44,6 +57,10 @@ def generate_dashboard_url(dashboard):
         baseurl = dashboard.get('dashboard', 'baseurl')
     except configparser.NoOptionError:
         baseurl = 'https://review.openstack.org/#/dashboard/?'
+
+    if project:
+        template = jinja2.Template(foreach)
+        foreach = template.render(projects=projects)
 
     url = baseurl
     url += escape(urllib.urlencode({'title': title,
@@ -166,13 +183,37 @@ def load_dashboards(paths):
         for dashboard_file in dashboard_files:
             try:
                 dashboards[dashboard_file] = read_dashboard_file(
-                    dashboard_file
-                )
+                    dashboard_file)
             except configparser.Error as e:
                 raise ValueError("dashboard file '%s' cannot be "
                                  "parsed: %s" % (dashboard_file, e))
 
     return dashboards
+
+
+def get_deliverables_of_project(project):
+    """Get list of OpenStack projects."""
+
+    try:
+        result = requests.request('get', PROJECTS_URL)
+        projects = yaml.load(result.text)
+    except Exception as e:
+        raise ValueError("%s cannot be retrieved: %s"
+                         % (PROJECTS_URL, e))
+
+    try:
+        return projects[project]['deliverables']
+    except KeyError:
+        raise ValueError("project %s not found" % project)
+
+
+def get_repositories_of_project(project):
+    """Get all repositories for an OpenStack project."""
+    result = []
+    deliverables = get_deliverables_of_project(project)
+    for data in deliverables.itervalues():
+        result.append(" ".join(data.get('repos', [])))
+    return result
 
 
 def main():
