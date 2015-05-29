@@ -61,5 +61,5 @@ I'm very happy to include additional interesting examples that teams
 find useful, and make it possible for teams to explore other
 approaches to reviewing code.
 
-If you have questions please find me on #openstack-dev,
+If you have questions please find me (sdague) on #openstack-dev,
 #openstack-infra, or #openstack-qa on FreeNode to discuss.
