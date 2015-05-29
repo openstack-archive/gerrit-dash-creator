@@ -1,7 +1,8 @@
 [dashboard]
 title = Ironic Inbox
 description = Ironic Review Inbox
-foreach = (project:openstack/ironic OR project:openstack/python-ironicclient OR project:openstack/ironic-python-agent OR project:openstack/ironic-specs OR project:openstack/ironic-lib OR project:openstack/ironic-inspector OR project:openstack/ironic-webclient OR project:openstack/bifrost) status:open NOT label:Code-Review<=-2
+project = ironic
+foreach = ({{projects}}) status:open NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1 OR label:Workflow<=-1)

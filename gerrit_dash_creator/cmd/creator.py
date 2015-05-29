@@ -19,8 +19,14 @@ import sys
 import urllib
 
 import jinja2
+import requests
 import six
 from six.moves import configparser
+import yaml
+
+
+PROJECTS_URL = ("https://git.openstack.org/cgit/openstack/governance/plain/"
+                "reference/projects.yaml")
 
 
 def escape(buff):
@@ -30,6 +36,13 @@ def escape(buff):
 
 def generate_dashboard_url(dashboard):
     """Generate a dashboard URL from a given definition."""
+    try:
+        project = dashboard.get('dashboard', 'project')
+        projects = get_repositories_of_project(project)
+        projects = ' OR '.join(sorted(projects))
+    except configparser.NoOptionError:
+        project = None
+
     try:
         title = dashboard.get('dashboard', 'title')
     except configparser.NoOptionError:
@@ -44,6 +57,10 @@ def generate_dashboard_url(dashboard):
         baseurl = dashboard.get('dashboard', 'baseurl')
     except configparser.NoOptionError:
         baseurl = 'https://review.openstack.org/#/dashboard/?'
+
+    if project:
+        template = jinja2.Template(foreach)
+        foreach = template.render(projects=projects)
 
     url = baseurl
     url += escape(urllib.urlencode({'title': title,
@@ -173,6 +190,26 @@ def load_dashboards(paths):
                                  "parsed: %s" % (dashboard_file, e))
 
     return dashboards
+
+
+def get_deliverables_of_project(project):
+    """Get list of OpenStack projects."""
+
+    # FIXME(jlvilla): Remove when a better way is found
+    requests.packages.urllib3.disable_warnings()
+    result = requests.request('get', PROJECTS_URL)
+    result.raise_for_status()
+    projects = yaml.load(result.text)
+    return projects[project]['deliverables']
+
+
+def get_repositories_of_project(project):
+    """Get all repositories for an OpenStack project."""
+    result = []
+    deliverables = get_deliverables_of_project(project)
+    for data in deliverables.itervalues():
+        result.append(" ".join(data.get('repos', [])))
+    return result
 
 
 def main():
