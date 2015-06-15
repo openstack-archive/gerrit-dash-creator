@@ -1,0 +1,27 @@
+[dashboard]
+title = Glance Review Dashboard
+description = Glance review requests
+foreach = (project:openstack/glance OR project:openstack/python-glanceclient OR project:openstack/glance_store) status:open NOT label:Code-Review<=-2
+
+[section "Own Patches"]
+query = owner:self status:open
+
+[section "Needs Approval"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 branch:master
+
+[section "Needs Reverify"]
+query = label:Verified<=-1,jenkins branch:master NOT label:Code-Review<=-1 NOT label:Workflow<=-1
+
+[section "Without Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master
+
+[section "With Negative Feedback"]
+query = NOT label:Workflow<=-1 NOT label:Verified<=-1,jenkins NOT owner:self label:Code-Review-1 limit:20 branch:master
+
+[section "5 Days Without Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=2 age:5d branch:master
+
+[section "Work In Progress"]
+query = NOT label:Workflow>=1 NOT owner:self label:Workflow<=-1 limit:20 branch:master
+
+
