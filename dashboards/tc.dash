@@ -4,13 +4,13 @@ description = Technical Committee Review Inbox
 foreach = project:openstack/governance
 
 [section "Ready to Merge"]
-query = label:Code-Review>=7
+query = label:Rollcall-vote>=7
 
 [section "You Haven't Voted on this Draft"]
-query = is:open NOT label:Code-Review,self NOT owner:self
+query = is:open NOT label:Code-Review,self NOT label:Rollcall-vote,self NOT owner:self
 
 [section "Has at Least One Objection"]
-query = is:open NOT label:Code-Review,self NOT owner:self label:Code-Review<=-1
+query = is:open NOT label:Code-Review,self NOT label:Rollcall-vote,self NOT owner:self label:Code-Review<=-1
 
 [section "All Open Items"]
 query = is:open
