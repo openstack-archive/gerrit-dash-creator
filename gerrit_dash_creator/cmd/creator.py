@@ -80,9 +80,8 @@ def get_options():
     parser.add_argument('--template', default='single.txt',
                         help='Name of template')
     parser.add_argument('--template-directory',
-                        default=pkg_resources.resource_filename(
-                            __name__, "templates"
-                        ), help='Directory to scan for template files')
+                        default="templates",
+                        help='Directory to scan for template files')
     parser.add_argument('--template-file', default=None,
                         help='Location of a specific template file')
     return parser.parse_args()
