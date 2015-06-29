@@ -19,7 +19,6 @@ import sys
 import urllib
 
 import jinja2
-import pkg_resources
 import six
 from six.moves import configparser
 
