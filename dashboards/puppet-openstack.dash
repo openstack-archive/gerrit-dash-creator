@@ -1,31 +1,8 @@
 [dashboard]
 title = Puppet Openstack Modules Inbox
 description = Puppet Openstack Modules Review Inbox
-foreach = (project:stackforge/puppet-ceilometer OR
-           project:stackforge/puppet-ceph OR
-           project:stackforge/puppet-cinder OR
-           project:stackforge/puppet-designate OR
-           project:stackforge/puppet-glance OR
-           project:stackforge/puppet-gnocchi OR
-           project:stackforge/puppet-heat OR
-           project:stackforge/puppet-horizon OR
-           project:stackforge/puppet-ironic OR
-           project:stackforge/puppet-keystone OR
-           project:stackforge/puppet-manila OR
-           project:stackforge/puppet-monasca OR
-           project:stackforge/puppet-murano OR
-           project:stackforge/puppet-n1k-vsm OR
-           project:stackforge/puppet-neutron OR
-           project:stackforge/puppet-nova OR
-           project:stackforge/puppet-openstack OR
-           project:stackforge/puppet-openstack-specs OR
-           project:stackforge/puppet-openstacklib OR
-           project:stackforge/puppet-sahara OR
-           project:stackforge/puppet-swift OR
-           project:stackforge/puppet-tempest OR
-           project:stackforge/puppet-tripleo OR
-           project:stackforge/puppet-trove OR
-           project:stackforge/puppet-vswitch) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+foreach = (project:openstack/tripleo-puppet-elements OR
+           project:^openstack/puppet-.*) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1)
