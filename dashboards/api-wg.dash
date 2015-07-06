@@ -1,0 +1,29 @@
+[dashboard]
+title = API Working Group Reviews
+description = Reviews for OpenStack API Working Group
+foreach = (project:openstack/api-wg)
+
+
+[section "Ready to freeze"]
+query = status:open label:Verified>=1,jenkins NOT label:Code-Review<=-1 NOT label:Code-Review<=-1 NOT label:Workflow<=-1 age:2d
+
+[section "Frozen"]
+query = status:open label:Code-Review=-2
+
+[section "Frozen but needs feedback"]
+query = status:open (label:Code-Review=-2 AND label:Code-Review=-1)
+
+[section "Ready to merge"]
+query = status:open label:Code-Review=-2 age:7d
+
+[section "Merged in the past 7 days"]
+query = status:merged label:Workflow=+1 -age:7d
+
+[section "Needs feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = status:open NOT label:Code-Review<=2 age:5d
+
+[section "All open reviews"]
+query = status:open
+
+[section "You are a reviewer (but haven't voted in the current revision)"]
+query = NOT label:Code-Review<=2,self reviewer:self
