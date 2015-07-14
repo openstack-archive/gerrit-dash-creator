@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+2: Sean Dague <sean@dague.net>
+Workflow+1: Sean Dague <sean@dague.net>
+Code-Review+1: YAMAMOTO Takashi <yamamoto@midokura.com>
+Code-Review+1: Ihar Hrachyshka <ihrachys@redhat.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 14 Jul 2015 18:13:20 +0000
+Reviewed-on: https://review.openstack.org/200689
+Project: stackforge/gerrit-dash-creator
+Branch: refs/heads/master
