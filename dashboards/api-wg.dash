@@ -14,7 +14,7 @@ query = status:open (label:Code-Review=-2 AND NOT label:Code-Review=-1)
 query = status:open (label:Code-Review=-2 AND label:Code-Review=-1)
 
 [section "Ready to merge"]
-query = status:open label:Code-Review=-2 age:7d
+query = status:open (label:Code-Review=-2 AND NOT label:Code-Review=-1 AND age:7d)
 
 [section "Merged in the past 7 days"]
 query = status:merged label:Workflow=+1 -age:7d
