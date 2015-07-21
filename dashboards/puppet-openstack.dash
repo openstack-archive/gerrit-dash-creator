@@ -4,16 +4,16 @@ description = Puppet Openstack Modules Review Inbox
 foreach = (project:stackforge/puppet-ceph OR
            project:stackforge/puppet-murano OR
            project:stackforge/puppet-n1k-vsm OR
-           project:^openstack/puppet-.*) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+           project:^openstack/puppet-.*) status:open NOT label:Workflow<=-1
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1)
 
 [section "Puppet Openstack Specs"]
-query = NOT owner:self project:openstack/puppet-openstack-specs
+query = NOT owner:self project:openstack/puppet-openstack-specs NOT label:Code-Review<=-2
 
 [section "Needs Approval"]
-query = label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+query = label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review<=-1
 
 [section "Needs Reverify"]
 query = label:Verified<=-1,jenkins NOT label:Code-Review<=-1 NOT label:Workflow<=-1
@@ -21,9 +21,12 @@ query = label:Verified<=-1,jenkins NOT label:Code-Review<=-1 NOT label:Workflow<
 [section "5 Days Without Feedback"]
 query = label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=2 age:5d
 
+[section "Disagreement"]
+query = label:Verified>=1,jenkins label:Code-Review<=-1 label:Code-Review>=1
+
 [section "No Negative Feedback"]
 query = label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
 
 [section "Other"]
-query = label:Verified>=1,jenkins NOT owner:self NOT project:openstack/puppet-openstack-specs label:Code-Review-1 limit:20
+query = label:Verified>=1,jenkins NOT owner:self NOT project:openstack/puppet-openstack-specs label:Code-Review-1 NOT label:Code-Review>=1 limit:20
 
