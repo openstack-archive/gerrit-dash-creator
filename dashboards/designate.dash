@@ -6,7 +6,7 @@ foreach = (project:openstack/designate OR project:openstack/python-designateclie
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = (project:openstack/designate OR project:openstack/python-designateclient) NOT label:Code-Review<=2  age:5d NOT label:Workflow<=-1 label:Verified>=1,jenkins
 
-[section "Your are a reviewer, but haven't voted in the current revision"]
+[section "You are a reviewer, but haven't voted in the current revision"]
 query = (project:openstack/designate OR project:openstack/python-designateclient) reviewer:self label:Verified>=1,jenkins
 
 [section "Needs final +2"]

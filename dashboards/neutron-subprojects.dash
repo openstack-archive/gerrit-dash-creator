@@ -6,7 +6,7 @@ foreach =(project:openstack/dragonflow OR project:openstack/networking-bgpvpn OR
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
 
-[section "Your are a reviewer, but haven't voted in the current revision"]
+[section "You are a reviewer, but haven't voted in the current revision"]
 query = reviewer:self
 
 [section "Needs final +2"]

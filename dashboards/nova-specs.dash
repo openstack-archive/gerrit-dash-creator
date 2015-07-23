@@ -3,7 +3,7 @@ title = Nova Specs
 description = Review Inbox
 foreach = project:openstack/nova-specs status:open NOT label:Workflow<=-1 branch:master NOT owner:self
 
-[section "Your are a reviewer, but haven't voted in the current revision"]
+[section "You are a reviewer, but haven't voted in the current revision"]
 query = reviewer:self NOT label:Code-Review>=-2,self label:Verified>=1,jenkins
 
 [section "Not blocked by -2s"]
