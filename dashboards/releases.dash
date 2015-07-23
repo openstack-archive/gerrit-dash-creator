@@ -1,0 +1,19 @@
+[dashboard]
+title = Releases Inbox
+description = Releases
+foreach = is:open
+
+[section "liberty"]
+query = project:openstack/releases file:^deliverables/liberty/.*
+
+[section "kilo"]
+query = project:openstack/releases file:^deliverables/kilo/.*
+
+[section "juno"]
+query = project:openstack/releases file:^deliverables/juno/.*
+
+[section "all releases"]
+query = is:open project:openstack/releases
+
+[section "tools"]
+query = project:openstack-infra/release-tools
