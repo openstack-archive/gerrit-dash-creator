@@ -1,0 +1,22 @@
+[dashboard]
+title = Neutron Review Inbox (master and feature/pecan branches only)
+description = Review Inbox
+foreach = (project:openstack/neutron OR project:openstack/python-neutronclient OR project:openstack/neutron-fwaas OR project:openstack/neutron-lbaas OR project:openstack/neutron-vpnaas) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self (branch:master OR branch:feature/pecan) (topic:bp/lbaas-ref-octavia OR topic:bp/get-me-a-network OR topic:bp/pecan OR topic:bp/external-dns-resolution OR topic:bp/internal-dns-resolution OR topic:address-scopes OR topic:bp/quantum-qos OR topic:bp/online-schema-migrations OR topic:better-quotas OR topic:restructure-l2-agent OR topic:rbac-networks OR topic:bp/ipv6-prefix-delegation OR topic:bp/vlan-aware-vms OR topic:bp/add-availability-zone OR topic:bp/lbaas-l7-rules OR topic:ironic-integ OR topic:bp/neutron-python3 OR topic:bp/bgp-dynamic-routing OR topic:bp/conntrack-in-security-group OR topic:bp/ml2-qos OR topic:bp/vm-without-l3-address)
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=2 age:5d
+
+[section "You are a reviewer, but haven't voted in the current revision"]
+query = reviewer:self
+
+[section "Needs final +2"]
+query = label:Code-Review>=2 NOT(reviewerin:neutron-core label:Code-Review<=-1) limit:50
+
+[section "Passed Jenkins, No Negative Core Feedback"]
+query = NOT label:Code-Review>=2 NOT(reviewerin:neutron-core label:Code-Review<=-1) limit:50
+
+[section "Wayward Changes (Changes with no code review in the last 2days)"]
+query = NOT label:Code-Review<=2 age:2d
+
+[section "You are not a reviewer yet"]
+query = NOT reviewer:self
