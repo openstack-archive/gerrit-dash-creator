@@ -10,13 +10,19 @@ query = owner:self (label:Verified-1 OR label:Code-Review-1 OR label:Workflow<=-
 query = NOT label:Workflow>=1 NOT owner:self project:stackforge/fuel-specs
 
 [section "Needs Approval"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review<=-1
+
+[section "Ready for Core Reviewers"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:stackforge/fuel-specs label:Verified>=1 label:Code-Review>=1 NOT label:Code-Review>=2 NOT label:Code-Review<=-1
 
 [section "5 Days Without Feedback"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:stackforge/fuel-specs NOT label:Code-Review<=2 age:5d
 
-[section "No Negative Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:stackforge/fuel-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
+[section "No Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:stackforge/fuel-specs NOT label:Code-Review<=2 NOT age:5d limit:50
 
-[section "Other"]
-query = NOT label:Verified<=-1 NOT owner:self NOT project:stackforge/fuel-specs label:Code-Review-1 limit:20
+[section "Disagreement"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:stackforge/fuel-specs label:Code-Review<=-1 label:Code-Review>=1
+
+[section "Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:stackforge/fuel-specs label:Code-Review-1 NOT label:Code-Review<=-2 NOT label:Code-Review>=1 limit:20
