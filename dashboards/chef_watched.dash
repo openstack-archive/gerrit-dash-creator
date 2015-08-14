@@ -7,7 +7,7 @@ foreach = status:open is:watched
 query = owner:self status:open
 
 [section "Chef OpenStack Specs"]
-query = NOT owner:self project:stackforge/openstack-chef-specs
+query = NOT owner:self project:openstack/openstack-chef-specs
 
 [section "Needs Approval"]
 query = label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
@@ -19,10 +19,10 @@ query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self limit:50
 query = label:Verified<=-1,jenkins NOT label:Code-Review<=-1 NOT label:Workflow<=-1
 
 [section "5 Days Without Feedback"]
-query = label:Verified>=1,jenkins NOT owner:self NOT project:stackforge/openstack-chef-specs NOT label:Code-Review<=2 age:5d
+query = label:Verified>=1,jenkins NOT owner:self NOT project:openstack/openstack-chef-specs NOT label:Code-Review<=2 age:5d
 
 [section "No Negative Feedback"]
-query = label:Verified>=1,jenkins NOT owner:self NOT project:stackforge/openstack-chef-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
+query = label:Verified>=1,jenkins NOT owner:self NOT project:openstack/openstack-chef-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
 
 [section "With Negative Feedback"]
 query = NOT label:Workflow<=-1 NOT label:Verified<=-1,jenkins NOT owner:self label:Code-Review-1 limit:20
