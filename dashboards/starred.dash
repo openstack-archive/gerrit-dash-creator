@@ -2,9 +2,13 @@
 title = Starred Items
 description = Starred Items
 foreach = is:starred is:open
+          NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self
 
-[section "You are a reviewer, but haven't voted in the current revision"]
-query = reviewer:self
+[section "Bug Fixes"]
+query = topic:^bug/.*
+
+[section "Blueprints"]
+query = message:"Blueprint"
 
 [section "Passed Jenkins, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
