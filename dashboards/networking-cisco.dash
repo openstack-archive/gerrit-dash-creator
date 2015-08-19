@@ -1,0 +1,13 @@
+[dashboard]
+title = Networking-Cisco Reviews
+description = Open Reviews
+foreach =project:openstack/networking-cisco status:open
+
+[section "master"]
+query = branch:master
+
+[section "stable/kilo"]
+query = branch:stable/kilo
+
+[section "Other branches"]
+query = NOT branch:master AND NOT branch:stable/kilo
