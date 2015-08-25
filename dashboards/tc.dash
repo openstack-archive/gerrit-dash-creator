@@ -3,6 +3,12 @@ title = Technical Committee Inbox
 description = Technical Committee Review Inbox
 foreach = project:openstack/governance
 
+[section "Formal Vote Items with New Drafts"]
+query = topic:formal-vote is:open NOT label:Code-Review,self NOT label:Rollcall-vote,self NOT owner:self
+
+[section "Formal Vote Items"]
+query = topic:formal-vote is:open
+
 [section "Ready to Merge"]
 query = label:Rollcall-vote>=7
 
