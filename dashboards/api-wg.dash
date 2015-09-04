@@ -22,4 +22,4 @@ query = NOT label:Code-Review<=2 age:5d
 query =
 
 [section "You are a reviewer (but haven't voted in the current revision)"]
-query = NOT label:Code-Review<=2,self reviewer:self NOT owner:self
+query = NOT label:Code-Review<=2 reviewer:self NOT owner:self
