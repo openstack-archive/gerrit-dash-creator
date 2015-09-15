@@ -15,7 +15,11 @@ foreach = (project:openstack/tripleo-incubator OR
            project:openstack-infra/tripleo-ci OR
            project:openstack/tuskar OR
            project:openstack/python-tuskarclient OR
-           project:openstack/os-net-config) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+           project:openstack/os-net-config OR
+           project:openstack/instack OR
+           project:openstack/instack-undercloud OR
+           project:openstack/python-tripleoclient OR
+           project:openstack/tripleo-docs) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1)
