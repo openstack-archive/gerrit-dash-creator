@@ -4,16 +4,16 @@ description = Horizon patches to look at
 foreach = (project:openstack/horizon OR project:openstack/django_openstack_auth) status:open NOT label:Code-Review<=-2
 
 [section "My Patches"]
-query = owner:self status:open
+query = owner:self
 
-[section "Needs Approval, not me"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Code-Review>=1,self
+[section "Your are a reviewer, but haven't voted in the current revision"]
+query = reviewer:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
 
 [section "Needs Approval"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Code-Review<=2,self
 
 [section "Not Reviewed by Me"]
-query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self limit:50
+query = NOT label:Code-Review<=2,self limit:50
 
 [section "Needs Reverify"]
 query = label:Verified<=-1,jenkins branch:master NOT label:Code-Review<=-1 NOT label:Workflow<=-1
