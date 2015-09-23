@@ -1,9 +1,9 @@
 [dashboard]
 title = Horizon Review Dashboard
 description = Horizon patches to look at
-foreach = (project:openstack/horizon OR project:openstack/django_openstack_auth) status:open NOT label:Code-Review<=-2
+foreach = (project:openstack/horizon-cisco-ui OR project:openstack/django-openstack-auth-kerberos OR project:openstack/tuskar-ui OR project:openstack/manila-ui OR project:openstack/designate-dashboard OR project:openstack/neutron-lbaas-dashboard OR project:openstack/mistral-dashboard) status:open NOT label:Code-Review<=-2
 
-[section "My Patches"]
+[section "Your Patches"]
 query = owner:self
 
 [section "Starred Reviews"]
