@@ -1,7 +1,24 @@
 [dashboard]
 title = Neutron Sub Projects Review Inbox
 description = Review Inbox
-foreach =(project:openstack/dragonflow OR project:openstack/networking-arista OR project:openstack/networking-bagpipe-l2 OR project:openstack/networking-bgpvpn OR project:openstack/networking-cisco OR project:openstack/networking-l2gw OR project:openstack/networking-lenovo OR project:openstack/networking-midonet OR project:openstack/networking-odl OR project:openstack/networking-ofagent OR project:openstack/networking-onos OR project:openstack/networking-ovn OR project:openstack/networking-sfc OR project:openstack/octavia OR project:openstack/networking-plumgrid OR project:openstack/vmware-nsx OR project:openstack/networking-vsphere) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self branch:master
+foreach = (
+    project:openstack/dragonflow OR
+    project:openstack/networking-arista OR
+    project:openstack/networking-bagpipe-l2 OR
+    project:openstack/networking-bgpvpn OR
+    project:openstack/networking-cisco OR
+    project:openstack/networking-l2gw OR
+    project:openstack/networking-lenovo OR
+    project:openstack/networking-midonet OR
+    project:openstack/networking-odl OR
+    project:openstack/networking-ofagent OR
+    project:openstack/networking-onos OR
+    project:openstack/networking-ovn OR
+    project:openstack/networking-sfc OR
+    project:openstack/octavia OR
+    project:openstack/networking-plumgrid OR
+    project:openstack/vmware-nsx OR
+    project:openstack/networking-vsphere) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self branch:master
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
