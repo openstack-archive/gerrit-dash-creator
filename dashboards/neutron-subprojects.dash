@@ -14,11 +14,11 @@ foreach = (
     project:openstack/networking-ofagent OR
     project:openstack/networking-onos OR
     project:openstack/networking-ovn OR
-    project:openstack/networking-sfc OR
-    project:openstack/octavia OR
     project:openstack/networking-plumgrid OR
-    project:openstack/vmware-nsx OR
-    project:openstack/networking-vsphere) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self branch:master
+    project:openstack/networking-sfc OR
+    project:openstack/networking-vsphere OR
+    project:openstack/octavia OR
+    project:openstack/vmware-nsx) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self branch:master
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
