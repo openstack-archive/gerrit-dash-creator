@@ -46,8 +46,8 @@ def generate_dashboard_url(dashboard):
         baseurl = 'https://review.openstack.org/#/dashboard/?'
 
     url = baseurl
-    url += urllib.urlencode({'title': escape(title),
-                             'foreach': escape(foreach)})
+    url += escape(urllib.urlencode({'title': title,
+                             'foreach': foreach}))
     for section in dashboard.sections():
         if not section.startswith('section'):
             continue
@@ -58,7 +58,7 @@ def generate_dashboard_url(dashboard):
             raise ValueError("option 'query' in '%s' not set" % section)
 
         title = section[9:-1]
-        encoded = urllib.urlencode({escape(title): escape(query)})
+        encoded = escape(urllib.urlencode({title: query}))
         url += "&%s" % encoded
     return url
 
