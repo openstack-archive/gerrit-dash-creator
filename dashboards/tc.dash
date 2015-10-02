@@ -1,16 +1,19 @@
 [dashboard]
 title = Technical Committee Inbox
 description = Technical Committee Review Inbox
-foreach = project:openstack/governance
+foreach = project:openstack/governance is:open
+
+[section "My items"]
+query = owner:self
 
 [section "Formal Vote Items I have not voted in yet"]
-query = topic:formal-vote is:open NOT label:Rollcall-vote<=2,self NOT owner:self
+query = topic:formal-vote NOT label:Code-Review<=2,self NOT label:Rollcall-vote<=2,self NOT owner:self
 
 [section "Formal Vote Items"]
-query = topic:formal-vote is:open
+query = topic:formal-vote
 
 [section "You Haven't Voted on this Draft"]
-query = is:open NOT label:Code-Review<=2,self NOT label:Rollcall-vote<=2,self NOT owner:self
+query = NOT label:Code-Review<=2,self NOT label:Rollcall-vote<=2,self NOT owner:self
 
 [section "Has at Least One Objection"]
-query = is:open NOT label:Code-Review<=2,self NOT owner:self label:Code-Review<=-1
+query = NOT label:Code-Review<=2,self NOT owner:self label:Code-Review<=-1
