@@ -3,8 +3,11 @@ title = Glance Review Dashboard
 description = Glance review requests
 foreach = (project:openstack/glance OR
            project:openstack/python-glanceclient OR
-           project:openstack/glance_store OR
-           project:openstack/glance-specs) status:open
+	   project:openstack/glance_store OR
+	   project:openstack/glance-specs) status:open
+
+[section "Priorities"]
+query = branch:master message:"MitakaPriority"
 
 [section "Needs Approval"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 branch:master NOT label:Code-Review<=-2
@@ -20,9 +23,6 @@ query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner
 
 [section "With Negative Feedback"]
 query = NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self label:Code-Review-1 limit:20 branch:master
-
-[section "Needs Reverify"]
-query = label:Verified<=-1 branch:master NOT label:Code-Review<=-1 NOT label:Workflow<=-1
 
 [section "5 Days Without Feedback"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=2 age:5d branch:master
