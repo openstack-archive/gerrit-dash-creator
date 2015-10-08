@@ -44,7 +44,7 @@ the dashboard file you want the URL for::
 
 Then put the URL in your browser and off you go.
 
-A daily updated index of all available dashboars is available
+A daily updated index of all available dashboards is available
 at http://ghostcloud.net/openstack_gerrit_dashboards/.
 
 
