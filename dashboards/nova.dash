@@ -1,0 +1,22 @@
+[dashboard]
+title = Nova
+description = Review Inbox
+foreach = project:openstack/nova status:open NOT label:Workflow<=-1 branch:master NOT owner:self
+
+[section "You are a reviewer, but haven't voted in the current revision"]
+query = reviewer:self NOT label:Code-Review>=-2,self label:Verified>=1,jenkins
+
+[section "Not blocked by -2s"]
+query = NOT label:Code-Review<=-2 NOT label:Code-Review>=2 NOT label:Code-Review>=-2,self label:Verified>=1,jenkins
+
+[section "No votes and spec is > 1 week old"]
+query = NOT label:Code-Review>=-2 age:7d label:Verified>=1,jenkins
+
+[section "Needs final +2"]
+query = label:Code-Review>=2 NOT label:Code-Review>=-2,self label:Verified>=1,jenkins
+
+[section "Broken (doesn't pass Jenkins)"]
+query = label:Verified<=-1,jenkins
+
+[section "Dead (blocked by a -2)"]
+query = label:Code-Review<=-2
