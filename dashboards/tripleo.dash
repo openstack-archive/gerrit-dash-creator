@@ -6,6 +6,7 @@ foreach = (project:openstack/tripleo-incubator OR
            project:openstack/tripleo-heat-templates OR
            project:openstack/tripleo-puppet-elements OR
            project:openstack/tripleo-specs OR
+           project:openstack/tripleo-common OR
            project:openstack/os-apply-config OR
            project:openstack/os-collect-config OR
            project:openstack/os-refresh-config OR
@@ -14,6 +15,7 @@ foreach = (project:openstack/tripleo-incubator OR
            project:openstack/dib-utils OR
            project:openstack-infra/tripleo-ci OR
            project:openstack/tuskar OR
+           project:openstack/tuskar-ui OR
            project:openstack/python-tuskarclient OR
            project:openstack/os-net-config OR
            project:openstack/instack OR
