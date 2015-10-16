@@ -4,13 +4,13 @@ description = Rally patches to review
 foreach = (project:openstack/rally) status:open
 
 [section "Critical for next release"]
-query = (starredby:"mdubov@mirantis.com" AND starredby:"boris@pavlovic.me")
+query = (starredby:"rvasilets@mirantis.com" AND starredby:"boris@pavlovic.me")
 
 [section "Waiting for final approve"]
-query = label:Verified>=1,jenkins label:Verified>=1,rally-ci NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT (starredby:"amaretskiy@mirantis.com" OR starredby:"akurilin@mirantis.com" OR starredby:"boris@pavlovic.me" OR starredby:"yingjun.li@kylin-cloud.com" OR starredby:"mdubov@mirantis.com" OR starredby:"sskripnick@mirantis.com" OR starredby:"yfried@redhat.com")
+query = label:Verified>=1,jenkins label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-Review>=2
 
 [section "You are a reviewer, but haven't voted in the current revision"]
-query = NOT label:Code-Review<=2,self reviewer:self
+query = NOT label:Code-Review<=2,self reviewer:self limit:25
 
 [section "Bug fixes"]
 query = topic:"^bug/.*"
@@ -19,10 +19,13 @@ query = topic:"^bug/.*"
 query = (message:"[spec]" file:"^.*specs.*")
 
 [section "Important patches"]
-query = (starredby:"boris@pavlovic.me" OR starredby:"mdubov@mirantis.com") NOT (starredby:"mdubov@mirantis.com" AND starredby:"boris@pavlovic.me")
+query = (starredby:"boris@pavlovic.me" OR starredby:"rvasilets@mirantis.com") NOT (starredby:"rvasilets@mirantis.com" AND starredby:"boris@pavlovic.me")
 
 [section "Ready for review"]
-query = label:Verified>=1,jenkins label:Verified>=1,rally-ci NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Code-Review>=2 NOT (starredby:"amaretskiy@mirantis.com" OR starredby:"akurilin@mirantis.com" OR starredby:"boris@pavlovic.me" OR starredby:"yingjun.li@kylin-cloud.com" OR starredby:"mdubov@mirantis.com" OR starredby:"sskripnick@mirantis.com" OR starredby:"yfried@redhat.com") NOT (message:"[spec]" file:"^.*specs.*")
+query = label:Verified>=1,jenkins NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Code-Review>=2
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=2 age:5d limit:25
 
 [section "Has -1 but passed tests"]
 query = label:Verified>=1,jenkins label:Verified>=1,rally-ci label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT (message:"[spec]" file:"^.*specs.*")
