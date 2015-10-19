@@ -1,7 +1,7 @@
 [dashboard]
 title = Fuel Documentation Review Inbox
 description = Fuel Documentation Review Inbox
-foreach = (project:stackforge/fuel-docs) status:open NOT label:Code-Review<=-2
+foreach = (project:openstack/fuel-docs) status:open NOT label:Code-Review<=-2
 
 [section "My patches requiring attention"]
 query = owner:self (label:Verified<=-1 OR label:Workflow<=-1 OR label:Code-Review<=-1)
