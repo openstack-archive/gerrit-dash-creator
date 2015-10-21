@@ -6,6 +6,7 @@ foreach = (project:openstack/tripleo-incubator OR
            project:openstack/tripleo-heat-templates OR
            project:openstack/tripleo-puppet-elements OR
            project:openstack/tripleo-specs OR
+           project:openstack/tripleo-common OR
            project:openstack/os-apply-config OR
            project:openstack/os-collect-config OR
            project:openstack/os-refresh-config OR
