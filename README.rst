@@ -55,7 +55,7 @@ If you have a dashboard definition that your OpenStack team finds
 useful, please submit a change request via git-review. The list of
 current outstanding changes can be seen at:
 
-https://review.openstack.org/#/q/status:open+project:stackforge/gerrit-dash-creator,n,z
+https://review.openstack.org/#/q/status:open+project:openstack/gerrit-dash-creator,n,z
 
 I'm very happy to include additional interesting examples that teams
 find useful, and make it possible for teams to explore other
