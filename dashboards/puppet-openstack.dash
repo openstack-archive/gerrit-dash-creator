@@ -1,8 +1,8 @@
 [dashboard]
 title = Puppet OpenStack Modules Inbox
 description = Puppet OpenStack Modules Review Inbox
-foreach = (project:stackforge/puppet-ceph OR
-           project:stackforge/puppet-n1k-vsm OR
+foreach = (project:openstack/puppet-ceph OR
+           project:openstack/puppet-n1k-vsm OR
            project:^openstack/puppet-.*) status:open NOT label:Workflow<=-1
 
 [section "My Patches Requiring Attention"]
