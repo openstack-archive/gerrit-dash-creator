@@ -1,7 +1,7 @@
 [dashboard]
 title = Cloud-init Review Dashboard
 description = Cloud-init Review Requests
-foreach = (project:stackforge/cloud-init) status:open NOT label:Code-Review<=-2
+foreach = (project:openstack/cloud-init) status:open NOT label:Code-Review<=-2
 
 [section "Own Patches"]
 query = owner:self status:open

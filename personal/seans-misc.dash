@@ -1,13 +1,13 @@
 [dashboard]
 title = Sean's Misc Review Inbox
 description = Review Inbox
-foreach = (project:openstack-infra/elastic-recheck OR project:openstack-infra/os-loganalyze OR project:openstack-dev/hacking OR project:openstack/requirements OR project:openstack/governance OR project:openstack-infra/reviewstats OR project:openstack-infra/gitdm OR project:stackforge/gerrit-dash-creator) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
+foreach = (project:openstack-infra/elastic-recheck OR project:openstack-infra/os-loganalyze OR project:openstack-dev/hacking OR project:openstack/requirements OR project:openstack/governance OR project:openstack-infra/reviewstats OR project:openstack-infra/gitdm OR project:openstack/gerrit-dash-creator) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
 
 [section "ER Queries"]
 query = project:openstack-infra/elastic-recheck file:^queries/.*yaml
 
 [section "Gerrit Dash Creator"]
-query = project:stackforge/gerrit-dash-creator
+query = project:openstack/gerrit-dash-creator
 
 [section "Governance"]
 query = project:openstack/governance
