@@ -1,7 +1,7 @@
 [dashboard]
 title = Monasca Review Dashboard
 description = Monasca review requests
-foreach = (project:stackforge/monasca-agent OR project:stackforge/monasca-api OR project:stackforge/monasca-ceilometer OR project:stackforge/monasca-common OR project:stackforge/monasca-notification OR project:stackforge/monasca-persister OR project:stackforge/monasca-thresh OR project:stackforge/monasca-ui OR project:stackforge/monasca-vagrant OR project:stackforge/python-monascaclient) status:open NOT label:Code-Review<=-2
+foreach = (project:openstack/monasca-agent OR project:openstack/monasca-api OR project:openstack/monasca-ceilometer OR project:openstack/monasca-common OR project:openstack/monasca-notification OR project:openstack/monasca-persister OR project:openstack/monasca-thresh OR project:openstack/monasca-ui OR project:openstack/monasca-vagrant OR project:openstack/python-monascaclient) status:open NOT label:Code-Review<=-2
 
 [section "Own Patches"]
 query = owner:self status:open
