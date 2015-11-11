@@ -1,0 +1,25 @@
+[dashboard]
+title = OSIC
+description =
+foreach = -owner:self AND (owner:manjeet.s.bhatia@intel.com OR owner:paul.dardeau@intel.com OR owner:ronald.de.rose@intel.com OR owner:stephen.finucane@intel.com OR owner:shashirekha.j.gundur@intel.com OR owner:ankur.gupta@intel.com OR owner:ganesh.mahalingam@intel.com OR owner:sumant.murke@intel.com OR owner:sujitha.neti@intel.com OR owner:nathaniel.potter@intel.com OR owner:siva.radhakrishnan@intel.com OR owner:nandini.tata@intel.com owner:pushkar.umaranikar@intel.com OR owner:kent.wang@intel.com OR owner:npustchi@yahoo.com)
+
+[section "Needs attention"]
+query = is:open -label:Code-Review<=2,self (label:Code-Review<=-1 OR -label:Verified+1,jenkins) label:Workflow+0
+
+[section "New"]
+query = is:open -label:Code-Review<=2 label:Verified+1,jenkins label:Workflow+0
+
+[section "+1"]
+query = is:open -label:Code-Review<=+2,self -label:Code-Review<=-1 label:Code-Review+1 -label:Code-Review+2 label:Verified+1,jenkins label:Workflow+0
+
+[section "+2"]
+query = is:open -label:Code-Review<=+2,self -label:Code-Review<=-1 label:Code-Review+2 label:Verified+1,jenkins label:Workflow+0
+
+[section "Pending gating"]
+query = is:open label:Verified=+1,jenkins label:Workflow+1
+
+[section "Gating"]
+query = is:open -label:Verified<=-1,jenkins -label:Verified>=+1,jenkins label:Workflow+1
+
+[section "Failed gating"]
+query = is:open label:Verified<=-1,jenkins label:Workflow+1
