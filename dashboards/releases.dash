@@ -15,6 +15,9 @@ query = project:openstack/releases file:^deliverables/kilo/.*
 [section "juno"]
 query = project:openstack/releases file:^deliverables/juno/.*
 
+[section "independent"]
+query = project:openstack/releases file:^deliverables/_independent/.*
+
 [section "all releases"]
 query = is:open project:openstack/releases
 
