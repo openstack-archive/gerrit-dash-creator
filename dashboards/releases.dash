@@ -23,3 +23,6 @@ query = is:open project:openstack/releases
 
 [section "tools"]
 query = project:openstack-infra/release-tools
+
+[section "reno"]
+query = project:openstack/reno
