@@ -16,10 +16,10 @@ query = NOT label:Code-Review<=2 age:5d
 query = reviewer:self
 
 [section "Bug fix, Passed Jenkins, No Negative Core Feedback"]
-query = NOT label:Code-Review<=-1,nova-core message:"bug: "
+query = NOT label:Code-Review<=-1,nova-core message:"Closes-Bug: "
 
 [section "Passed Jenkins, No Negative Core Feedback"]
-query = NOT label:Code-Review<=-1,nova-core NOT message:"bug: "
+query = NOT label:Code-Review<=-1,nova-core NOT message:"Closes-Bug: "
 
-[section "Wayward Changes (Changes with no code review in the last 2days)"]
-query = NOT label:Code-Review<=2 age:2d
+[section "Wayward Changes (Changes with no code review in the last 5 days)"]
+query = label:Code-Review<=2 NOT label:Code-Review<=-1,nova-core age:5d
