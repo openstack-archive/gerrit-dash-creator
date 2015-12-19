@@ -1,0 +1,8 @@
+Code-Review+2: Christian Berendt <christian@berendt.io>
+Workflow+1: Christian Berendt <christian@berendt.io>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sat, 19 Dec 2015 11:04:14 +0000
+Reviewed-on: https://review.openstack.org/249347
+Project: openstack/gerrit-dash-creator
+Branch: refs/heads/master
