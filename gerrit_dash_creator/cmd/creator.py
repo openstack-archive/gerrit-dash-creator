@@ -16,11 +16,11 @@ import argparse
 import os
 import os.path
 import sys
-import urllib
 
 import jinja2
 import six
 from six.moves import configparser
+from six.moves.urllib import parse as urllib_parse
 
 
 def escape(buff):
@@ -46,8 +46,8 @@ def generate_dashboard_url(dashboard):
         baseurl = 'https://review.openstack.org/#/dashboard/?'
 
     url = baseurl
-    url += escape(urllib.urlencode({'title': title,
-                                    'foreach': foreach}))
+    url += escape(urllib_parse.urlencode({'title': title,
+                                          'foreach': foreach}))
     for section in dashboard.sections():
         if not section.startswith('section'):
             continue
@@ -58,7 +58,7 @@ def generate_dashboard_url(dashboard):
             raise ValueError("option 'query' in '%s' not set" % section)
 
         title = section[9:-1]
-        encoded = escape(urllib.urlencode({title: query}))
+        encoded = escape(urllib_parse.urlencode({title: query}))
         url += "&%s" % encoded
     return url
 
