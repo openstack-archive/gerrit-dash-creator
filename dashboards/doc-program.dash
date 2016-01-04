@@ -21,9 +21,6 @@ query = project:openstack/training-guides
 [section "Doc Tools"]
 query = (project:openstack/openstack-doc-tools OR project:openstack/clouddocs-maven-plugin) status:open
 
-[section "DocImpact flags"]
-query = (project:openstack/*) (status:open) AND message:DocImpact
-
 [section "Needs final +2"]
 query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/object-api OR project:openstack/image-api OR project:openstack/identity-api OR project:openstack/compute-api OR project:openstack/volume-api OR project:openstack/netconn-api OR project:openstack/operations-guide OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/ha-guide) label:Code-Review>=2 limit:50
 

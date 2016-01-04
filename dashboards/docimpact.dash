@@ -1,0 +1,10 @@
+[dashboard]
+title = Cross-project OpenStack Documentation
+description = Review Inbox for all RST Docs and DocImpact flags
+foreach = project:^openstack/.* status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self branch:master
+
+[section "DocImpact in commit message"]
+query = message:docimpact
+
+[section "All RST files ready for review"]
+query = file:^.*\.rst
