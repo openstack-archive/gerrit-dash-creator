@@ -1,28 +1,42 @@
 [dashboard]
 title = Fuel Python Review Inbox
 description = Fuel Python Review Inbox
-foreach = (project:openstack/fuel-agent OR project:openstack/python-fuelclient OR project:openstack/fuel-astute OR project:openstack/fuel-main OR project:openstack/fuel-menu OR project:openstack/fuel-nailgun-agent OR project:openstack/fuel-ostf) status:open NOT project:openstack/fuel-docs NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+foreach =
+    (
+        project:openstack/fuel-web OR
+        project:openstack/python-fuelclient OR
+        project:openstack/fuel-agent OR
+        project:openstack/fuel-astute OR
+        project:openstack/fuel-nailgun-agent OR
+        project:openstack/fuel-ostf OR
+        project:openstack/fuel-menu OR
+        project:openstack/fuel-mirror OR
+        project:openstack/fuel-upgrade OR
+        project:openstack/shotgun OR
+        project:openstack/fuel-dev-tools OR
+        project:openstack/network-checker
+    )
+    branch:master
+    status:open
+    NOT owner:self
 
-[section "My Patches Requiring Attention"]
-query = owner:self (label:Verified-1 OR label:Code-Review-1 OR label:Workflow<=-1)
+[section "In Gates"]
+query = label:Workflow>=1 label:Code-Review>=2 NOT label:Code-Review<=-2
 
-[section "Fuel Specs"]
-query = NOT label:Workflow>=1 NOT owner:self project:openstack/fuel-specs
+[section "Needs Feedback"]
+query = NOT label:Verified<=-1 NOT label:Code-Review<=2 age:2d NOT label:Workflow>=1 NOT label:Workflow<=-1
 
-[section "Needs Approval"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review<=-1
+[section "Needs Final Approve"]
+query = NOT label:Verified<=-1 label:Code-Review>=2 NOT label:Code-Review<=-1 NOT label:Workflow>=1 NOT label:Workflow<=-1
 
-[section "Ready for Core Reviewers"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-specs label:Verified>=1 label:Code-Review>=1 NOT label:Code-Review>=2 NOT label:Code-Review<=-1
+[section "Needs Core Review"]
+query = NOT label:Verified<=-1 label:Verified>=1 label:Code-Review>=1 NOT label:Code-Review>=2 NOT label:Code-Review<=-1 NOT label:Code-Review<=-2 NOT label:Workflow>=1 NOT label:Workflow<=-1
 
-[section "5 Days Without Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-specs NOT label:Code-Review<=2 age:5d
+[section "New"]
+query = NOT label:Verified<=-1 NOT label:Code-Review<=2 NOT age:2d limit:50 NOT label:Workflow>=1 NOT label:Workflow<=-1
 
-[section "No Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-specs NOT label:Code-Review<=2 NOT age:5d limit:50
+[section "Blocked"]
+query = label:Code-Review<=-2
 
-[section "Disagreement"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-specs label:Code-Review<=-1 label:Code-Review>=1
-
-[section "Negative Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-specs label:Code-Review-1 NOT label:Code-Review<=-2 NOT label:Code-Review>=1 limit:20
+[section "Lost (no updates for 4 weeks)"]
+query = age:4w
