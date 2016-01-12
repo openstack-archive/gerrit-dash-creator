@@ -1,10 +1,16 @@
 [dashboard]
 title = QA Review Inbox
 description = Review Inbox
-foreach = (project:openstack/tempest OR project:openstack/tempest-lib OR project:openstack-dev/grenade OR project:openstack-dev/devstack OR project:openstack/qa-specs) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self
+foreach = (project:openstack/tempest OR project:openstack/tempest-lib OR project:openstack/qa-specs) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self
 
 [section "QA Specs"]
 query = project:openstack/qa-specs
+
+[section "Needs final +2"]
+query = NOT label:Code-Review<=-1,tempest-core label:Code-Review>=2
+
+[section "Small Patches"]
+query = NOT label:Code-Review<=-1,tempest-core delta:<=10
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
@@ -12,11 +18,11 @@ query = NOT label:Code-Review<=2 age:5d
 [section "You are a reviewer, but haven't voted in the current revision"]
 query = reviewer:self
 
-[section "Needs final +2"]
-query = (project:openstack/tempest OR project:openstack-dev/grenade) label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1
+[section "Bug fix, Passed Jenkins, No Negative Core Feedback"]
+query = NOT label:Code-Review<=-1,tempest-core message:"Closes-Bug: "
 
-[section "Passed Jenkins, No Negative Feedback"]
-query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+[section "Passed Jenkins, No Negative Core Feedback"]
+query = NOT label:Code-Review<=-1,tempest-core NOT message:"Closes-Bug: "
 
-[section "Wayward Changes (Changes with no code review in the last 2days)"]
-query = NOT label:Code-Review<=2 age:2d
+[section "Wayward Changes (Changes with no code review in the last 5 days)"]
+query = label:Code-Review<=2 NOT label:Code-Review<=-1,tempest-core age:5d
