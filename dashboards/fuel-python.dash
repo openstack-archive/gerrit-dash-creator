@@ -24,7 +24,7 @@ foreach =
 query = label:Workflow>=1 label:Code-Review>=2 NOT label:Code-Review<=-2
 
 [section "Needs Feedback"]
-query = NOT label:Verified<=-1 NOT label:Code-Review<=2 age:2d NOT label:Workflow>=1 NOT label:Workflow<=-1
+query = NOT label:Verified<=-1 NOT label:Code-Review<=-1 age:2d NOT label:Workflow>=1 NOT label:Workflow<=-1
 
 [section "Needs Final Approve"]
 query = NOT label:Verified<=-1 label:Code-Review>=2 NOT label:Code-Review<=-1 NOT label:Workflow>=1 NOT label:Workflow<=-1
