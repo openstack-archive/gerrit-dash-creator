@@ -26,3 +26,6 @@ query = project:openstack-infra/release-tools
 
 [section "reno"]
 query = project:openstack/reno
+
+[section "release-test"]
+query = project:openstack-infra/release-test
