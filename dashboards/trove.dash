@@ -4,19 +4,32 @@ description = Reviews for the OpenStack Database Project (Trove)
 foreach = (project:openstack/trove OR
            project:openstack/trove-integration OR
            project:openstack/trove-specs OR
-           project:openstack/python-troveclient) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+           project:openstack/python-troveclient OR
+           project:openstack/trove-dashboard) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1,jenkins OR label:Code-Review<=-1)
 
-[section "Starred (by PTL or myself)"]
-query = (starredby:slicknik OR is:starred) AND status:open
+[section "Needs Approval"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 branch:master NOT label:Code-Review<=-2
 
-[section "Needs Final Approval"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+[section "Bug Fixes without Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master topic:^bug.*
 
-[section "Patches Proposed Recently"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=2 -age:7d
+[section "Blueprints without Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master topic:^bp.*
 
-[section "Patches Older Than a Week"]
-query = NOT label:Workflow>=1 label:Verified>=1,jenkins NOT label:Code-Review<=2 age:5d -age:8week
+[section "Without Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master NOT topic:^bug.* NOT topic:^bp.*
+
+[section "With Negative Feedback"]
+query = NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self label:Code-Review-1 limit:20 branch:master
+
+[section "5 Days Without Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=2 age:5d branch:master
+
+[section "Patches I -2'd"]
+query = label:Code-Review<=-2,self
+
+[section "Stable Branches"]
+query = branch:^stable/.*
