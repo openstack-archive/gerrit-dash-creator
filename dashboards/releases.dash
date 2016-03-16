@@ -3,6 +3,9 @@ title = Releases Inbox
 description = Releases
 foreach = is:open
 
+[section "newton"]
+query = project:openstack/releases file:^deliverables/newton/.*
+
 [section "mitaka"]
 query = project:openstack/releases file:^deliverables/mitaka/.*
 
