@@ -1,0 +1,10 @@
+Code-Review+1: Bulat Gaifullin <bgaifullin@mirantis.com>
+Code-Review+1: Evgeniy L <eli@mirantis.com>
+Code-Review+2: Sean Dague <sean@dague.net>
+Workflow+1: Sean Dague <sean@dague.net>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 21 Mar 2016 10:34:46 +0000
+Reviewed-on: https://review.openstack.org/272078
+Project: openstack/gerrit-dash-creator
+Branch: refs/heads/master
