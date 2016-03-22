@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -12,25 +12,20 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-output_directory=doc/dashboards/
+set -x
 
-if [[ -e $output_directory ]]; then
-    rm -f $output_directory/*
+OUTPUT_DIRECTORY=${OUTPUT_DIRECTORY:-doc/source/dashboards/}
+
+if [[ -e $OUTPUT_DIRECTORY ]]; then
+    rm -f $OUTPUT_DIRECTORY/*
 else
-    mkdir -p $output_directory
+    mkdir -p $OUTPUT_DIRECTORY
 fi
-
-cp doc/source/conf.py $output_directory
-
-echo "
-html_theme_options = {
-    'nosidebar': True
-}" >> $output_directory/conf.py
 
 for dashboard in $(find dashboards -name '*.dash' | sort); do
     output=$(basename $dashboard .dash)
     python gerrit_dash_creator/cmd/creator.py --template-directory templates \
-    --template single.rst $dashboard > $output_directory/dashboard_$output.rst
+    --template single.rst $dashboard > $OUTPUT_DIRECTORY/dashboard_$output.rst
 done
 
 echo "===========================
@@ -38,9 +33,10 @@ OpenStack Gerrit Dashboards
 ===========================
 
 .. toctree::
-" >> $output_directory/index.rst
+   :maxdepth: 1
+" >> $OUTPUT_DIRECTORY/index.rst
 
-for dashboard in $(find $output_directory -name 'dashboard_*.rst' | sort); do
+for dashboard in $(find $OUTPUT_DIRECTORY -name 'dashboard_*.rst' | sort); do
     dashboard=$(basename $dashboard .rst)
-    echo "  " $dashboard >> $output_directory/index.rst
+    echo "  " $dashboard >> $OUTPUT_DIRECTORY/index.rst
 done

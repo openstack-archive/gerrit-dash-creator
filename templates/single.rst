@@ -2,17 +2,25 @@
 ==============================================================================
 
 {% if description %}
-Description::
-
-    {{ description }}
+Description
+-----------
+{{ description }}
 {%- endif %}
 
-URL::
+URL
+---
 
-    {{ url }}
+::
+
+   {{ url }}
+
+`View this dashboard <{{ url }}>`__
 
 {% if configuration %}
-Configuration::
+Configuration
+-------------
+
+::
 
 {% for line in configuration.splitlines() %}
     {{ line }}

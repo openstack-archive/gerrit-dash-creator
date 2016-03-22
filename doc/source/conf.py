@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import os
+import subprocess
 import sys
 
 sys.path.insert(0, os.path.abspath('../..'))
@@ -68,3 +69,15 @@ latex_documents = [
      u'%s Documentation' % project,
      u'OpenStack Foundation', 'manual'),
 ]
+
+# this is a bit of a hack that generates the RST for each dashboard
+# dynamically and works from tox -e docs & on readthedocs.  It has to
+# put it in doc/source to get picked up as part of the build.
+def setup(app):
+    if os.getcwd().endswith("doc/source"):
+        prefix = "cd ../../;"
+    else:
+        prefix = ""
+
+    subprocess.call("%s ./tools/generate_dashboards.sh" % (prefix),
+                    shell=True)

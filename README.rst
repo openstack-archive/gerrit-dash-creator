@@ -44,8 +44,8 @@ the dashboard file you want the URL for::
 
 Then put the URL in your browser and off you go.
 
-A daily updated index of all available dashboards is available
-at `<https://readthedocs.org/gerrit-dash-creator>`__
+The latest dashboards are available at
+`<http://gerrit-dash-creator.readthedocs.org/en/latest/dashboards/index.html>`__
 
 
 Contributions Welcomed
