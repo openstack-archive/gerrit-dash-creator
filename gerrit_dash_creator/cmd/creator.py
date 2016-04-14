@@ -22,7 +22,6 @@ import six
 from six.moves import configparser
 from six.moves.urllib import parse as urllib_parse
 
-
 def escape(buff):
     """Because otherwise Firefox is a sad panda."""
     return buff.replace(',', '%2c').replace('-', '%2D')
@@ -78,8 +77,16 @@ def get_options():
                              'dasbhoard files')
     parser.add_argument('--template', default='single.txt',
                         help='Name of template')
+
+    # Find path to template_dir
+    # We need to support running with and without installation
+    if os.path.exists('templates'):
+        template_dir = 'templates'
+    else:
+        template_dir = os.path.join(sys.prefix, 'share',
+                                    'gerrit-dash-creator', 'templates')
     parser.add_argument('--template-directory',
-                        default="templates",
+                        default=template_dir,
                         help='Directory to scan for template files')
     parser.add_argument('--template-file', default=None,
                         help='Location of a specific template file')
