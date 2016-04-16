@@ -1,22 +1,35 @@
 [dashboard]
 title = Trove Review Dashboard
-description = Reviews for the OpenStack Database Project (Trove)
-foreach = (project:openstack/trove OR
-           project:openstack/trove-integration OR
-           project:openstack/trove-specs OR
-           project:openstack/python-troveclient) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+description = Review Dashboard for the OpenStack DBaaS Project (Trove)
+
+foreach = status:open  (project:openstack/trove OR project:openstack/trove-integration OR project:openstack/trove-specs OR project:openstack/python-troveclient OR project:openstack/trove-dashboard)
 
 [section "My Patches Requiring Attention"]
-query = owner:self (label:Verified-1,jenkins OR label:Code-Review<=-1)
+query = owner:self (label:Verified-1,jenkins OR label:Code-Review<=-1 OR label:Workflow<=-1 OR NOT is:mergeable) (project:openstack/trove OR project:openstack/trove-integration OR project:openstack/trove-specs OR project:openstack/python-troveclient OR project:openstack/trove-dashboard)
 
-[section "Starred (by PTL or myself)"]
-query = (starredby:slicknik OR is:starred) AND status:open
+[section "Patches waiting longer than 14 days"]
+query = label:Verified>=1,jenkins NOT label:Workflow<=-1 NOT label:Code-Review<=-1 is:mergeable age:14d
 
-[section "Needs Final Approval"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+[section "Patches waiting longer than 7 days"]
+query = label:Verified>=1,jenkins NOT label:Workflow<=-1 NOT label:Code-Review<=-1 is:mergeable age:7d NOT age:14d
 
-[section "Patches Proposed Recently"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=2 -age:7d
+[section "Specs requiring review"]
+query = project:openstack/trove-specs NOT label:Workflow<=-1  NOT label:Verified<=-1,jenkins NOT Code-Review<=-2
 
-[section "Patches Older Than a Week"]
-query = NOT label:Workflow>=1 label:Verified>=1,jenkins NOT label:Code-Review<=2 age:5d -age:8week
+[section "Trove: Priority code reviews"]
+query = (starredby:amrith OR starredby:self) (project:openstack/trove OR project:openstack/trove-integration ) NOT label:Workflow<=-1 is:mergeable NOT label:Verified<=-1,jenkins NOT Code-Review<=-2
+
+[section "Trove Client and Dashboard: Priority code reviews"]
+query = (starredby:amrith OR starredby:self) (project:openstack/python-troveclient OR project:openstack/trove-dashboard) NOT label:Workflow<=-1 is:mergeable  NOT label:Verified<=-1,jenkins NOT Code-Review<=-2
+
+[section "Changes needing Final Approval"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 is:mergeable
+
+[section "Changes on branches other than master"]
+query = NOT branch:master
+
+[section "Needing attention"]
+query = (label:Verified<=-1,jenkins) NOT label:Workflow<=-1 NOT label:Code-Review<=-2 NOT is:mergeable
+
+
+
