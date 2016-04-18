@@ -83,6 +83,8 @@ def get_options():
     # We need to support running with and without installation
     if os.path.exists('templates'):
         template_dir = 'templates'
+    elif os.path.exists('/usr/local/share/gerrit-dash-creator/templates'):
+        template_dir = '/usr/local/share/gerrit-dash-creator/templates'
     else:
         template_dir = os.path.join(sys.prefix, 'share',
                                     'gerrit-dash-creator', 'templates')
