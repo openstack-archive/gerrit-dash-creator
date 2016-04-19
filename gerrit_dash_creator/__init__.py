@@ -13,4 +13,4 @@
 import pbr.version
 
 
-__version__ = pbr.version.VersionInfo('reviewstats').version_string()
+__version__ = pbr.version.VersionInfo('gerrit-dash-creator').version_string()
