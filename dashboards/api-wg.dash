@@ -1,7 +1,7 @@
 [dashboard]
 title = API Working Group Reviews
 description = Reviews for OpenStack API Working Group
-foreach = project:openstack/api-wg status:open NOT Workflow=+1
+foreach = project:openstack/api-wg status:open NOT label:Workflow=+1
 
 [section "Ready to freeze"]
 query = label:Verified>=1,jenkins NOT label:Code-Review<=-1 NOT label:Workflow<=-1 age:2d
