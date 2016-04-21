@@ -14,13 +14,13 @@ query = label:Verified>=1,jenkins NOT label:Workflow<=-1 NOT label:Code-Review<=
 query = label:Verified>=1,jenkins NOT label:Workflow<=-1 NOT label:Code-Review<=-1 is:mergeable age:7d NOT age:14d
 
 [section "Specs requiring review"]
-query = project:openstack/trove-specs NOT label:Workflow<=-1  NOT label:Verified<=-1,jenkins NOT Code-Review<=-2
+query = project:openstack/trove-specs NOT label:Workflow<=-1  NOT label:Verified<=-1,jenkins NOT label:Code-Review<=-2
 
 [section "Trove: Priority code reviews"]
-query = (starredby:amrith OR starredby:self) (project:openstack/trove OR project:openstack/trove-integration ) NOT label:Workflow<=-1 is:mergeable NOT label:Verified<=-1,jenkins NOT Code-Review<=-2
+query = (starredby:amrith OR starredby:self) (project:openstack/trove OR project:openstack/trove-integration) NOT label:Workflow<=-1 is:mergeable NOT label:Verified<=-1,jenkins NOT label:Code-Review<=-2
 
 [section "Trove Client and Dashboard: Priority code reviews"]
-query = (starredby:amrith OR starredby:self) (project:openstack/python-troveclient OR project:openstack/trove-dashboard) NOT label:Workflow<=-1 is:mergeable  NOT label:Verified<=-1,jenkins NOT Code-Review<=-2
+query = (starredby:amrith OR starredby:self) (project:openstack/python-troveclient OR project:openstack/trove-dashboard) NOT label:Workflow<=-1 is:mergeable  NOT label:Verified<=-1,jenkins NOT label:Code-Review<=-2
 
 [section "Changes needing Final Approval"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 is:mergeable
