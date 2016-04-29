@@ -1,7 +1,7 @@
 [dashboard]
 title = FUEL Logging, Monitoring and Alarming Review Inbox
 description = Review Inbox
-foreach = (project:openstack/fuel-plugin-lma-collector OR project:openstack/fuel-plugin-elasticsearch-kibana OR project:openstack/fuel-plugin-influxdb-grafana OR project:openstack/fuel-plugin-lma-infrastructure-alerting) status:open
+foreach = (project:openstack/fuel-plugin-lma-collector OR project:openstack/fuel-plugin-elasticsearch-kibana OR project:openstack/fuel-plugin-influxdb-grafana OR project:openstack/fuel-plugin-lma-infrastructure-alerting OR openstack/stacklight-integration-tests) status:open
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1 OR label:Code-Review-1 OR label:Workflow<=-1)
