@@ -2,19 +2,19 @@
 title = Designate Review Inbox
 description = Review Inbox for the designate team. This will be kept up to date on http://graham.hayes.ie/designate/dashboard
 
-foreach = (project:openstack/designate OR project:openstack/python-designateclient OR project:openstack/designate-specs OR project:openstack/designate-dashboard) status:open
+foreach = (project:openstack/designate OR project:openstack/python-designateclient OR project:openstack/designate-specs OR project:openstack/designate-dashboard OR project:openstack/designate-tempest-plugin) status:open
+
+[section "Backports - stable/mitaka"]
+query = branch:stable/mitaka NOT label:Code-Review>=-2,self
 
 [section "Backports - stable/liberty"]
 query = branch:stable/liberty NOT label:Code-Review>=-2,self
-
-[section "Backports - stable/kilo"]
-query = branch:stable/kilo NOT label:Code-Review>=-2,self
 
 [section "You are a reviewer, but haven't voted in the current revision"]
 query = reviewer:self label:Verified>=1,jenkins NOT label:Code-Review>=-2,self NOT owner:self
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 label:Verified>=1,jenkins limit:50 NOT label:Workflow<=-1 NOT label:Code-Review>=2,self NOT owner:self
+query = label:Code-Review>=2 label:Verified>=1,jenkins limit:50 NOT label:Workflow<=-1 NOT label:Workflow>=1 NOT label:Code-Review>=2,self NOT owner:self
 
 [section "+1'd and passed Jenkins"]
 query = label:Verified>=1,jenkins label:Code-Review>=1 NOT label:Code-Review<=-1 limit:50 NOT label:Workflow<=-1 NOT owner:self NOT label:Code-Review>=-2,self
@@ -22,5 +22,5 @@ query = label:Verified>=1,jenkins label:Code-Review>=1 NOT label:Code-Review<=-1
 [section "Passed Jenkins, Need's Review"]
 query = label:Verified>=1,jenkins NOT label:Code-Review<=2 limit:50 NOT label:Workflow<=-1 NOT owner:self
 
-[section "All Open Reviews"]
-query = NOT owner:self
+[section "My Open Reviews"]
+query = owner:self
