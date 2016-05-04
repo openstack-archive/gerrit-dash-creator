@@ -6,6 +6,9 @@ foreach = (project:openstack/nova OR project:openstack/python-novaclient OR proj
 [section "API Ref Updates"]
 query = project:openstack/nova file:api-ref NOT label:Code-Review>=-2,self
 
+[section "API Priorities"]
+query = topic:bp/remove-legacy-v2-api-code
+
 [section "Proposed API changing Specs"]
 query = project:openstack/nova-specs NOT label:Code-Review>=-2,self
 
