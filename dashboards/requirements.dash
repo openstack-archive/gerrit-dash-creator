@@ -3,6 +3,9 @@ title = Global Requirements Review Inbox
 description = Review Inbox
 foreach = project:openstack/requirements status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=0,self
 
+[section "New Releases"]
+query = topic:new-release
+
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d branch:master
 
