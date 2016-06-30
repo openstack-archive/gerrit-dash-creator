@@ -1,7 +1,7 @@
 [dashboard]
 title = Telemetry Inbox
 description = Telemetry Review Inbox
-foreach = (project:openstack/ceilometer OR project:openstack/python-ceilometerclient OR project:openstack/ceilometermiddleware OR project:openstack/ceilometer-specs OR project:openstack/aodh OR project:openstack/python-aodhclient OR project:openstack/gnocchi OR project:openstack/python-gnocchiclient) status:open NOT label:Code-Review<=-2
+foreach = (project:openstack/ceilometer OR project:openstack/python-ceilometerclient OR project:openstack/ceilometermiddleware OR project:openstack/ceilometer-specs OR project:openstack/aodh OR project:openstack/python-aodhclient OR project:openstack/gnocchi OR project:openstack/python-gnocchiclient OR project:openstack/panko) status:open NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1 OR label:Workflow<=-1)
