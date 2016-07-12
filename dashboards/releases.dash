@@ -18,8 +18,11 @@ query = project:openstack/releases file:^deliverables/_independent/.*
 [section "all releases"]
 query = is:open project:openstack/releases
 
-[section "tools"]
+[section "release-tools"]
 query = project:openstack-infra/release-tools
+
+[section "project-config release-tools"]
+query = project:openstack-infra/project-config file:^jenkins/scripts/release-tools/.*
 
 [section "reno"]
 query = project:openstack/reno
