@@ -12,12 +12,6 @@ query = project:openstack/releases file:^deliverables/mitaka/.*
 [section "liberty"]
 query = project:openstack/releases file:^deliverables/liberty/.*
 
-[section "kilo"]
-query = project:openstack/releases file:^deliverables/kilo/.*
-
-[section "juno"]
-query = project:openstack/releases file:^deliverables/juno/.*
-
 [section "independent"]
 query = project:openstack/releases file:^deliverables/_independent/.*
 
