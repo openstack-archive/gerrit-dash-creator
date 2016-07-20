@@ -16,6 +16,7 @@ import argparse
 import os
 import os.path
 import sys
+import webbrowser
 
 import jinja2
 import six
@@ -78,6 +79,9 @@ def get_options():
                              'dasbhoard files')
     parser.add_argument('--template', default='single.txt',
                         help='Name of template')
+    parser.add_argument('--open-browser', '-b', default=False,
+                        action="store_true",
+                        help='Generate URL, and open in the default browser')
 
     # Find path to template_dir
     # We need to support running with and without installation
@@ -135,7 +139,7 @@ def get_configuration(dashboard):
     return result
 
 
-def generate_dashboard_urls(dashboards, template):
+def generate_dashboard_urls(dashboards, template, openurl):
     """Prints the dashboard URLs of a set of dashboards."""
     result = 0
 
@@ -155,7 +159,12 @@ def generate_dashboard_urls(dashboards, template):
             'description': dashboard.get('dashboard', 'description') or None,
             'configuration': get_configuration(dashboard)
         }
-        print(template.render(variables))
+
+        url = (template.render(variables))
+        print(url)
+
+        if openurl is True:
+            webbrowser.open_new_tab(url)
 
     return result
 
@@ -200,7 +209,7 @@ def main():
     try:
         dashboards = load_dashboards(opts.dashboard_paths)
         if not opts.check_only and template:
-            generate_dashboard_urls(dashboards, template)
+            generate_dashboard_urls(dashboards, template, opts.open_browser)
         elif not opts.check_only and not template:
             return 1
     except ValueError as e:

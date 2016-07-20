@@ -15,6 +15,7 @@
 import argparse
 import os
 import sys
+import webbrowser
 
 from launchpadlib import launchpad
 import six
@@ -56,7 +57,12 @@ def print_dash_url(opts, bugs):
                        ' OR '.join(['change:%s' % bug
                                     for bug in bugs[label][prio]]))
 
-    print(creator.generate_dashboard_url(config))
+    url = creator.generate_dashboard_url(config)
+
+    print(url)
+
+    if opts.open_browser is True:
+        webbrowser.open_new_tab(url)
 
 
 def pretty_milestone(milestone_url):
@@ -105,6 +111,9 @@ def get_options():
                         help='Project Milestone')
     parser.add_argument('--tag', default=None,
                         help='Project Tag')
+    parser.add_argument('--open-browser', '-b', default=False,
+                        action="store_true",
+                        help='Generate URL, and open in the default browser')
     return parser.parse_args()
 
 
