@@ -18,11 +18,11 @@ query = NOT label:Code-Review>=2 NOT(reviewerin:networking-midonet-core label:Co
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
 query = NOT label:Code-Review<=2 age:2d branch:master
 
+[section "stable/mitaka"]
+query = branch:stable/mitaka
+
 [section "stable/liberty"]
 query = branch:stable/liberty
 
-[section "stable/kilo"]
-query = branch:stable/liberty
-
 [section "other branches"]
-query = NOT branch:master AND NOT branch:stable/liberty AND NOT branch:stable/kilo
+query = NOT branch:master AND NOT branch:stable/mitaka AND NOT branch:stable/liberty
