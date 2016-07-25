@@ -1,0 +1,25 @@
+[dashboard]
+title = Fuel-ccp Review Inbox
+description = Review Inbox
+foreach = projects:openstack/fuel-ccp status:open NOT owner:self NOT label:Workflow<=-1
+
+[section "My Patches Requiring Attention"]
+query = owner:self (label:Verified-1 OR label:Code-Review-1 OR label:Workflow<=-1)
+
+[section "Ready for Reviewers"]
+query = NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-ccp-specs NOT project:openstack/fuel-ccp-tests NOT label:Code-Review<=-1
+
+[section "Tests"]
+query = NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-ccp-specs project:openstack/fuel-ccp-tests
+
+[section "5 Days Without Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-ccp-specs NOT label:Code-Review<=2 age:5d
+
+[section "Disagreement"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-ccp-specs label:Code-Review<=-1 label:Code-Review>=1
+
+[section "Specs"]
+query = project:openstack/fuel-ccp-specs
+
+[section "Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-ccp-specs label:Code-Review<=-1 limit:20
