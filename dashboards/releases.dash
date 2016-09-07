@@ -3,6 +3,9 @@ title = Releases Inbox
 description = Releases
 foreach = is:open
 
+[section "ocata"]
+query = project:openstack/releases file:^deliverables/ocata/.* NOT label:Workflow-1
+
 [section "newton"]
 query = project:openstack/releases file:^deliverables/newton/.*
 
