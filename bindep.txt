@@ -4,6 +4,8 @@
 dbus-devel [platform:rpm]
 dbus-glib-devel [platform:rpm]
 language-pack-en [platform:ubuntu]
+libffi-dev [platform:dpkg]
+libffi-devel [platform:rpm]
 locales [platform:debian]
 python-dev [platform:dpkg]
 python-devel [platform:rpm]
