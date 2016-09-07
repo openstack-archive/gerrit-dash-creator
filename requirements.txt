@@ -5,6 +5,5 @@
 jinja2
 pbr>=1.6
 six>=1.9.0
-launchpadlib
 oslosphinx
 simplejson>=2.2.0
