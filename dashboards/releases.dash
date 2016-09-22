@@ -4,16 +4,16 @@ description = Releases
 foreach = is:open
 
 [section "newton"]
-query = project:openstack/releases file:^deliverables/newton/.*
+query = project:openstack/releases file:^deliverables/newton/.* NOT label:Workflow-1
 
 [section "mitaka"]
-query = project:openstack/releases file:^deliverables/mitaka/.*
+query = project:openstack/releases file:^deliverables/mitaka/.* NOT label:Workflow-1
 
 [section "liberty"]
-query = project:openstack/releases file:^deliverables/liberty/.*
+query = project:openstack/releases file:^deliverables/liberty/.* NOT label:Workflow-1
 
 [section "independent"]
-query = project:openstack/releases file:^deliverables/_independent/.*
+query = project:openstack/releases file:^deliverables/_independent/.* NOT label:Workflow-1
 
 [section "all releases"]
 query = is:open project:openstack/releases
