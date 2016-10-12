@@ -1,16 +1,28 @@
 [dashboard]
 title = Networking-Cisco Reviews
 description = Open Reviews
-foreach = project:openstack/networking-cisco status:open
+foreach = project:openstack/networking-cisco (status:open OR status:merged)
 
 [section "Needs Approval"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
 
 [section "Needs Reverify"]
-query = label:Workflow>=1 NOT label:Workflow<=-1 label:Verified<=-1,jenkins
+query = label:Workflow>=1 NOT label:Workflow<=-1 label:Verified<=-1,jenkins NOT owner:self
 
 [section "No Negative Feedback (top 10)"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:10
 
 [section "Everything else, Not WIP (top 10)"]
-query = NOT label:Code-Review>=2 NOT label:Code-Review-2 NOT label:Workflow<=-1 limit:10
+query = NOT label:Code-Review-2 (label:Code-Review<=-1 OR label:Verified<=-1,jenkins) NOT label:Workflow<=-1 NOT label:Workflow>=1 NOT owner:self limit:10
+
+[section "Recently Approved (top 10)"]
+query = label:Workflow>=1 limit:10
+
+[section "Patches owned by me"]
+query = owner:self status:open NOT label:Workflow>=1
+
+[section "Work in Progress (top 10)"]
+query = label:Workflow<=-1 NOT label:Code-Review<=-2 NOT owner:self limit:10
+
+[section "Blocked Patches (top 10)"]
+query = label:Code-Review<=-2 NOT owner:self limit:10
