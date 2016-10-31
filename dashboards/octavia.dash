@@ -1,0 +1,22 @@
+[dashboard]
+title = Octavia Review Inbox
+description = Review Inbox
+foreach =
+
+[section "Own Patches"]
+query = owner:self status:open
+
+[section "Needs final +2"]
+query = NOT owner:self project:openstack/octavia status:open label:Verified>=1,jenkins label:Code-Review>=2 NOT(reviewerin:octavia-core label:Code-Review<=-1 label:Workflow>=1) limit:50
+
+[section "You are a reviewer, but haven't voted in the current revision"]
+query = NOT owner:self project:openstack/octavia status:open label:Verified>=1,jenkins reviewer:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT owner:self project:openstack/octavia status:open label:Verified>=1,jenkins NOT label:Code-Review<=2 age:5d
+
+[section "Wayward Changes (Changes with no code review in the last 2days)"]
+query = NOT owner:self project:openstack/octavia status:open label:Verified>=1,jenkins NOT label:Code-Review<=2 age:2d NOT label:Workflow<=-1 NOT label:Code-Review>=-2,self
+
+[section "Passed Jenkins, No Negative Core Feedback"]
+query = NOT owner:self project:openstack/octavia status:open label:Verified>=1,jenkins NOT label:Workflow<=-1 NOT label:Code-Review>=2 NOT(reviewerin:octavia-core label:Code-Review<=-1) limit:50
