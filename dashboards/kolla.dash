@@ -2,6 +2,7 @@
 title = Kolla Inbox
 description = Kolla Review Inbox
 foreach = (project:openstack/kolla OR
+           project:openstack/kolla-ansible OR
            project:openstack/kolla-kubernetes) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
