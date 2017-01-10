@@ -1,0 +1,24 @@
+[dashboard]
+title = TripleO Quickstart Inbox
+description = TripleO Quickstart Review Inbox
+foreach = (project:openstack/tripleo-quickstart OR
+    project:openstack/tripleo-quickstart-extras) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+
+[section "My Patches Requiring Attention"]
+query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1)
+
+[section "TripleO Specs"]
+query = NOT owner:self project:openstack/tripleo-specs
+
+[section "Needs Approval"]
+query = label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+
+[section "5 Days Without Feedback"]
+query = label:Verified>=1,jenkins NOT owner:self NOT project:openstack/tripleo-specs NOT label:Code-Review<=2 age:5d
+
+[section "No Negative Feedback"]
+query = label:Verified>=1,jenkins NOT owner:self NOT project:openstack/tripleo-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
+
+[section "Other"]
+query = label:Verified>=1,jenkins NOT owner:self NOT project:openstack/tripleo-specs label:Code-Review-1 limit:20
+
