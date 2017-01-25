@@ -3,6 +3,9 @@ title = Releases Inbox
 description = Releases
 foreach = is:open
 
+[section "pike"]
+query = project:openstack/releases file:^deliverables/pike/.* NOT label:Workflow-1
+
 [section "ocata"]
 query = project:openstack/releases file:^deliverables/ocata/.* NOT label:Workflow-1
 
@@ -11,9 +14,6 @@ query = project:openstack/releases file:^deliverables/newton/.* NOT label:Workfl
 
 [section "mitaka"]
 query = project:openstack/releases file:^deliverables/mitaka/.* NOT label:Workflow-1
-
-[section "liberty"]
-query = project:openstack/releases file:^deliverables/liberty/.* NOT label:Workflow-1
 
 [section "independent"]
 query = project:openstack/releases file:^deliverables/_independent/.* NOT label:Workflow-1
