@@ -1,0 +1,10 @@
+Code-Review+1: Gael Chamoulaud <gchamoul@redhat.com>
+Code-Review+1: Sagi Shnaidman <sshnaidm@redhat.com>
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Workflow+1: Andreas Jaeger <jaegerandi@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 27 Jan 2017 15:58:44 +0000
+Reviewed-on: https://review.openstack.org/418293
+Project: openstack/gerrit-dash-creator
+Branch: refs/heads/master
