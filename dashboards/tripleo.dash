@@ -1,26 +1,27 @@
 [dashboard]
 title = TripleO Inbox
 description = TripleO Review Inbox
-foreach = (project:openstack/tripleo-incubator OR
-           project:openstack/tripleo-image-elements OR
-           project:openstack/tripleo-heat-templates OR
-           project:openstack/tripleo-puppet-elements OR
-           project:openstack/tripleo-specs OR
-           project:openstack/tripleo-common OR
-           project:openstack/os-apply-config OR
-           project:openstack/os-collect-config OR
-           project:openstack/os-refresh-config OR
-           project:openstack/os-cloud-config OR
+foreach = (project:openstack/dib-utils OR
            project:openstack/diskimage-builder OR
-           project:openstack/dib-utils OR
-           project:openstack-infra/tripleo-ci OR
-           project:openstack/tuskar OR
-           project:openstack/python-tuskarclient OR
-           project:openstack/os-net-config OR
            project:openstack/instack OR
            project:openstack/instack-undercloud OR
+           project:openstack/os-apply-config OR
+           project:openstack/os-collect-config OR
+           project:openstack/os-net-config OR
+           project:openstack/os-refresh-config OR
            project:openstack/python-tripleoclient OR
-           project:openstack/tripleo-docs) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+           project:openstack/tripleo-common OR
+           project:openstack/tripleo-docs OR
+           project:openstack/tripleo-heat-templates OR
+           project:openstack/tripleo-image-elements OR
+           project:openstack/tripleo-incubator OR
+           project:openstack/tripleo-puppet-elements OR
+           project:openstack/tripleo-quickstart OR
+           project:openstack/tripleo-quickstart-extras OR
+           project:openstack/tripleo-specs OR
+           project:openstack/tripleo-ui OR
+           project:openstack/tripleo-validations OR
+           project:openstack-infra/tripleo-ci) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1)
