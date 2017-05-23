@@ -19,7 +19,7 @@ query = NOT label:Code-Review>=2 NOT(reviewerin:networking-midonet-core label:Co
 query = NOT label:Code-Review<=2 age:2d branch:master
 
 [section "stable/ocata"]
-query = branch:stable/mitaka
+query = branch:stable/ocata
 
 [section "stable/newton"]
 query = branch:stable/liberty
