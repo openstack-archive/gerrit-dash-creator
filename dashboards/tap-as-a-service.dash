@@ -1,19 +1,28 @@
 [dashboard]
 title = tap-as-a-service Review Inbox
 description = Review Inbox
-foreach = (project:openstack/tap-as-a-service) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self branch:master
+foreach = (project:openstack/tap-as-a-service) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 age:5d
+query = NOT label:Code-Review<=2 age:5d branch:master
 
 [section "You are a reviewer, but haven't voted in the current revision"]
-query = reviewer:self
+query = reviewer:self branch:master
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 NOT(reviewerin:tap-as-a-service-core label:Code-Review<=-1) limit:50
+query = label:Code-Review>=2 NOT(reviewerin:tap-as-a-service-core label:Code-Review<=-1) limit:50 branch:master
 
 [section "Passed Jenkins, No Negative Core Feedback"]
-query = NOT label:Code-Review>=2 NOT(reviewerin:tap-as-a-service-core label:Code-Review<=-1) limit:50
+query = NOT label:Code-Review>=2 NOT(reviewerin:tap-as-a-service-core label:Code-Review<=-1) limit:50 branch:master
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
-query = NOT label:Code-Review<=2 age:2d
+query = NOT label:Code-Review<=2 age:2d branch:master
+
+[section "stable/ocata"]
+query = branch:stable/ocata
+
+[section "stable/newton"]
+query = branch:stable/newton
+
+[section "other branches"]
+query = NOT branch:master AND NOT branch:stable/ocata AND NOT branch:stable/newton
