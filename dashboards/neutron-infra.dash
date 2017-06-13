@@ -1,0 +1,7 @@
+[dashboard]
+title = Neutron Infra Review Inbox
+description = Neutron Infra Review Inbox
+foreach = (project:openstack-infra/project-config) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
+
+[section "Neutron related project-config reviews"]
+query = (message:"neutron" OR message:"networking-")
