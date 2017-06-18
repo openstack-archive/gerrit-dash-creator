@@ -22,7 +22,7 @@ query = NOT label:Code-Review<=2 age:2d branch:master
 query = branch:stable/ocata
 
 [section "stable/newton"]
-query = branch:stable/liberty
+query = branch:stable/newton
 
 [section "other branches"]
 query = NOT branch:master AND NOT branch:stable/ocata AND NOT branch:stable/newton
