@@ -2,16 +2,17 @@
 title = Neutron Stable Related Projects Review Inbox
 description = Review Inbox
 foreach = (
-    project:openstack/neutron OR
-    project:openstack/neutron-dynamic-routing OR
-    project:openstack/neutron-fwaas OR
-    project:openstack/neutron-lib OR
     project:openstack/networking-bagpipe OR
     project:openstack/networking-bgpvpn OR
     project:openstack/networking-midonet OR
     project:openstack/networking-odl OR
     project:openstack/networking-ovn OR
     project:openstack/networking-sfc OR
+    project:openstack/neutron OR
+    project:openstack/neutron-dynamic-routing OR
+    project:openstack/neutron-fwaas OR
+    project:openstack/neutron-lib OR
+    project:openstack/ovsdbapp OR
     project:openstack/python-neutronclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self branch:^stable/.*
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
