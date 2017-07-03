@@ -1,7 +1,7 @@
 [dashboard]
 title = Ops/User Docs Newsworthy
 description = In Progress and Merged for weekly news for OpenStack Documentation
-foreach = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/docs-specs OR project:openstack/object-api OR project:openstack/image-api OR project:openstack/identity-api OR project:openstack/compute-api OR project:openstack/volume-api OR project:openstack/netconn-api OR project:openstack/operations-guide OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/clouddocs-maven-plugin OR project:openstack/ha-guide)
+foreach = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/docs-specs OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/openstackdocstheme)
 
 [section "Work in progress"]
 query = status:open label:Workflow<=-1

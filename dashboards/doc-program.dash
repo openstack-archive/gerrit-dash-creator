@@ -9,20 +9,20 @@ query = NOT label:Code-Review<=2 age:5d
 [section "Specs"]
 query = project:openstack/docs-specs status:open
 
-[section "API Docs"]
-query = (project:openstack/api-site OR project:openstack/object-api OR project:openstack/image-api OR project:openstack/identity-api OR project:openstack/compute-api OR project:openstack/volume-api OR project:openstack/netconn-api) status:open
+[section "API Site Docs"]
+query = (project:openstack/api-site) status:open
 
 [section "Ops/Admin Docs"]
-query = (project:openstack/openstack-manuals OR project:openstack/operations-guide OR project:openstack/security-doc) status:open
+query = (project:openstack/openstack-manuals  OR project:openstack/security-doc) status:open
 
 [section "Training"]
 query = project:openstack/training-guides
 
 [section "Doc Tools"]
-query = (project:openstack/openstack-doc-tools OR project:openstack/clouddocs-maven-plugin) status:open
+query = (project:openstack/openstack-doc-tools OR project:openstack/openstackdocstheme) status:open
 
 [section "Needs final +2"]
-query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/object-api OR project:openstack/image-api OR project:openstack/identity-api OR project:openstack/compute-api OR project:openstack/volume-api OR project:openstack/netconn-api OR project:openstack/operations-guide OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/ha-guide) label:Code-Review>=2 limit:50
+query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/openstackdocstheme) label:Code-Review>=2 limit:50
 
 [section "Passed Jenkins (with no negative feedback)"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
