@@ -12,6 +12,9 @@ query = topic:formal-vote NOT label:Code-Review<=2,self NOT label:Rollcall-vote<
 [section "Formal Vote Items"]
 query = topic:formal-vote
 
+[section "Goal Items"]
+query = path:^goals/.*
+
 [section "You Haven't Voted on this Draft"]
 query = NOT label:Code-Review<=2,self NOT label:Rollcall-vote<=2,self NOT owner:self
 
