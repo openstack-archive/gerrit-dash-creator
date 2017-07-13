@@ -1,7 +1,7 @@
 [dashboard]
 title = tap-as-a-service Review Inbox
 description = Review Inbox
-foreach = (project:openstack/tap-as-a-service) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
+foreach = (project:openstack/tap-as-a-service OR project:openstack/tap-as-a-service-dashboard) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d branch:master
