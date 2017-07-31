@@ -1,7 +1,19 @@
 [dashboard]
 title = Docs Review Inbox
 description = Review Inbox for OpenStack Documentation
-foreach = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/docs-specs OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/openstackdocstheme status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self
+foreach = ( project:openstack/openstack-manuals OR
+            project:openstack/api-site OR
+            project:openstack/docs-specs OR
+            project:openstack/security-doc OR
+            project:openstack/training-guides OR
+            project:openstack/openstack-doc-tools OR
+            project:openstack/openstackdocstheme )
+           status:open
+           NOT owner:self
+           NOT label:Workflow<=-1
+           label:Verified>=1,jenkins
+           NOT label:Code-Review<=-1,self
+           NOT label:Code-Review>=1,self
 
 [section "Needs feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
