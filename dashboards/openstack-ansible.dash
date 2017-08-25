@@ -9,8 +9,21 @@ foreach = (project:^openstack/openstack-ansible.* OR
            label:Verified>=1,jenkins
            NOT label:Code-Review>=0,self
 
-[section "Reviews Requested by PTL"]
-query = starredby:jesse-pretorius
+# core reviewers taken from https://review.openstack.org/#/admin/groups/490,members
+[section "Reviews Requested by Core Reviewers"]
+query = (starredby: a.settle@outlook.com OR
+         starredby: amy@demarco.com OR
+         starredby: andy.mccrae@googlemail.com OR
+         starredby: david.wilde@rackspace.com OR
+         starredby: jean-philippe.evrard@rackspace.co.uk OR
+         starredby: jesse.pretorius@rackspace.co.uk OR
+         starredby: jimmy.mccrory@gmail.com OR
+         starredby: kevin@cloudnull.com OR
+         starredby: logan2211@gmail.com OR
+         starredby: major@mhtx.net OR
+         starredby: gariepy.marc@gmail.com OR
+         starredby: mchandras@suse.de OR
+         starredby: robb.romans@rackspace.com)
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
