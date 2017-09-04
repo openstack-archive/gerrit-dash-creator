@@ -7,4 +7,4 @@ foreach = (project:openstack-infra/project-config OR project:openstack-infra/dev
 # The following query is intended to match with comments
 # like "Needs neutron infra liason +1."
 # "liason" seems like a common typo
-query = (message:"neutron" OR message:"networking-" OR message:"ovsdbapp" OR (comment:"neutron" (comment:"liaison" OR comment:"liason")))
+query = (message:"neutron" OR message:"networking-" OR message:"n8g-" OR message:"ovsdbapp" OR (comment:"neutron" (comment:"liaison" OR comment:"liason")))
