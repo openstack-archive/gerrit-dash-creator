@@ -3,7 +3,7 @@ title = OpenStack Client Review Inbox
 description = Review Inbox
 foreach = (project:openstack/python-openstackclient OR project:openstack/cliff) status:open
     NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins
-    NOT label:Code-Review>=-2,self branch:master
+    NOT reviewedby:self branch:master
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d

@@ -7,25 +7,25 @@ foreach = (project:openstack/glance OR
            project:openstack/glance-specs) status:open
 
 [section "Priorities"]
-query = branch:master message:"MitakaPriority"
+query = branch:master message:"PikePriority"
 
 [section "Needs Approval"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 branch:master NOT label:Code-Review<=-2
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 branch:master NOT label:Code-Review<=-2 NOT reviewedby:self
 
 [section "Bug Fixes without Negative Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master topic:^bug.*
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master topic:^bug.* NOT reviewedby:self
 
 [section "Blueprints without Negative Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master topic:^bp.*
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master topic:^bp.* NOT reviewedby:self
 
 [section "Without Negative Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master NOT topic:^bug.* NOT topic:^bp.*
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master NOT topic:^bug.* NOT topic:^bp.* NOT reviewedby:self
 
 [section "With Negative Feedback"]
-query = NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self label:Code-Review-1 limit:20 branch:master
+query = NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self label:Code-Review-1 limit:20 branch:master NOT reviewedby:self
 
 [section "5 Days Without Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=2 age:5d branch:master
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=2 age:5d branch:master NOT reviewedby:self
 
 [section "Own Patches"]
 query = owner:self
@@ -34,4 +34,4 @@ query = owner:self
 query = label:Code-Review<=-2,self
 
 [section "Stable Branches"]
-query = branch:^stable/.*
+query = branch:^stable/.* NOT reviewedby:self

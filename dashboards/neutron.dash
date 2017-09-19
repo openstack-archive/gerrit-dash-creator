@@ -5,7 +5,7 @@ foreach = (project:openstack/neutron OR
            project:openstack/neutron-lib OR
            project:openstack/python-neutronclient OR
            project:openstack/neutron-specs)
-          status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2,self branch:master
+          status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self branch:master
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
