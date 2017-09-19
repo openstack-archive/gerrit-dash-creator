@@ -1,0 +1,24 @@
+[dashboard]
+title = OS-API-Ref Review Inbox
+description = Review Inbox
+# note, we're putting grenade in this review list as well because grenade while part of QA program
+# is closer to a review group with devstack.
+foreach = project:openstack/os-api-ref status:open label:Verified>=1,jenkins NOT reviewedby:self
+
+[section "Needs final +2"]
+query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self
+
+[section "Passed Jenkins, No Negative Feedback (Small Fixes)"]
+query = NOT label:Code-Review<=-1 delta:<=10
+
+[section "Passed Jenkins, No Negative Feedback"]
+query = NOT label:Code-Review<=-1 delta:>10
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
+
+[section "You are a reviewer, but haven't voted in the current revision"]
+query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self
+
+[section "Wayward Changes (Changes with no code review in the last 2days)"]
+query = NOT is:reviewed age:2d
