@@ -5,6 +5,7 @@
 *.py[cod]
 *.egg
 *.egg-info
+.eggs/
 dist
 build
 eggs
