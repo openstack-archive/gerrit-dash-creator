@@ -11,7 +11,7 @@ query = owner:self
 query = is:starred
 
 [section "Your are a reviewer, but haven't voted in the current revision"]
-query = reviewer:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self
+query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self NOT label:Workflow<=-1 label:Verified>=1,jenkins
 
 [section "Needs Approval"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Code-Review<=2,self
