@@ -4,7 +4,7 @@ description = Watched Projects
 foreach = is:watched is:open
 
 [section "You are a reviewer, but haven't voted in the current revision"]
-query = reviewer:self
+query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self
 
 [section "Passed Jenkins, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50

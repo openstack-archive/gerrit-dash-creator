@@ -14,4 +14,4 @@ query = (project:openstack/api-site) status:open
 query = (project:openstack/*) (status:open) AND (message:ApiImpact OR message:APIImpact)
 
 [section "You are a reviewer (but haven't voted in the current revision)"]
-query = reviewer:self
+query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self

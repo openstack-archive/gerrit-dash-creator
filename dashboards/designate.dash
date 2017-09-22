@@ -11,7 +11,7 @@ query = branch:stable/mitaka NOT reviewedby:self
 query = branch:stable/liberty NOT reviewedby:self
 
 [section "You are a reviewer, but haven't voted in the current revision"]
-query = reviewer:self label:Verified>=1,jenkins NOT reviewedby:self NOT owner:self
+query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self label:Verified>=1,jenkins NOT owner:self
 
 [section "Needs final +2"]
 query = label:Code-Review>=2 label:Verified>=1,jenkins limit:50 NOT label:Workflow<=-1 NOT label:Workflow>=1 NOT label:Code-Review>=2,self NOT owner:self
