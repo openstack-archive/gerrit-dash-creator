@@ -10,7 +10,7 @@ foreach = (project:openstack/octavia OR
 query = label:Verified>=1,jenkins label:Code-Review>=2 NOT(reviewerin:octavia-core label:Code-Review<=-1 OR label:Workflow>=1) limit:50
 
 [section "You are a reviewer, but haven't voted in the current revision"]
-query = label:Verified>=1,jenkins reviewer:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self limit:50
+query = label:Verified>=1,jenkins NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self limit:50
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = label:Verified>=1,jenkins NOT label:Code-Review<=2 age:5d limit:10

@@ -16,7 +16,7 @@ query = project:openstack/nova-specs NOT reviewedby:self
 query = NOT label:Code-Review<=2 age:5d
 
 [section "Your are a reviewer, but haven't voted in the current revision"]
-query = reviewer:self
+query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self
 
 [section "Needs final +2"]
 query = label:Code-Review>=2
