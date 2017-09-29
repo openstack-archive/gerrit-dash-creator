@@ -12,7 +12,7 @@ query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self
 
 [section "Needs final +2"]
-query = NOT label:Code-Review<=-2 label:Code-Review>=2
+query = NOT label:Code-Review<=-2 label:Code-Review>=2 NOT label:workflow>=1
 
 [section "Bug fix, Passed Zuul, No Negative Core Feedback"]
 query = NOT label:Code-Review<=-1 message:"bug: "
