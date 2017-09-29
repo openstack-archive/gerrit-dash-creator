@@ -32,7 +32,11 @@ query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d label:Verified
 query = reviewer:self NOT reviewedby:self label:Verified>=1,zuul
 
 [section "Needs final +2"]
+<<<<<<< 10332fd71462423899639007de9747de6eaa1260
 query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1 NOT reviewedby:self label:Verified>=1,zuul
+=======
+query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self NOT label:workflow>=1
+>>>>>>> Only list non +A under 'Need final +2'
 
 [section "Passed Zuul, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50 label:Verified>=1,zuul

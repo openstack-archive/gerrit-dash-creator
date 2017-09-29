@@ -13,7 +13,7 @@ query = file:^specs/queens/.* NOT label:Code-Review<=-2 NOT label:Code-Review>=2
 query = file:^specs/queens/.* NOT label:Code-Review>=-2 age:7d label:Verified>=1,zuul
 
 [section "Needs final +2"]
-query = file:^specs/queens/.* label:Code-Review>=2 NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self label:Verified>=1,zuul
+query = file:^specs/queens/.* label:Code-Review>=2 NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self label:Verified>=1,zuul  NOT label:workflow>=1
 
 [section "Broken Specs (doesn't pass Zuul)"]
 query = file:^specs/queens/.* label:Verified<=-1,zuul

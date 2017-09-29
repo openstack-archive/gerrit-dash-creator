@@ -1,0 +1,17 @@
+[dashboard]
+title = API Docs Review Inbox
+description = Review Inbox for OpenStack API Docs
+foreach = (project:openstack/api-site) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self
+
+
+[section "Needs feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=2 age:5d
+
+[section "API Docs"]
+query = (project:openstack/api-site) status:open
+
+[section "APIImpact flags"]
+query = (project:openstack/*) (status:open) AND (message:ApiImpact OR message:APIImpact)
+
+[section "You are a reviewer (but haven't voted in the current revision)"]
+query = reviewer:self
