@@ -1,0 +1,10 @@
+Verified+1: Jenkins
+Code-Review+1: Ghanshyam Mann <ghanshyammann@gmail.com>
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Workflow+1: Andreas Jaeger <jaegerandi@gmail.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 29 Sep 2017 21:49:10 +0000
+Reviewed-on: https://review.openstack.org/506237
+Project: openstack/gerrit-dash-creator
+Branch: refs/heads/master
