@@ -10,7 +10,7 @@ query = NOT label:Code-Review<=2 age:5d
 query = reviewer:self
 
 [section "Needs final +2"]
-query = NOT label:Code-Review<=-2 label:Code-Review>=2
+query = NOT label:Code-Review<=-2 label:Code-Review>=2 NOT label:workflow>=1
 
 [section "Bug fix, Passed Jenkins, No Negative Core Feedback"]
 query = NOT label:Code-Review<=-1 message:"bug: "

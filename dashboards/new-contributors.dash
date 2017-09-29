@@ -10,7 +10,7 @@ query = label:Verified<1,jenkins
 query = NOT label:Code-Review<=2 age:5d label:Verified>=1,jenkins
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 limit:50
+query = label:Code-Review>=2 limit:50 NOT label:workflow>=1
 
 [section "Passed Jenkins, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 label:Verified>=1,jenkins limit:50

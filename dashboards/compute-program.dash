@@ -4,7 +4,7 @@ description = Review Inbox
 foreach = (project:openstack/nova OR project:openstack/python-novaclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self branch:master is:mergeable
 
 [section "Needs final +2"]
-query = NOT label:Code-Review<=-1,nova-core label:Code-Review>=2
+query = NOT label:Code-Review<=-1,nova-core label:Code-Review>=2 NOT label:workflow>=1
 
 [section "Small Patches"]
 query = NOT label:Code-Review<=-1,nova-core delta:<=10

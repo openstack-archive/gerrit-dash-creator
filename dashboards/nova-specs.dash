@@ -13,7 +13,7 @@ query = NOT label:Code-Review<=-2 NOT label:Code-Review>=2 NOT reviewedby:self l
 query = NOT label:Code-Review>=-2 age:7d label:Verified>=1,jenkins
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 NOT reviewedby:self label:Verified>=1,jenkins
+query = label:Code-Review>=2 NOT reviewedby:self label:Verified>=1,jenkins NOT label:workflow>=1
 
 [section "Broken Specs (doesn't pass Jenkins)"]
 query = label:Verified<=-1,jenkins
