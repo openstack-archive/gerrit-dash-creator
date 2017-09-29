@@ -6,7 +6,7 @@ description = Review Inbox
 foreach = (project:openstack-dev/devstack OR project:openstack-dev/devstack-vagrant OR project:openstack-dev/grenade) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self
+query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self NOT label:workflow>=1
 
 [section "Passed Jenkins, No Negative Feedback (Small Fixes)"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1,devstack-core delta:<=10

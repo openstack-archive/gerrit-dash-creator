@@ -10,7 +10,7 @@ query = NOT label:Code-Review<=2 age:5d branch:master
 query = reviewer:self branch:master
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 NOT(reviewerin:networking-midonet-core label:Code-Review<=-1) limit:50 branch:master
+query = label:Code-Review>=2 NOT(reviewerin:networking-midonet-core label:Code-Review<=-1) limit:50 branch:master NOT label:workflow>=1
 
 [section "Passed Jenkins, No Negative Core Feedback"]
 query = NOT label:Code-Review>=2 NOT(reviewerin:networking-midonet-core label:Code-Review<=-1) limit:50 branch:master

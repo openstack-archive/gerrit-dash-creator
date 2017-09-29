@@ -4,7 +4,7 @@ description = Review Inbox
 foreach = project:openstack/os-api-ref status:open label:Verified>=1,jenkins NOT reviewedby:self
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self
+query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self NOT label:workflow>=1
 
 [section "Passed Jenkins, No Negative Feedback (Small Fixes)"]
 query = NOT label:Code-Review<=-1 delta:<=10
