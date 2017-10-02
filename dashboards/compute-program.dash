@@ -1,7 +1,7 @@
 [dashboard]
 title = Nova Review Inbox (master branch only)
 description = Review Inbox
-foreach = (project:openstack/nova OR project:openstack/python-novaclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self branch:master is:mergeable
+foreach = (project:openstack/nova OR project:openstack/python-novaclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,zuul NOT reviewedby:self branch:master is:mergeable
 
 [section "Needs final +2"]
 query = NOT label:Code-Review<=-1,nova-core label:Code-Review>=2
@@ -15,10 +15,10 @@ query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 NOT is:reviewed age:5
 [section "You are a reviewer, but haven't voted in the current revision"]
 query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self
 
-[section "Bug fix, Passed Jenkins, No Negative Core Feedback"]
+[section "Bug fix, Passed Zuul, No Negative Core Feedback"]
 query = NOT label:Code-Review<=-1,nova-core message:"Closes-Bug: "
 
-[section "Passed Jenkins, No Negative Core Feedback"]
+[section "Passed Zuul, No Negative Core Feedback"]
 query = NOT label:Code-Review<=-1,nova-core NOT message:"Closes-Bug: "
 
 [section "Wayward Changes (Changes with no code review in the last 5 days)"]

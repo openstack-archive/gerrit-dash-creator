@@ -4,22 +4,22 @@ description = Summary of Ironic Patches to Review
 foreach = (project:openstack/ironic OR project:openstack/python-ironicclient OR project:openstack/ironic-python-agent OR project:openstack/ironic-specs OR project:openstack/ironic-lib OR project:openstack/ironic-inspector OR project:openstack/ironic-webclient OR project:openstack/bifrost) status:open NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
-query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1 OR label:Workflow<=-1)
+query = owner:self (label:Verified-1,zuul OR label:Code-Review-1 OR label:Workflow<=-1)
 
 [section "Small things (<25 LOC, limit 10)"]
-query = delta:<=25 limit:10 (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent) OR (label:Code-Review-1,ironic-inspector-core AND project:openstack/ironic-inspector)) label:Verified>=1,jenkins branch:master
+query = delta:<=25 limit:10 (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent) OR (label:Code-Review-1,ironic-inspector-core AND project:openstack/ironic-inspector)) label:Verified>=1,zuul branch:master
 
 [section "Needs Reverify"]
-query = label:Workflow>=1 NOT label:Workflow<=-1 label:Verified<=-1,jenkins
+query = label:Workflow>=1 NOT label:Workflow<=-1 label:Verified<=-1,zuul
 
 [section "Needs Final Approval (to land on master)"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-Review>=2 label:Verified>=1,jenkins (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent)) NOT project:openstack/ironic-specs branch:master
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-Review>=2 label:Verified>=1,zuul (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent)) NOT project:openstack/ironic-specs branch:master
 
 [section "Newer (<1wk) Open Patches (limit 25)"]
-query = -age:1week limit:25 branch:master NOT label:Workflow>=1 (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent) OR (label:Code-Review-1,ironic-inspector-core AND project:openstack/ironic-inspector)) label:Verified>=1,jenkins NOT label:Code-Review>=2 NOT project:openstack/ironic-specs
+query = -age:1week limit:25 branch:master NOT label:Workflow>=1 (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent) OR (label:Code-Review-1,ironic-inspector-core AND project:openstack/ironic-inspector)) label:Verified>=1,zuul NOT label:Code-Review>=2 NOT project:openstack/ironic-specs
 
-[section "Older (>1wk) Open Patches Passing Jenkins Tests (limit 50)"]
-query = age:1week limit:50 NOT label:Workflow>=1 NOT label:Code-Review<=2 age:1week NOT label:Verified>=1,jenkins NOT project:openstack/ironic-specs (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent) OR (label:Code-Review-1,ironic-inspector-core AND project:openstack/ironic-inspector))
+[section "Older (>1wk) Open Patches Passing Zuul Tests (limit 50)"]
+query = age:1week limit:50 NOT label:Workflow>=1 NOT label:Code-Review<=2 age:1week NOT label:Verified>=1,zuul NOT project:openstack/ironic-specs (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent) OR (label:Code-Review-1,ironic-inspector-core AND project:openstack/ironic-inspector))
 
 [section "Open Stable Backports"]
 query = NOT project:openstack/ironic-specs branch:^stable/.* status:open

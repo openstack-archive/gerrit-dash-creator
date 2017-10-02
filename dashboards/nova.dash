@@ -9,7 +9,7 @@ foreach = ( project:openstack/nova OR
            status:open
            NOT owner:self
            NOT label:Workflow<=-1
-           label:Verified>=1,jenkins
+           label:Verified>=1,zuul
            NOT reviewedby:self
            branch:master
 
@@ -19,7 +19,7 @@ query = (project:openstack/nova OR project:openstack/python-novaclient OR projec
 [section "Needs final +2"]
 query = (project:openstack/nova OR project:openstack/python-novaclient OR project:openstack/os-vif OR project:openstack/os-traits) NOT label:Code-Review>=2,self label:Code-Review>=2 limit:50
 
-[section "Bug fix, Passed Jenkins, No Negative Feedback"]
+[section "Bug fix, Passed Zuul, No Negative Feedback"]
 query =  NOT label:Code-Review>=2,self NOT label:Code-Review<=-1,nova-core message:"bug: " limit:50
 
 [section "Wayward Changes (Changes with no code review in the last two days)"]
@@ -28,7 +28,7 @@ query = NOT label:Code-Review<=2 age:2d limit:50
 [section "Needs feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d limit:50
 
-[section "Passed Jenkins, No Negative Feedback"]
+[section "Passed Zuul, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
 
 [section "Needs revisit (You were a reviewer but haven't voted in the current revision)"]

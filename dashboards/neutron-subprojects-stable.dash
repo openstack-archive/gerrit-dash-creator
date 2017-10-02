@@ -13,7 +13,7 @@ foreach = (
     project:openstack/neutron-fwaas OR
     project:openstack/neutron-lib OR
     project:openstack/ovsdbapp OR
-    project:openstack/python-neutronclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self branch:^stable/.*
+    project:openstack/python-neutronclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,zuul NOT reviewedby:self branch:^stable/.*
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
@@ -24,7 +24,7 @@ query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:se
 [section "Needs final +2"]
 query = label:Code-Review>=2 NOT(reviewerin:neutron-stable-maint label:Code-Review<=-1) limit:50
 
-[section "Passed Jenkins, No Negative Core Feedback"]
+[section "Passed Zuul, No Negative Core Feedback"]
 query = NOT label:Code-Review>=2 NOT(reviewerin:neutron-stable-maint label:Code-Review<=-1) limit:50
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
