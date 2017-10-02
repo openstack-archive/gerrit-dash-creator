@@ -7,7 +7,7 @@ foreach = (project:openstack/rally) status:open
 query = (starredby:"rvasilets@mirantis.com" AND starredby:"boris@pavlovic.me")
 
 [section "Waiting for final approve"]
-query = label:Verified>=1,jenkins label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-Review>=2
+query = label:Verified>=1,zuul label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-Review>=2
 
 [section "Bug fixes"]
 query = topic:"^bug/.*"
@@ -16,7 +16,7 @@ query = topic:"^bug/.*"
 query = (message:"[spec]" file:"^.*specs.*")
 
 [section "Ready for review"]
-query = label:Verified>=1,jenkins NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Code-Review>=2 NOT (message:"[spec]" file:"^.*specs.*")
+query = label:Verified>=1,zuul NOT label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Code-Review>=2 NOT (message:"[spec]" file:"^.*specs.*")
 
 [section "Has -1 but passed tests"]
-query = label:Verified>=1,jenkins label:Verified>=1,rally-ci label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT (message:"[spec]" file:"^.*specs.*")
+query = label:Verified>=1,zuul label:Verified>=1,rally-ci label:Code-Review-1 NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT (message:"[spec]" file:"^.*specs.*")

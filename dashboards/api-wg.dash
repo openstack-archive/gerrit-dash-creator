@@ -4,7 +4,7 @@ description = Reviews for OpenStack API Working Group
 foreach = project:openstack/api-wg status:open NOT label:Workflow=+1
 
 [section "Ready to freeze"]
-query = label:Verified>=1,jenkins NOT label:Code-Review<=-1 NOT label:Workflow<=-1 age:2d
+query = label:Verified>=1,zuul NOT label:Code-Review<=-1 NOT label:Workflow<=-1 age:2d
 
 [section "Frozen"]
 query = label:Code-Review=+2

@@ -1,7 +1,7 @@
 [dashboard]
 title = stable-maint Review Inbox
 description = Review Inbox
-foreach = (project:openstack/ceilometer OR project:openstack/python-ceilometerclient OR project:openstack/cinder OR project:openstack/python-cinderclient OR project:openstack/glance OR project:openstack/python-glanceclient OR project:openstack/heat OR project:openstack/python-heatclient OR project:openstack/horizon OR project:openstack/keystone OR project:openstack/python-keystoneclient OR project:openstack/neutron OR project:openstack/python-neutronclient OR project:openstack/nova OR project:openstack/python-novaclient OR project:openstack/trove OR project:openstack/python-troveclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self branch:^stable/.*
+foreach = (project:openstack/ceilometer OR project:openstack/python-ceilometerclient OR project:openstack/cinder OR project:openstack/python-cinderclient OR project:openstack/glance OR project:openstack/python-glanceclient OR project:openstack/heat OR project:openstack/python-heatclient OR project:openstack/horizon OR project:openstack/keystone OR project:openstack/python-keystoneclient OR project:openstack/neutron OR project:openstack/python-neutronclient OR project:openstack/nova OR project:openstack/python-novaclient OR project:openstack/trove OR project:openstack/python-troveclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,zuul NOT reviewedby:self branch:^stable/.*
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
@@ -12,7 +12,7 @@ query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:se
 [section "Needs final +2"]
 query = label:Code-Review>=2 NOT(reviewerin:stable-maint-core label:Code-Review<=-1) limit:50
 
-[section "Passed Jenkins, No Negative Core Feedback"]
+[section "Passed Zuul, No Negative Core Feedback"]
 query = NOT label:Code-Review>=2 NOT(reviewerin:stable-maint-core label:Code-Review<=-1) limit:50
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
