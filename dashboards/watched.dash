@@ -6,7 +6,7 @@ foreach = is:watched is:open
 [section "You are a reviewer, but haven't voted in the current revision"]
 query = reviewer:self
 
-[section "Passed Jenkins, No Negative Feedback"]
+[section "Passed Zuul, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
 
 [section "Needs final +2"]

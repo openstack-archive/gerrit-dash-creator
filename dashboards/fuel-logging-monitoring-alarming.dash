@@ -19,10 +19,10 @@ query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT 
 query = NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-specs label:Code-Review-1 limit:20
 
 [section "Needs Reverify"]
-query = label:Workflow>=1 NOT label:Workflow<=-1 label:Verified<=-1,jenkins
+query = label:Workflow>=1 NOT label:Workflow<=-1 label:Verified<=-1,zuul
 
 [section "Work In Progress Or Unverified"]
-query = NOT label:Workflow>=1 NOT owner:self (label:Workflow<=-1 OR label:Verified<=-1,jenkins)
+query = NOT label:Workflow>=1 NOT owner:self (label:Workflow<=-1 OR label:Verified<=-1,zuul)
 
 [section "All My Patches "]
 query = owner:self

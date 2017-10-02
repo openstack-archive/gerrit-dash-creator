@@ -13,7 +13,7 @@ query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-R
 query = label:Workflow>=1 NOT label:Code-Review<=-2
 
 [section "Needs Reverify"]
-query = label:Verified<=-1,jenkins NOT project:openstack/swift-specs branch:master NOT label:Code-Review<=-1 NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+query = label:Verified<=-1,zuul NOT project:openstack/swift-specs branch:master NOT label:Code-Review<=-1 NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "Possible abandoned changes"]
-query = status:open age:4week (label:Verified<=-1,jenkins OR label:Code-Review<=-1) NOT label:Workflow<=-1
+query = status:open age:4week (label:Verified<=-1,zuul OR label:Code-Review<=-1) NOT label:Workflow<=-1

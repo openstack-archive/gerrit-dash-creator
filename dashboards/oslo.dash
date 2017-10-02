@@ -41,7 +41,7 @@ query = label:Code-Review>=2 limit:50
 [section "New Contributors"]
 query = reviewer:10068
 
-[section "Passed Jenkins, No Negative Feedback"]
+[section "Passed Zuul, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
