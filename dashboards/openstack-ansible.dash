@@ -7,7 +7,7 @@ foreach = (project:^openstack/openstack-ansible.* OR
            NOT owner:self
            NOT label:Workflow<=-1
            label:Verified>=1,jenkins
-           NOT label:Code-Review>=0,self
+           NOT reviewedby:self
 
 # core reviewers taken from https://review.openstack.org/#/admin/groups/490,members
 [section "Reviews Requested by Core Reviewers"]
@@ -29,10 +29,10 @@ query = (starredby: a.settle@outlook.com OR
 query = NOT label:Code-Review<=2 age:5d
 
 [section "You are a reviewer but haven't voted in the current revision"]
-query = NOT label:Code-Review<=2,self reviewer:self
+query = reviewer:self NOT reviewedby:self
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self
+query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1 NOT reviewedby:self
 
 [section "Passed Jenkins, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
