@@ -1,0 +1,9 @@
+Verified+1: Jenkins
+Code-Review+2: Sean Dague <sean@dague.net>
+Workflow+1: Sean Dague <sean@dague.net>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 03 Oct 2017 16:47:27 +0000
+Reviewed-on: https://review.openstack.org/506214
+Project: openstack/gerrit-dash-creator
+Branch: refs/heads/master
