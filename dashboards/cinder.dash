@@ -1,0 +1,37 @@
+[dashboard]
+title = Cinder Review Dashboard
+description = Cinder review requests
+foreach = (project:openstack/cinder OR
+           project:openstack/python-cinderclient OR
+           project:openstack/os-brick OR
+           project:openstack/cinder-specs) status:open
+
+[section "Cinder Specs"]
+query = project:openstack/cinder-specs
+
+[section "Needs Final +2"]
+query = label:Code-Review>=2 NOT label:Code-Review<=-2 NOT reviewedby:self
+
+[section "Small Patches"]
+query = NOT label:Code-Review<=-1,cinder-core delta:<=10
+
+[section "Bug Fixes without Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self limit:50 branch:master topic:^bug.* NOT reviewedby:self
+
+[section "Blueprints without Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master topic:^bp.* NOT reviewedby:self
+
+[section "Without Negative Feedback"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50 branch:master NOT topic:^bug.* NOT topic:^bp.* NOT reviewedby:self
+
+[section "5 Days Without Feedback"]
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 NOT is:reviewed age:5d
+
+[section "Own Patches"]
+query = owner:self
+
+[section "Patches I -2'd"]
+query = label:Code-Review<=-2,self
+
+[section "Stable Branches"]
+query = branch:^stable/.* NOT reviewedby:self
