@@ -1,0 +1,10 @@
+Verified+1: Jenkins
+Code-Review+1: Brian Haley <haleyb.dev@gmail.com>
+Code-Review+2: Sean Dague <sean@dague.net>
+Workflow+1: Sean Dague <sean@dague.net>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 18 Oct 2017 14:05:13 +0000
+Reviewed-on: https://review.openstack.org/506767
+Project: openstack/gerrit-dash-creator
+Branch: refs/heads/master
