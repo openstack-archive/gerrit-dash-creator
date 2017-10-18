@@ -1,7 +1,7 @@
 [dashboard]
 title = Global Requirements Review Inbox
 description = Review Inbox
-foreach = project:openstack/requirements status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT reviewedby:self
+foreach = project:openstack/requirements status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,zuul NOT reviewedby:self
 
 [section "New Releases"]
 query = topic:new-release
@@ -15,7 +15,7 @@ query = NOT reviewedby:self reviewer:self
 [section "Needs final +2"]
 query = label:Code-Review>=2 limit:50 NOT reviewedby:self
 
-[section "Passed Jenkins, No Negative Feedback"]
+[section "Passed Zuul, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50 branch:master
 
 [section "Wayward Changes (Changes with no code review in the last 2 days)"]

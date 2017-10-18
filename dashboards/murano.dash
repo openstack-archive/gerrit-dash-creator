@@ -12,7 +12,7 @@ query = NOT label:Code-Review<=2,self reviewer:self NOT owner:self
 [section "Need Feedback"]
 query = NOT label:Code-Review<=2 NOT label:Verified<=-1 NOT owner:self
 
-[section "Passed Jenkins, No Negative Feedback"]
+[section "Passed Zuul, No Negative Feedback"]
 query = label:Code-Review>=1 NOT label:Code-Review<=-1 AND NOT label:Verified<=-1 NOT owner:self NOT reviewer:self limit:50
 
 [section "Maybe Review?"]

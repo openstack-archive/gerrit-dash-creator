@@ -1,7 +1,7 @@
 [dashboard]
 title = Josh's Misc Review Inbox
 description = Review Inbox
-foreach = (project:openstack/taskflow OR project:openstack/tooz OR project:openstack/anvil OR project:openstack/doc8 OR project:openstack/cloud-init OR project:openstack/debtcollector) status:open NOT label:Workflow<=-1 label:Verified>=1,jenkins NOT label:Code-Review>=-2
+foreach = (project:openstack/taskflow OR project:openstack/tooz OR project:openstack/anvil OR project:openstack/doc8 OR project:openstack/cloud-init OR project:openstack/debtcollector) status:open NOT label:Workflow<=-1 label:Verified>=1,zuul NOT label:Code-Review>=-2
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
 query = NOT label:Code-Review<=2 age:5d
@@ -12,10 +12,10 @@ query = reviewer:self
 [section "Needs final +2"]
 query = NOT label:Code-Review<=-2 label:Code-Review>=2
 
-[section "Bug fix, Passed Jenkins, No Negative Core Feedback"]
+[section "Bug fix, Passed Zuul, No Negative Core Feedback"]
 query = NOT label:Code-Review<=-1 message:"bug: "
 
-[section "Passed Jenkins, No Negative Core Feedback"]
+[section "Passed Zuul, No Negative Core Feedback"]
 query = NOT label:Code-Review<=-1 NOT message:"bug: "
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
