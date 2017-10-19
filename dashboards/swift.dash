@@ -19,7 +19,7 @@ query = NOT project:openstack/swift-specs branch:^stable/.* status:open
 query = NOT project:openstack/swift-specs branch:^feature/.* status:open
 
 [section "Recently Proposed to master"]
-query = NOT label:Workflow>=1 (NOT label:Code-Review-1,swift-core OR (label:Code-Review-1,swiftclient-core AND project:openstack/python-swiftclient)) label:Verified>=1,jenkins NOT label:Code-Review>=2 NOT project:openstack/swift-specs -age:1week branch:master
+query = NOT label:Workflow>=1 (NOT label:Code-Review-1,swift-core OR (label:Code-Review-1,swiftclient-core AND project:openstack/python-swiftclient)) label:Verified>=1,zuul NOT label:Code-Review>=2 NOT project:openstack/swift-specs -age:1week branch:master
 
 [section "Older open patches"]
 query = NOT label:Workflow>=1 NOT label:Code-Review<=2 age:1week NOT project:openstack/swift-specs (NOT label:Code-Review-1,swift-core OR (label:Code-Review-1,swiftclient-core AND project:openstack/python-swiftclient))

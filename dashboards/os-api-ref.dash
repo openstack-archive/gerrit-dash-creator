@@ -1,15 +1,15 @@
 [dashboard]
 title = OS-API-Ref Review Inbox
 description = Review Inbox
-foreach = project:openstack/os-api-ref status:open label:Verified>=1,jenkins NOT reviewedby:self
+foreach = project:openstack/os-api-ref status:open label:Verified>=1,zuul NOT reviewedby:self
 
 [section "Needs final +2"]
 query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self
 
-[section "Passed Jenkins, No Negative Feedback (Small Fixes)"]
+[section "Passed Zuul, No Negative Feedback (Small Fixes)"]
 query = NOT label:Code-Review<=-1 delta:<=10
 
-[section "Passed Jenkins, No Negative Feedback"]
+[section "Passed Zuul, No Negative Feedback"]
 query = NOT label:Code-Review<=-1 delta:>10
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]

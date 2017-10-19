@@ -2,7 +2,7 @@
 title = OpenStack Client Review Inbox
 description = Review Inbox
 foreach = (project:openstack/python-openstackclient OR project:openstack/cliff) status:open
-    NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,jenkins
+    NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,zuul
     NOT reviewedby:self branch:master
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
@@ -14,10 +14,10 @@ query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:se
 [section "Needs final +2"]
 query = NOT label:Code-Review<=-2 label:Code-Review>=2
 
-[section "Bug fix, Passed Jenkins, No Negative Core Feedback"]
+[section "Bug fix, Passed Zuul, No Negative Core Feedback"]
 query = NOT label:Code-Review<=-1 message:"bug: "
 
-[section "Passed Jenkins, No Negative Core Feedback"]
+[section "Passed Zuul, No Negative Core Feedback"]
 query = NOT label:Code-Review<=-1 NOT message:"bug: "
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]

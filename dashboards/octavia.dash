@@ -7,19 +7,19 @@ foreach = (project:openstack/octavia OR
            NOT owner:self NOT label:Workflow<=-1
 
 [section "Needs final +2"]
-query = label:Verified>=1,jenkins label:Code-Review>=2 NOT(reviewerin:octavia-core label:Code-Review<=-1 OR label:Workflow>=1) limit:50
+query = label:Verified>=1,zuul label:Code-Review>=2 NOT(reviewerin:octavia-core label:Code-Review<=-1 OR label:Workflow>=1) limit:50
 
 [section "You are a reviewer, but haven't voted in the current revision"]
-query = label:Verified>=1,jenkins NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self NOT label:Workflow<=-1 label:Verified>=1,jenkins limit:50
+query = label:Verified>=1,zuul NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self NOT label:Workflow<=-1 label:Verified>=1,zuul limit:50
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = label:Verified>=1,jenkins NOT label:Code-Review<=2 age:5d limit:10
+query = label:Verified>=1,zuul NOT label:Code-Review<=2 age:5d limit:10
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
-query = label:Verified>=1,jenkins NOT label:Code-Review<=2 age:2d NOT label:Workflow<=-1 NOT reviewedby:self limit:10
+query = label:Verified>=1,zuul NOT label:Code-Review<=2 age:2d NOT label:Workflow<=-1 NOT reviewedby:self limit:10
 
-[section "Passed Jenkins, No Negative Core Feedback"]
-query = label:Verified>=1,jenkins NOT label:Workflow<=-1 NOT label:Code-Review>=2 NOT(reviewerin:octavia-core label:Code-Review<=-1) limit:10
+[section "Passed Zuul, No Negative Core Feedback"]
+query = label:Verified>=1,zuul NOT label:Workflow<=-1 NOT label:Code-Review>=2 NOT(reviewerin:octavia-core label:Code-Review<=-1) limit:10
 
 [section "In merge"]
 query = label:Code-Review>=2,octavia-core label:Workflow>=1

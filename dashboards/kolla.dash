@@ -6,17 +6,17 @@ foreach = (project:openstack/kolla OR
            project:openstack/kolla-kubernetes) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
-query = owner:self (label:Verified-1,jenkins OR label:Code-Review-1)
+query = owner:self (label:Verified-1,zuul OR label:Code-Review-1)
 
 [section "Needs Approval"]
-query = label:Verified>=1,jenkins NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
+query = label:Verified>=1,zuul NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
 
 [section "5 Days Without Feedback"]
-query = label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=2 age:5d
+query = label:Verified>=1,zuul NOT owner:self NOT label:Code-Review<=2 age:5d
 
 [section "No Negative Feedback"]
-query = label:Verified>=1,jenkins NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
+query = label:Verified>=1,zuul NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
 
 [section "Other"]
-query = label:Verified>=1,jenkins NOT owner:self  label:Code-Review-1 limit:20
+query = label:Verified>=1,zuul NOT owner:self  label:Code-Review-1 limit:20
 

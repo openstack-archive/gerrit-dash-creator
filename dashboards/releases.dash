@@ -25,7 +25,7 @@ query = is:open project:openstack/releases
 query = project:openstack-infra/release-tools
 
 [section "project-config release-tools"]
-query = project:openstack-infra/project-config file:^jenkins/scripts/release-tools/.*
+query = project:openstack-infra/project-config file:^zuul/scripts/release-tools/.*
 
 [section "reno"]
 query = project:openstack/reno
