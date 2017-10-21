@@ -1,7 +1,19 @@
 [dashboard]
-title = Horizon Review Dashboard
+title = Horizon Plugins Review Dashboard
 description = Horizon patches to look at
-foreach = (project:openstack/horizon-cisco-ui OR project:openstack/django-openstack-auth-kerberos OR project:openstack/tuskar-ui OR project:openstack/manila-ui OR project:openstack/designate-dashboard OR project:openstack/neutron-lbaas-dashboard OR project:openstack/mistral-dashboard) status:open NOT label:Code-Review<=-2
+foreach = (project:openstack/ui-cookiecutter
+           OR project:openstack/congress-dashboard
+           OR project:openstack/designate-dashboard
+           OR project:openstack/horizon-cisco-ui
+           OR project:openstack/manila-ui
+           OR project:openstack/mistral-dashboard
+           OR project:openstack/neutron-fwaas-dashboard
+           OR project:openstack/neutron-lbaas-dashboard
+           OR project:openstack/neutron-vpnaas-dashboard
+           OR project:openstack/octavia-dashboard
+           OR project:openstack/sahara-dashboard
+           OR project:openstack/trove-dashboard
+          ) status:open NOT label:Code-Review<=-2
 
 [section "Your Patches"]
 query = owner:self
@@ -10,13 +22,13 @@ query = owner:self
 query = is:starred
 
 [section "Your are a reviewer, but haven't voted in the current revision"]
-query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self NOT label:Workflow<=-1 label:Verified>=1,zuul
+query = NOT owner:self NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self NOT label:Workflow<=-1 label:Verified>=1,zuul
 
 [section "Needs Approval"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,zuul NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1 NOT label:Code-Review<=2,self
 
 [section "Not Reviewed by Me"]
-query = NOT label:Code-Review<=2,self limit:50
+query = NOT owner:self NOT reviewer:self NOT label:Code-Review<=2,self limit:50
 
 [section "Needs Reverify"]
 query = label:Verified<=-1,zuul branch:master NOT label:Code-Review<=-1 NOT label:Workflow<=-1
