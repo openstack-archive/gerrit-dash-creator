@@ -10,7 +10,7 @@ query = NOT label:Code-Review<=-1,patrole-core label:Code-Review>=2 NOT label:wo
 query = NOT label:Code-Review<=-1,patrole-core delta:<=10
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 age:5d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 
 [section "You are a reviewer, but haven't voted in the current revision"]
 query = reviewer:self
@@ -22,4 +22,4 @@ query = NOT label:Code-Review<=-1,patrole-core message:"Closes-Bug: "
 query = NOT label:Code-Review<=-1,patrole-core NOT message:"Closes-Bug: "
 
 [section "Wayward Changes (Changes with no code review in the last 5 days)"]
-query = label:Code-Review<=2 NOT label:Code-Review<=-1,patrole-core age:5d
+query = NOT label:Code-Review>=1 NOT label:Code-Review<=-1,patrole-core age:5d

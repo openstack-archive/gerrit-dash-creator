@@ -16,7 +16,7 @@ foreach = ( project:openstack/openstack-manuals OR
            NOT reviewedby:self
 
 [section "Needs feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 age:5d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 
 [section "Specs"]
 query = project:openstack/docs-specs status:open
@@ -40,4 +40,4 @@ query = (project:openstack/openstack-manuals OR project:openstack/api-site OR pr
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
 
 [section "Wayward Changes (Changes with no code review in the last two days)"]
-query = NOT label:Code-Review<=2 age:2d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:2d

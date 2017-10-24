@@ -22,7 +22,7 @@ query = NOT project:openstack/swift-specs branch:^feature/.* status:open
 query = NOT label:Workflow>=1 (NOT label:Code-Review-1,swift-core OR (label:Code-Review-1,swiftclient-core AND project:openstack/python-swiftclient)) label:Verified>=1,zuul NOT label:Code-Review>=2 NOT project:openstack/swift-specs -age:1week branch:master
 
 [section "Older open patches"]
-query = NOT label:Workflow>=1 NOT label:Code-Review<=2 age:1week NOT project:openstack/swift-specs (NOT label:Code-Review-1,swift-core OR (label:Code-Review-1,swiftclient-core AND project:openstack/python-swiftclient))
+query = NOT label:Workflow>=1 NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:1week NOT project:openstack/swift-specs (NOT label:Code-Review-1,swift-core OR (label:Code-Review-1,swiftclient-core AND project:openstack/python-swiftclient))
 
 [section "Swift Specs"]
 query = project:openstack/swift-specs NOT label:Code-Review<=-2

@@ -25,7 +25,7 @@ query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner
 query = NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self label:Code-Review-1 limit:20 branch:master NOT reviewedby:self
 
 [section "5 Days Without Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=2 age:5d branch:master NOT reviewedby:self
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1 NOT owner:self NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d branch:master NOT reviewedby:self
 
 [section "Own Patches"]
 query = owner:self

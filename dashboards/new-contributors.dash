@@ -7,7 +7,7 @@ foreach = reviewer:"Welcome, new contributor!" status:open NOT owner:self NOT la
 query = label:Verified<1,zuul
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 age:5d label:Verified>=1,zuul
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d label:Verified>=1,zuul
 
 [section "Needs final +2"]
 query = label:Code-Review>=2 limit:50
@@ -16,4 +16,4 @@ query = label:Code-Review>=2 limit:50
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 label:Verified>=1,zuul limit:50
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
-query = NOT label:Code-Review<=2 age:2d label:Verified>=1,zuul
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:2d label:Verified>=1,zuul

@@ -4,7 +4,7 @@ description = Review Inbox for OpenStack Documentation
 foreach = (project:openstack/openstack-manuals OR project:openstack/security-doc OR openstack/openstack-ux status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,zuul NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self
 
 [section "Needs feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 age:5d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 
 [section "User Docs"]
 query = (project:openstack/openstack-manuals OR project:openstack/security-doc) status:open
@@ -19,4 +19,4 @@ query = (project:openstack/openstack-manuals OR project:openstack/api-site OR pr
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
 
 [section "Wayward Changes (Changes with no code review in the last two days)"]
-query = NOT label:Code-Review<=2 age:2d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:2d
