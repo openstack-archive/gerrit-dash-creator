@@ -23,10 +23,10 @@ query = (project:openstack/nova OR project:openstack/python-novaclient OR projec
 query =  NOT label:Code-Review>=2,self NOT label:Code-Review<=-1,nova-core message:"bug: " limit:50
 
 [section "Wayward Changes (Changes with no code review in the last two days)"]
-query = NOT label:Code-Review<=2 age:2d limit:50
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:2d limit:50
 
 [section "Needs feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 age:5d limit:50
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d limit:50
 
 [section "Passed Zuul, No Negative Feedback"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50

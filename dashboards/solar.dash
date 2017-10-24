@@ -13,10 +13,10 @@ query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT 
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 label:Verified>=1 label:Code-Review>=1 NOT label:Code-Review>=2 NOT label:Code-Review<=-1
 
 [section "5 Days Without Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT label:Code-Review<=2 age:5d
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 
 [section "No Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT label:Code-Review<=2 NOT age:5d limit:50
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT label:Code-Review<=-1 NOT label:Code-Review>=1 NOT age:5d limit:50
 
 [section "Disagreement"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 label:Code-Review<=-1 label:Code-Review>=1

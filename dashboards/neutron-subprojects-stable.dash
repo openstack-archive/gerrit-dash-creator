@@ -16,7 +16,7 @@ foreach = (
     project:openstack/python-neutronclient) status:open NOT owner:self NOT label:Workflow<=-1 label:Verified>=1,zuul NOT reviewedby:self branch:^stable/.*
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 age:5d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 
 [section "You are a reviewer, but haven't voted in the current revision"]
 query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self
@@ -28,4 +28,4 @@ query = label:Code-Review>=2 NOT(reviewerin:neutron-stable-maint label:Code-Revi
 query = NOT label:Code-Review>=2 NOT(reviewerin:neutron-stable-maint label:Code-Review<=-1) limit:50
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
-query = NOT label:Code-Review<=2 age:2d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:2d

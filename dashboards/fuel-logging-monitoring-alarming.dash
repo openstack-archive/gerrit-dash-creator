@@ -10,7 +10,7 @@ query = owner:self (label:Verified-1 OR label:Code-Review-1 OR label:Workflow<=-
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
 
 [section "2 Days Without Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-specs NOT label:Code-Review<=2 age:2d
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:2d
 
 [section "No Negative Feedback"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT owner:self NOT project:openstack/fuel-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50

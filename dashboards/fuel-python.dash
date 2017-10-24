@@ -33,7 +33,7 @@ query = NOT label:Verified<=-1 label:Code-Review>=2 NOT label:Code-Review<=-1 NO
 query = NOT label:Verified<=-1 label:Verified>=1 label:Code-Review>=1 NOT label:Code-Review>=2 NOT label:Code-Review<=-1 NOT label:Code-Review<=-2 NOT label:Workflow>=1 NOT label:Workflow<=-1
 
 [section "New"]
-query = NOT label:Verified<=-1 NOT label:Code-Review<=2 NOT age:2d limit:50 NOT label:Workflow>=1 NOT label:Workflow<=-1
+query = NOT label:Verified<=-1 NOT label:Code-Review<=-1 NOT label:Code-Review>=1 NOT age:2d limit:50 NOT label:Workflow>=1 NOT label:Workflow<=-1
 
 [section "Blocked"]
 query = label:Code-Review<=-2

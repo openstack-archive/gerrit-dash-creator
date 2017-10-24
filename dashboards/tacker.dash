@@ -7,13 +7,13 @@ foreach = (project:^.*/.*tacker.*) NOT label:Workflow<=-1 NOT label:Code-Review<
 query = owner:"OpenStack Proposal Bot <openstack-infra@lists.openstack.org>"
 
 [section "Needs final +2"]
-query = label:Code-Review>=2 NOT label:Code-Review<=-1 NOT label:Verified<=-1 NOT label:Code-Review<=2,self NOT owner:self limit:10
+query = label:Code-Review>=2 NOT label:Code-Review<=-1 NOT label:Verified<=-1 NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self NOT owner:self limit:10
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 NOT label:Verified<=-1 NOT owner:self age:5d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 NOT label:Verified<=-1 NOT owner:self age:5d
 
 [section "You are a reviewer, but haven't voted in the current revision"]
-query = NOT label:Code-Review<=2,self reviewer:self NOT owner:self limit:10
+query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self NOT owner:self limit:10
 
 [section "Passed Zuul, No Negative Feedback"]
 query = label:Code-Review>=1 NOT label:Code-Review<=-1 AND NOT label:Verified<=-1 NOT owner:self NOT reviewer:self limit:10
@@ -25,5 +25,5 @@ query = label:Code-Review<=-1 limit:10
 query = NOT owner:self NOT reviewer:self limit:10
 
 [section "Wayward Changes (Changes with no code review in the last 2days)"]
-query = NOT label:Code-Review<=2 age:2d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:2d
 
