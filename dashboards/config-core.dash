@@ -1,0 +1,26 @@
+[dashboard]
+title = Config Core Review Inbox
+description = Review board for project-config, openstack-zuul-jobs, zuul-jobs
+foreach = (project:openstack-infra/openstack-zuul-jobs OR
+           project:openstack-infra/project-config OR
+           project:openstack-infra/zuul-jobs)
+          status:open
+          is:mergeable
+          NOT owner:self
+          NOT label:Workflow<=-1
+          label:Verified>=1,zuul
+
+[section "Needs final +2"]
+query = label:Code-Review>=2 NOT label:Code-Review<=-1 NOT reviewedby:self label:Verified>=1,zuul
+
+[section "Small Patches"]
+query = NOT label:Code-Review<=-1 delta:<=10 NOT reviewedby:self
+
+[section "Needs feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
+
+[section "Passed Zuul (with no negative feedback)"]
+query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
+
+[section "Wayward Changes (Changes with no code review in the last 5 days)"]
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
