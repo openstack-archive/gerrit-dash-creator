@@ -4,7 +4,7 @@ description = Review Inbox
 foreach = status:open NOT owner:self reviewer:self
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 age:5d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 
 [section "Things I've -2ed"]
 query = label:Code-Review<=-2,self

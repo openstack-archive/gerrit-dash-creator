@@ -13,7 +13,7 @@ query = topic:bp/remove-legacy-v2-api-code NOT reviewedby:self
 query = project:openstack/nova-specs NOT reviewedby:self
 
 [section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
-query = NOT label:Code-Review<=2 age:5d
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 
 [section "Your are a reviewer, but haven't voted in the current revision"]
 query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self

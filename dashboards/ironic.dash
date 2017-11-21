@@ -19,7 +19,7 @@ query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-R
 query = -age:1week limit:25 branch:master NOT label:Workflow>=1 (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent) OR (label:Code-Review-1,ironic-inspector-core AND project:openstack/ironic-inspector)) label:Verified>=1,zuul NOT label:Code-Review>=2 NOT project:openstack/ironic-specs
 
 [section "Older (>1wk) Open Patches Passing Zuul Tests (limit 50)"]
-query = age:1week limit:50 NOT label:Workflow>=1 NOT label:Code-Review<=2 age:1week NOT label:Verified>=1,zuul NOT project:openstack/ironic-specs (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent) OR (label:Code-Review-1,ironic-inspector-core AND project:openstack/ironic-inspector))
+query = age:1week limit:50 NOT label:Workflow>=1 NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:1week NOT label:Verified>=1,zuul NOT project:openstack/ironic-specs (NOT label:Code-Review-1,ironic-core OR (label:Code-Review-1,ironic-python-agent-core AND project:openstack/ironic-python-agent) OR (label:Code-Review-1,ironic-inspector-core AND project:openstack/ironic-inspector))
 
 [section "Open Stable Backports"]
 query = NOT project:openstack/ironic-specs branch:^stable/.* status:open

@@ -33,7 +33,7 @@ query = NOT owner:self project:openstack/tripleo-specs
 query = label:Verified>=1,zuul NOT owner:self label:Code-Review>=2 NOT label:Code-Review-1
 
 [section "5 Days Without Feedback"]
-query = label:Verified>=1,zuul NOT owner:self NOT project:openstack/tripleo-specs NOT label:Code-Review<=2 age:5d
+query = label:Verified>=1,zuul NOT owner:self NOT project:openstack/tripleo-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 
 [section "No Negative Feedback"]
 query = label:Verified>=1,zuul NOT owner:self NOT project:openstack/tripleo-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50

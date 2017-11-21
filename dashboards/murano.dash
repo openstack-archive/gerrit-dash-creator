@@ -7,10 +7,10 @@ foreach = (project:^.*/.*murano.* OR project:openstack/yaql) NOT label:Workflow<
 query = owner:self
 
 [section "You are a reviewer, but haven't voted in the current revision"]
-query = NOT label:Code-Review<=2,self reviewer:self NOT owner:self
+query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self NOT owner:self
 
 [section "Need Feedback"]
-query = NOT label:Code-Review<=2 NOT label:Verified<=-1 NOT owner:self
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 NOT label:Verified<=-1 NOT owner:self
 
 [section "Passed Zuul, No Negative Feedback"]
 query = label:Code-Review>=1 NOT label:Code-Review<=-1 AND NOT label:Verified<=-1 NOT owner:self NOT reviewer:self limit:50
@@ -22,7 +22,7 @@ query = NOT owner:self NOT reviewer:self limit:25
 query = label:Code-Review=1,self limit:25
 
 [section "Need final +2"]
-query = label:Code-Review>=2 NOT label:Code-Review<=-1 NOT label:Verified<=-1 NOT label:Code-Review<=2,self NOT owner:self limit:25
+query = label:Code-Review>=2 NOT label:Code-Review<=-1 NOT label:Verified<=-1 NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self NOT owner:self limit:25
 
 [section "My +2s"]
 query = label:Code-Review=2,self limit:25

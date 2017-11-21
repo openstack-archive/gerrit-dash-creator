@@ -16,7 +16,7 @@ query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,zuul NOT 
 query = label:Workflow>=1 NOT label:Workflow<=-1 label:Verified<=-1,zuul
 
 [section "5 Days Without Feedback"]
-query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,zuul NOT owner:self NOT project:openstack/ceilometer-specs NOT label:Code-Review<=2 age:5d
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,zuul NOT owner:self NOT project:openstack/ceilometer-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
 
 [section "No Negative Feedback (top 50)"]
 query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,zuul NOT owner:self NOT project:openstack/ceilometer-specs NOT label:Code-Review<=-1 NOT label:Code-Review>=2 limit:50
@@ -25,7 +25,7 @@ query = NOT label:Workflow>=1 NOT label:Workflow<=-1 label:Verified>=1,zuul NOT 
 query = NOT label:Workflow<=-1 NOT label:Verified<=-1,zuul NOT owner:self NOT project:openstack/ceilometer-specs label:Code-Review-1 limit:20
 
 [section "Unreviewed, not WIP (top 20)"]
-query = NOT label:Code-Review<=2 NOT label:Workflow<=-1 NOT project:openstack/ceilometer-specs limit:20
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 NOT label:Workflow<=-1 NOT project:openstack/ceilometer-specs limit:20
 
 [section "Work In Progress Or Unverified (top 20)"]
 query = NOT label:Workflow>=1 NOT owner:self (label:Workflow<=-1 OR label:Verified<=-1,zuul) limit:20
