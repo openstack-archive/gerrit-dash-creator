@@ -4,11 +4,11 @@ description = Review Inbox for the designate team. This will be kept up to date 
 
 foreach = (project:openstack/designate OR project:openstack/python-designateclient OR project:openstack/designate-specs OR project:openstack/designate-dashboard OR project:openstack/designate-tempest-plugin) status:open
 
-[section "Backports - stable/mitaka"]
-query = branch:stable/mitaka NOT reviewedby:self
+[section "Backports - stable/ocata"]
+query = branch:stable/ocata NOT reviewedby:self
 
-[section "Backports - stable/liberty"]
-query = branch:stable/liberty NOT reviewedby:self
+[section "Backports - stable/pike"]
+query = branch:stable/pike NOT reviewedby:self
 
 [section "You are a reviewer, but haven't voted in the current revision"]
 query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self label:Verified>=1,zuul NOT owner:self
