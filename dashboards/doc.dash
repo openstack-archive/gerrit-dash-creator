@@ -8,6 +8,7 @@ foreach = ( project:openstack/openstack-manuals OR
             project:openstack/training-guides OR
             project:openstack/openstack-doc-tools OR
             project:openstack/whereto OR
+            project:openstack/os-api-ref OR
             project:openstack/openstackdocstheme )
            status:open
            NOT owner:self
@@ -16,7 +17,7 @@ foreach = ( project:openstack/openstack-manuals OR
            NOT reviewedby:self
 
 [section "Small patches"]
-query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/whereto OR project:openstack/openstackdocstheme) NOT label:Code-Review>=2,self NOT label:Code-Review<=-1,openstack-doc-core NOT message:"DNM" delta:<=10
+query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/whereto OR openstack/os-api-ref OR project:openstack/openstackdocstheme) NOT label:Code-Review>=2,self NOT label:Code-Review<=-1,openstack-doc-core NOT message:"DNM" delta:<=10
 
 [section "API Site Docs"]
 query = (project:openstack/api-site) status:open
@@ -28,10 +29,10 @@ query = (project:openstack/openstack-manuals OR project:openstack/security-doc) 
 query = project:openstack/training-guides status:open
 
 [section "Doc Tools"]
-query = (project:openstack/openstack-doc-tools OR project:openstack/whereto OR project:openstack/openstackdocstheme) status:open
+query = (project:openstack/openstack-doc-tools OR project:openstack/whereto OR openstack/os-api-ref OR project:openstack/openstackdocstheme) status:open
 
 [section "Needs final +2"]
-query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/whereto OR project:openstack/openstackdocstheme) label:Code-Review>=2 limit:50
+query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/whereto OR openstack/os-api-ref OR project:openstack/openstackdocstheme) label:Code-Review>=2 limit:50
 
 [section "Passed Zuul (with no negative feedback)"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
