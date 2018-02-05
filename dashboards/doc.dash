@@ -3,6 +3,7 @@ title = Docs Review Inbox
 description = Review Inbox for OpenStack Documentation
 foreach = ( project:openstack/openstack-manuals OR
             project:openstack/api-site OR
+            project:openstack/contributor-guide OR
             project:openstack/docs-specs OR
             project:openstack/security-doc OR
             project:openstack/training-guides OR
@@ -22,11 +23,11 @@ query = (project:openstack/openstack-manuals OR project:openstack/api-site OR pr
 [section "API Site Docs"]
 query = (project:openstack/api-site) status:open
 
-[section "Ops/Admin Docs"]
+[section "Core Suite Docs"]
 query = (project:openstack/openstack-manuals OR project:openstack/security-doc) status:open
 
-[section "Training"]
-query = project:openstack/training-guides status:open
+[section "Training/Contributor"]
+query = (project:openstack/training-guides OR project:openstack/contributor-guide) status:open
 
 [section "Doc Tools"]
 query = (project:openstack/openstack-doc-tools OR project:openstack/whereto OR openstack/os-api-ref OR project:openstack/openstackdocstheme) status:open
