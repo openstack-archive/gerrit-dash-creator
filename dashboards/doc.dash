@@ -3,6 +3,7 @@ title = Docs Review Inbox
 description = Review Inbox for OpenStack Documentation
 foreach = ( project:openstack/openstack-manuals OR
             project:openstack/api-site OR
+            project:openstack/contributor-guide OR
             project:openstack/docs-specs OR
             project:openstack/security-doc OR
             project:openstack/training-guides OR
@@ -17,22 +18,25 @@ foreach = ( project:openstack/openstack-manuals OR
            NOT reviewedby:self
 
 [section "Small patches"]
-query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/whereto OR openstack/os-api-ref OR project:openstack/openstackdocstheme) NOT label:Code-Review>=2,self NOT label:Code-Review<=-1,openstack-doc-core NOT message:"DNM" delta:<=10
+query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/contributor-guide OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/whereto OR openstack/os-api-ref OR project:openstack/openstackdocstheme) NOT label:Code-Review>=2,self NOT label:Code-Review<=-1,openstack-doc-core NOT message:"DNM" delta:<=10
 
 [section "API Site Docs"]
 query = (project:openstack/api-site) status:open
 
-[section "Ops/Admin Docs"]
-query = (project:openstack/openstack-manuals OR project:openstack/security-doc) status:open
+[section "Core Suite Docs and Specs"]
+query = (project:openstack/openstack-manuals OR project:openstack/docs-specs) status:open
 
-[section "Training"]
-query = project:openstack/training-guides status:open
+[section "Security Docs"]
+query = (project:openstack/security-doc) status:open
+
+[section "Training/Contributor"]
+query = (project:openstack/training-guides OR project:openstack/contributor-guide) status:open
 
 [section "Doc Tools"]
 query = (project:openstack/openstack-doc-tools OR project:openstack/whereto OR openstack/os-api-ref OR project:openstack/openstackdocstheme) status:open
 
 [section "Needs final +2"]
-query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/whereto OR openstack/os-api-ref OR project:openstack/openstackdocstheme) label:Code-Review>=2 limit:50
+query = (project:openstack/openstack-manuals OR project:openstack/api-site OR project:openstack/contributor-guide OR project:openstack/security-doc OR project:openstack/training-guides OR project:openstack/openstack-doc-tools OR project:openstack/whereto OR openstack/os-api-ref OR project:openstack/openstackdocstheme) label:Code-Review>=2 limit:50
 
 [section "Passed Zuul (with no negative feedback)"]
 query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 limit:50
@@ -42,6 +46,3 @@ query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:2d
 
 [section "Needs revisit (You were a reviewer but haven't voted in the current revision)"]
 query = reviewer:self limit:50
-
-[section "Specs"]
-query = project:openstack/docs-specs status:open
