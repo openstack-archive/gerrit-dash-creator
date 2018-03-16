@@ -1,0 +1,26 @@
+[dashboard]
+title = Kayobe Review Dashboard
+description = Summary of Kayobe Patches to Review
+foreach = (project:openstack/kayobe) status:open NOT label:Code-Review<=-2
+
+[section "My Patches Requiring Attention"]
+query = owner:self (label:Verified-1,zuul OR label:Code-Review-1 OR label:Workflow<=-1)
+
+[section "Small things (<25 LOC, limit 10)"]
+query = delta:<=25 limit:10 (NOT label:Code-Review-1,kayobe-core) label:Verified>=1,zuul branch:master
+
+[section "Needs Reverify"]
+query = label:Workflow>=1 NOT label:Workflow<=-1 label:Verified<=-1,zuul
+
+[section "Needs Final Approval (to land on master)"]
+query = NOT label:Workflow>=1 NOT label:Workflow<=-1 NOT owner:self label:Code-Review>=2 label:Verified>=1,zuul (NOT label:Code-Review-1,kayobe-core) branch:master
+
+[section "Newer (<1wk) Open Patches (limit 25)"]
+query = -age:1week limit:25 branch:master NOT label:Workflow>=1 (NOT label:Code-Review-1,kayobe-core) label:Verified>=1,zuul NOT label:Code-Review>=2
+
+[section "Older (>1wk) Open Patches Passing Zuul Tests (limit 50)"]
+query = age:1week limit:50 NOT label:Workflow>=1 NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:1week NOT label:Verified>=1,zuul (NOT label:Code-Review-1,kayobe-core)
+
+[section "Open Stable Backports"]
+query = branch:^stable/.* status:open
+
