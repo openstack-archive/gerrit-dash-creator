@@ -4,6 +4,9 @@ description = Review Inbox for the designate team. This will be kept up to date 
 
 foreach = (project:openstack/designate OR project:openstack/python-designateclient OR project:openstack/designate-specs OR project:openstack/designate-dashboard OR project:openstack/designate-tempest-plugin) status:open
 
+[section "Backports - stable/queens"]
+query = branch:stable/queens NOT reviewedby:self
+
 [section "Backports - stable/ocata"]
 query = branch:stable/ocata NOT reviewedby:self
 
