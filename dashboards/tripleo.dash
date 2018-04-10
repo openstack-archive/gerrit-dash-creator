@@ -21,6 +21,7 @@ foreach = (project:openstack/dib-utils OR
            project:openstack/tripleo-specs OR
            project:openstack/tripleo-ui OR
            project:openstack/tripleo-validations OR
+           project:openstack/tripleo-upgrade OR
            project:openstack-infra/tripleo-ci) status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
