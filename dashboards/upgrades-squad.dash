@@ -1,0 +1,67 @@
+[dashboard]
+title = TripleO Upgrades squad reviews dashboard
+description = Reviews of primary interest
+foreach = 
+           # Proyects
+           (project:openstack/dib-utils OR
+           project:openstack/diskimage-builder OR
+           project:openstack/instack OR
+           project:openstack/instack-undercloud OR
+           project:openstack/os-apply-config OR
+           project:openstack/os-collect-config OR
+           project:openstack/os-net-config OR
+           project:openstack/os-refresh-config OR
+           project:openstack/python-tripleoclient OR
+           project:openstack/tripleo-common OR
+           project:openstack/tripleo-docs OR
+           project:openstack/tripleo-heat-templates OR
+           project:openstack/tripleo-image-elements OR
+           project:openstack/tripleo-incubator OR
+           project:openstack/tripleo-puppet-elements OR
+           project:openstack/tripleo-quickstart OR
+           project:openstack/tripleo-quickstart-extras OR
+           project:openstack/tripleo-specs OR
+           project:openstack/tripleo-ui OR
+           project:openstack/tripleo-validations OR
+           project:openstack/tripleo-upgrade OR
+           project:openstack-infra/tripleo-ci)
+           # People
+           (owner:ccamacho@redhat.com OR
+           owner:yroblamo@redhat.com OR
+           owner:jfrancoa@redhat.com OR
+           owner:mat.bultel@gmail.com OR
+           owner:mbultel@redhat.com OR
+           owner:marios@redhat.com OR
+           owner:social@v3.sk OR
+           owner:lbezdick@redhat.com OR
+           owner:mcornea@redhat.com OR
+           owner:yprokule@redhat.com OR
+           owner:rbartal@redhat.com OR
+           owner:augol@redhat.com OR
+           owner:sgolovat@redhat.com OR
+           owner:sathlang@redhat.com OR
+           owner:jistr@redhat.com)
+           # General filters
+           (NOT message:"DNM"
+           is:mergeable
+           status:open
+           NOT label:Workflow<=-1
+           NOT label:Code-Review<=-2
+           NOT message:"DNM")
+
+[section "Backports"]
+query = message:"cherry picked from"
+
+[section "5 Days without feedback"]
+query = NOT is:reviewed age:5d
+        NOT message:"cherry picked from"
+
+[section "Needs approval"]
+query = label:Verified>=1,zuul
+        NOT owner:self label:Code-Review>=2
+        NOT label:Code-Review-1
+        NOT message:"cherry picked from"
+
+[section "Squad reviews"]
+query = is:reviewed age:5d
+        NOT message:"cherry picked from"
