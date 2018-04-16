@@ -1,0 +1,27 @@
+[dashboard]
+title = Designate PTL Overview Dashboard
+description = Review Inbox for the designate PTL.
+
+foreach = (project:openstack/designate OR project:openstack/python-designateclient OR project:openstack/designate-specs OR project:openstack/designate-dashboard OR project:openstack/designate-tempest-plugin) status:open
+
+[section "Urgent Fixes"]
+query = label:Review-Priority==2
+
+[section "Priority Patches"]
+query = label:Review-Priority==1
+
+[section "Backports]
+query = branch:^stable/.*
+
+[section "Docs Changes"]
+query = path:^docs/.*
+
+[section "Small patches"]
+query = NOT message:"DNM" delta:<=20
+
+[section "Big patches"]
+query = (project:openstack/designate OR project:openstack/python-designateclient OR project:openstack/designate-dashboard OR project:openstack/designate-tempest-plugin) NOT message:"DNM" delta:>400
+
+[section "Aging Patches"]
+query =
+
