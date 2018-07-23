@@ -1,0 +1,8 @@
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Workflow+1: Andreas Jaeger <jaegerandi@gmail.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 23 Jul 2018 17:22:05 +0000
+Reviewed-on: https://review.openstack.org/584945
+Project: openstack/gerrit-dash-creator
+Branch: refs/heads/master
