@@ -1,0 +1,27 @@
+[dashboard]
+title = Installation Guides Review Inbox
+description = Review Inbox for Project Installation Guides
+foreach = file:"^doc\/source\/install\/.*"
+          status:open
+          NOT owner:self
+          NOT label:Workflow<=-1
+          label:Verified>=1,zuul
+          NOT reviewedby:self
+
+[section "Needs final +2"]
+query = label:Code-Review>=2 limit:50 NOT label:Code-Review<=-1,self
+
+[section "Passed Zuul, No Negative Feedback (Small Fixes)"]
+query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 delta:<=10
+
+[section "Passed Zuul, No Negative Feedback"]
+query = NOT label:Code-Review>=2 NOT label:Code-Review<=-1 delta:>10
+
+[section "Needs Feedback (Changes older than 5 days that have not been reviewed by anyone)"]
+query = NOT label:Code-Review<=-1 NOT label:Code-Review>=1 age:5d
+
+[section "You are a reviewer, but haven't voted in the current revision"]
+query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self
+
+[section "Wayward Changes (Changes with no code review in the last 2 days)"]
+query = NOT is:reviewed age:2d
