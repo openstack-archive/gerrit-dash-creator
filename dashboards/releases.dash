@@ -3,6 +3,9 @@ title = Releases Inbox
 description = Releases
 foreach = is:open
 
+[section "stein"]
+query = project:openstack/releases file:^deliverables/stein/.* NOT label:Workflow-1
+
 [section "rocky"]
 query = project:openstack/releases file:^deliverables/rocky/.* NOT label:Workflow-1
 
@@ -18,17 +21,16 @@ query = project:openstack/releases file:^deliverables/ocata/.* NOT label:Workflo
 [section "independent"]
 query = project:openstack/releases file:^deliverables/_independent/.* NOT label:Workflow-1
 
-[section "all releases"]
+[section "Tools/Jobs"]
+query = (
+   ( project:openstack-infra/project-config file:^zuul/scripts/release-tools/.* )
+   OR
+   project:openstack-infra/release-test
+   OR
+   ( project:openstack/releases file:^openstack_releases/.* )
+   OR
+   project:openstack/reno
+   )
+
+[section "All Releases"]
 query = is:open project:openstack/releases
-
-[section "release-tools"]
-query = project:openstack-infra/release-tools
-
-[section "project-config release-tools"]
-query = project:openstack-infra/project-config file:^zuul/scripts/release-tools/.*
-
-[section "reno"]
-query = project:openstack/reno
-
-[section "release-test"]
-query = project:openstack-infra/release-test
