@@ -1,7 +1,7 @@
 [dashboard]
 title = Kayobe Review Dashboard
 description = Summary of Kayobe Patches to Review
-foreach = (project:openstack/kayobe OR project:openstack/kayobe-config) status:open NOT label:Code-Review<=-2
+foreach = (project:openstack/kayobe OR project:openstack/kayobe-config OR project:openstack/kayobe-config-dev) status:open NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1,zuul OR label:Code-Review-1 OR label:Workflow<=-1)
