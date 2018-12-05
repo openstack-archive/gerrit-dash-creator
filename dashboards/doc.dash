@@ -1,16 +1,17 @@
 [dashboard]
 title = Docs Review Inbox
 description = Review Inbox for OpenStack Documentation
-foreach = ( project:openstack/openstack-manuals OR
-            project:openstack/api-site OR
+foreach = ( project:openstack/api-site OR
             project:openstack/contributor-guide OR
             project:openstack/docs-specs OR
+            project:openstack/openstack-doc-tools OR
+            project:openstack/openstack-manuals OR
+            project:openstack/openstackdocstheme OR
             project:openstack/security-doc OR
             project:openstack/training-guides OR
-            project:openstack/openstack-doc-tools OR
+            project:openstack/training-labs OR
             project:openstack/whereto OR
-            project:openstack/os-api-ref OR
-            project:openstack/openstackdocstheme )
+            project:openstack/os-api-ref )
            status:open
            NOT owner:self
            NOT label:Workflow<=-1
