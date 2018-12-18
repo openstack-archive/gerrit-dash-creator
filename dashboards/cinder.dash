@@ -4,6 +4,7 @@ description = Cinder review requests
 foreach = (project:openstack/cinder OR
            project:openstack/python-cinderclient OR
            project:openstack/os-brick OR
+           project:openstack/python-brick-cinderclient-ext OR
            project:openstack/cinder-specs) status:open
 
 [section "Cinder Specs"]
