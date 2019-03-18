@@ -3,6 +3,9 @@ title = Releases Inbox
 description = Releases
 foreach = is:open
 
+[section "train"]
+query = project:openstack/releases file:^deliverables/train/.* NOT label:Workflow-1
+
 [section "stein"]
 query = project:openstack/releases file:^deliverables/stein/.* NOT label:Workflow-1
 
