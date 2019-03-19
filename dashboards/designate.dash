@@ -10,6 +10,9 @@ query = label:Review-Priority=2
 [section "Priority Patches"]
 query = label:Review-Priority=1
 
+[section "Backports - stable/rocky"]
+query = branch:stable/rocky NOT reviewedby:self
+
 [section "Backports - stable/queens"]
 query = branch:stable/queens NOT reviewedby:self
 
@@ -24,9 +27,6 @@ query = NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:se
 
 [section "Needs final +2"]
 query = label:Code-Review>=2 label:Verified>=1,zuul limit:50 NOT label:Workflow<=-1 NOT label:Workflow>=1 NOT label:Code-Review>=2,self NOT owner:self
-
-[section "+1'd and passed Zuul"]
-query = label:Verified>=1,zuul label:Code-Review>=1 NOT label:Code-Review<=-1 limit:50 NOT label:Workflow<=-1 NOT owner:self NOT reviewedby:self
 
 [section "Passed Zuul, Need's Review"]
 query = label:Verified>=1,zuul NOT label:Code-Review<=-1 NOT label:Code-Review>=1 limit:50 NOT label:Workflow<=-1 NOT owner:self

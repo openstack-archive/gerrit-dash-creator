@@ -1,0 +1,11 @@
+[dashboard]
+title = Designate Release Inbox
+description = Review Inbox for the designate for the release window.
+
+foreach = (project:openstack/designate OR project:openstack/python-designateclient OR project:openstack/designate-specs OR project:openstack/designate-dashboard OR project:openstack/designate-tempest-plugin) status:open
+
+[section "Needed for release - "]
+query = label:Review-Priority=2 AND branch:master
+
+[section "Nice to have for Release"]
+query = label:Review-Priority=1 AND branch:master
