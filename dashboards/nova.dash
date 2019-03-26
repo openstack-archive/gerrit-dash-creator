@@ -17,7 +17,7 @@ foreach = ( project:openstack/nova OR
 query = (project:openstack/nova OR project:openstack/python-novaclient OR project:openstack/os-vif OR project:openstack/os-traits) NOT label:Code-Review>=2,self NOT label:Code-Review<=-1,nova-core NOT message:"DNM" delta:<=10
 
 [section "Needs final +2"]
-query = (project:openstack/nova OR project:openstack/python-novaclient OR project:openstack/os-vif OR project:openstack/os-traits) NOT label:Code-Review>=2,self label:Code-Review>=2 limit:50
+query = (project:openstack/nova OR project:openstack/python-novaclient OR project:openstack/os-vif OR project:openstack/os-traits) NOT label:Code-Review>=2,self label:Code-Review>=2 limit:50 NOT label:workflow>=1
 
 [section "Bug fix, Passed Zuul, No Negative Feedback"]
 query =  NOT label:Code-Review>=2,self NOT label:Code-Review<=-1,nova-core message:"bug: " limit:50

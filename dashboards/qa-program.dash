@@ -7,7 +7,7 @@ foreach = (project:openstack/tempest OR project:openstack/tempest-lib OR project
 query = project:openstack/qa-specs
 
 [section "Needs final +2"]
-query = NOT label:Code-Review<=-1,tempest-core label:Code-Review>=2
+query = NOT label:Code-Review<=-1,tempest-core label:Code-Review>=2 NOT label:workflow>=1
 
 [section "Small Patches"]
 query = NOT label:Code-Review<=-1,tempest-core delta:<=10
