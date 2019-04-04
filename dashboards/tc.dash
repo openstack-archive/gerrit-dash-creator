@@ -6,14 +6,14 @@ foreach = project:openstack/governance is:open
 [section "My proposals"]
 query = owner:self
 
+[section "Quickies"]
+query = ( topic:typo-fix OR topic:code-change OR topic:documentation-change OR topic:project-update OR topic:new-project ) NOT ( label:RollCall-Vote+1,self OR label:RollCall-Vote-1,self )
+
 [section "Formal Vote Items I have not voted on yet"]
 query = topic:formal-vote NOT ( label:RollCall-Vote+1,self OR label:RollCall-Vote-1,self )
 
 [section "Has at Least One Objection"]
 query = ( label:RollCall-Vote<=-1 OR label:Code-Review<=-1 )
-
-[section "Quickies"]
-query = ( topic:typo-fix OR topic:code-change OR topic:documentation-change OR topic:project-update )
 
 [section "Formal Vote Items"]
 query = topic:formal-vote
