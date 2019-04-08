@@ -1,7 +1,7 @@
 [dashboard]
-title = Kolla Review Dashboard
-description = Summary of Kolla patches to review
-foreach = project:openstack/kolla status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
+title = Kolla-Ansible Review Dashboard
+description = Summary of Kolla-Ansible patches to review
+foreach = project:openstack/kolla-ansible status:open NOT label:Workflow<=-1 NOT label:Code-Review<=-2
 
 [section "My Patches Requiring Attention"]
 query = owner:self (label:Verified-1,zuul OR label:Code-Review-1 OR label:Workflow<=-1)
