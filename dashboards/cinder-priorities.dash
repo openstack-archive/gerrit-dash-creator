@@ -4,7 +4,8 @@ description = Cinder priority reviews
 foreach = (project:openstack/cinder OR
            project:openstack/python-cinderclient OR
            project:openstack/python-brick-cinderclient-ext OR
-           project:openstack/os-brick) status:open
+           project:openstack/os-brick OR
+           project:openstack/cinderlib) status:open
 
 [section "High Priority Changes"]
 query = label:Review-Priority=2
