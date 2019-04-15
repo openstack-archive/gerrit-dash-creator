@@ -103,7 +103,7 @@ def read_dashboard_file(dashboard_file):
         raise ValueError("dashboard file '%s' is missing or "
                          "is not readable" % dashboard_file)
     dashboard = configparser.ConfigParser()
-    dashboard.readfp(open(dashboard_file))
+    dashboard.read_file(open(dashboard_file))
     return dashboard
 
 
