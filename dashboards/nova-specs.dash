@@ -1,25 +1,25 @@
 [dashboard]
-title = Nova Specs - Queens
+title = Nova Specs - Tain
 description = Review Inbox
 foreach = project:openstack/nova-specs status:open NOT label:Workflow<=-1 branch:master NOT owner:self
 
 [section "You are a reviewer, but haven't voted in the current revision"]
-query = file:^specs/queens/.* NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self label:Verified>=1,zuul
+query = file:^specs/train/.* NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self reviewer:self label:Verified>=1,zuul
 
 [section "Not blocked by -2s"]
-query = file:^specs/queens/.* NOT label:Code-Review<=-2 NOT label:Code-Review>=2 NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self label:Verified>=1,zuul
+query = file:^specs/train/.* NOT label:Code-Review<=-2 NOT label:Code-Review>=2 NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self label:Verified>=1,zuul
 
 [section "No votes and spec is > 1 week old"]
-query = file:^specs/queens/.* NOT label:Code-Review>=-2 age:7d label:Verified>=1,zuul
+query = file:^specs/train/.* NOT label:Code-Review>=-2 age:7d label:Verified>=1,zuul
 
 [section "Needs final +2"]
-query = file:^specs/queens/.* label:Code-Review>=2 NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self label:Verified>=1,zuul  NOT label:workflow>=1
+query = file:^specs/train/.* label:Code-Review>=2 NOT label:Code-Review<=-1,self NOT label:Code-Review>=1,self label:Verified>=1,zuul  NOT label:workflow>=1
 
 [section "Broken Specs (doesn't pass Zuul)"]
-query = file:^specs/queens/.* label:Verified<=-1,zuul
+query = file:^specs/train/.* label:Verified<=-1,zuul
 
 [section "Dead Specs (blocked by a -2)"]
-query = file:^specs/queens/.* label:Code-Review<=-2
+query = file:^specs/train/.* label:Code-Review<=-2
 
-[section "Dead Specs (Not Proposed for Queens)"]
-query = NOT file:^specs/queens/.*
+[section "Dead Specs (Not Proposed for Train)"]
+query = NOT file:^specs/train/.*
